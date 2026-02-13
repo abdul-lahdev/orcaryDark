@@ -8,7 +8,7 @@ export default function Layout({ children }) {
             <SideBar />
             <div className="ml-70 flex flex-col gap-3">
                 <Header />
-                <div className="p-10">
+                <div className="p-10" >
                     {children}
                 </div>
             </div>

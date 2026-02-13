@@ -47,7 +47,7 @@
   --radius-4xl: calc(var(--radius) + 16px);
 
   /* Custom Variables for Tailwind classes */
-  --color-dark1: var(--dark1);
+  /* --color-dark1: var(--dark1); */
 }
 
 :root {
@@ -85,6 +85,11 @@
   --sidebar-ring: oklch(0.708 0 0);
 
   --dark1: red; /* Light mode mein color */
+  --dark2: #blue;
+
+  --blue1: #23a5e7;
+
+  --grey1: purple;
 }
 
 .dark {
@@ -120,7 +125,12 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
 
-  --dark1: #121216; /* Dark mode mein color */
+  --dark1: #1c1c21; /* Dark mode mein color */
+  --dark2: #303036;
+  --dark3: #2b2b31;
+
+  --blue1: #23a5e7;
+  --grey1: #a1a1aa;
 }
 
 @layer base {

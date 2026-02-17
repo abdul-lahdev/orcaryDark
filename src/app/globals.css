@@ -85,10 +85,10 @@
   --sidebar-ring: oklch(0.708 0 0);
 
   --dark1: red; /* Light mode mein color */
-  --dark2: #blue;
+  --dark2: blue;
 
   --blue1: #23a5e7;
-
+  --red1: #ef4343;
   --grey1: purple;
 }
 
@@ -128,9 +128,41 @@
   --dark1: #1c1c21; /* Dark mode mein color */
   --dark2: #303036;
   --dark3: #2b2b31;
+  --dark4: #2b2b314d;
+  /* --dark5: #2b2b31; */
+
+  --light1: #f9fafb;
+  --light2: #e9eff6;
 
   --blue1: #23a5e7;
+  --blue2: #23a5e71a;
   --grey1: #a1a1aa;
+  --grey2: #8897ae;
+  --red1: #ef4343;
+  --red2: #e92215;
+  --red3: #cf000026;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/font/interFont.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+html,
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+a,
+span {
+  font-family: "Inter", sans-serif !important;
 }
 
 @layer base {

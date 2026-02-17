@@ -2,6 +2,7 @@ import { LuUsers } from "react-icons/lu";
 import SubscriptionChart from "./_components/subscriptChart";
 import ClaimsChart from "./_components/claimsChart";
 import EarningsChart from "./_components/earningChart";
+import ActiveUsersChart from "./_components/activeUserChart";
 
 export const metadata = {
     title: "Dashboard",
@@ -74,14 +75,14 @@ export default function Page() {
                         <SubscriptionChart />
                     </div>
                     <div className="bg-(--dark3) rounded-[10px] p-4">
-                        <ClaimsChart />
+                        {/* <ClaimsChart /> */}
+                        <ActiveUsersChart />
                     </div>
                 </div>
                 <div className="bg-(--dark3) rounded-[10px] p-4">
                     <EarningsChart />
                 </div>
             </div>
-
         </>
     )
 }

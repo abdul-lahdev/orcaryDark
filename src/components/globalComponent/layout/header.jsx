@@ -1,15 +1,22 @@
 "use client";
 import { useTheme } from "next-themes";
-import { Bell, Calendar, LogOut, Settings, User, Wallet } from "lucide-react";
-import { LuUsers } from "react-icons/lu";
+import { Bell, Calendar, LogOut, Moon, Settings, User, Wallet } from "lucide-react";
+import { LuChevronDown, LuUsers } from "react-icons/lu";
+
+import { Input } from "@/components/ui/input"
+
+
+import { Button } from "@/components/ui/button"
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuGroup,
     DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export default function Header() {
 
@@ -43,8 +50,58 @@ export default function Header() {
                             </DropdownMenuGroup>
                         </DropdownMenuContent>
                     </DropdownMenu>
+                    <Moon size={18} className="text-(--grey1) dark:hover:text-white" />
                     <Calendar size={18} className="text-(--grey1) dark:hover:text-white" />
-                    <Bell size={18} className="text-(--grey1) dark:hover:text-white" />
+
+                    <DropdownMenu>
+                        <DropdownMenuTrigger className='cursor-pointer relative' asChild>
+                            <div>
+                                <span className="absolute block bg-(--red1) size-2 rounded-full right-0 top-0 translate-x-1.25 -translate-y-1.25"></span>
+                                <Bell size={18} className="text-(--grey1) dark:hover:text-white" /></div>
+
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuGroup>
+                                <DropdownMenuItem>Notification 1</DropdownMenuItem>
+                                <DropdownMenuItem>Notification 2</DropdownMenuItem>
+                                <DropdownMenuItem>Notification 3</DropdownMenuItem>
+                            </DropdownMenuGroup>
+
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+
+                    <div>
+                        <DropdownMenu>
+                            <DropdownMenuTrigger className='cursor-pointer relative' asChild>
+                                <div className="flex items-center gap-10 pl-5 border-l border-(--dark2) ml-10 ">
+                                    <div className="flex items-center gap-3">
+                                        <Avatar>
+                                            <AvatarImage src="https://github.com/shadcn.png" />
+                                            <AvatarFallback>CN</AvatarFallback>
+                                        </Avatar>
+                                        <div>
+                                            <h1 className="text-[16px]/[20px] font-medium text-(--light1)">Mike Millers</h1>
+                                            <p className='text-[12px] font-normal text-(--grey2)'>Admin Account</p>
+                                        </div>
+
+                                    </div>
+                                    <span>
+                                        <LuChevronDown size={18} className='text-white' />
+                                    </span>
+                                </div>
+
+
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                                <DropdownMenuGroup>
+                                    <DropdownMenuItem>Notification 1</DropdownMenuItem>
+                                    <DropdownMenuItem>Notification 2</DropdownMenuItem>
+                                    <DropdownMenuItem>Notification 3</DropdownMenuItem>
+                                </DropdownMenuGroup>
+
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </div>
 
 
                 </div>

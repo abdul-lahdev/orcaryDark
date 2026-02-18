@@ -1,30 +1,21 @@
-import { Button } from "@/components/ui/button";
 import AnimatedTabs from "./_components/AnimatedTabs";
 import { ArrowRight } from "lucide-react";
 import { ChannelsAccordion } from "./_components/ChannelsAccordion";
+import TopBanner from "./_components/TopBanner";
+
 
 export const metadata = {
     title: "Virtual-Classroom",
 };
 
 export default function Page() {
+
     return (
         <>
+
             <div className="px-8 py-6 overflow-x-hidden">
-                <div className="min-h-82 rounded-3xl bg-[url(/images/dashboard/banner.png)] bg-(--blue2) bg-cover bg-center p-3 flex flex-col justify-center items-center">
-                    <h1 className="text-[48px] font-normal text-transparent bg-clip-text bg-[linear-gradient(90deg,#FFFFFF_0%,#23A5E7_50%,#23A5E7_100%)]">
-                        Resources For In-depth Understanding
-                    </h1>
-                    <p className="text-[20px] font-normal text-(--grey1) mt-2">
-                        Check different resources of thousands of subjects
-                    </p>
-
-                    <div className="flex items-center gap-3 mt-8">
-                        <Button className='h-12 text-[16px] font-normal'>Upload Resource</Button>
-                        <Button variant="secondary" className='h-12 text-[16px] font-normal'>Upload Resource</Button>
-                    </div>
-                </div>
-
+               
+<TopBanner/>
                 <div className="mt-6">
                     <AnimatedTabs />
                 </div>

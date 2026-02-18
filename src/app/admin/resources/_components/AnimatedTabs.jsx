@@ -74,10 +74,10 @@ export default function AnimatedTabs() {
     let [activeTab, setActiveTab] = useState(tabs[0].id);
 
     const filteredVideos = liveCards.filter(
-        (item) => item.isLive === false && item.category === activeTab
+        (item) => item.docType === "video" && item.category === activeTab
     );
-    const onGoingData = liveCards.filter(
-        (item) => item.isLive === true && item.category === activeTab
+    const filteredDocument = liveCards.filter(
+        (item) => item.docType === "document" && item.category === activeTab
     );
 
 
@@ -119,7 +119,7 @@ export default function AnimatedTabs() {
 
                         <div className="flex justify-between items-center">
                             <h2 className="text-white text-[24px] font-semibold">
-                                Upcoming
+                                Video
                             </h2>
                             <Link
                                 href='/'
@@ -157,7 +157,7 @@ export default function AnimatedTabs() {
 
                         <div className="flex justify-between items-center mt-10">
                             <h2 className="text-white text-[24px] font-semibold">
-                                Ongoing
+                                Document
                             </h2>
                             <Link
                                 href='/'
@@ -175,8 +175,8 @@ export default function AnimatedTabs() {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-4">
 
                             {
-                                onGoingData.length > 0 ? (
-                                    onGoingData.map((item) => (
+                                filteredDocument.length > 0 ? (
+                                    filteredDocument.map((item) => (
                                         <div
                                             key={item.id}
                                             className="shadow-[0px_0px_25px_0px_#c2d4de0a] hover:bg-(--dark3) rounded-[12px] bg-transparent p-3 transition-all duration-300 hover:-translate-y-1.5 cursor-pointer"
@@ -200,13 +200,11 @@ export default function AnimatedTabs() {
 }
 
 export const VideoCard = ({ item }) => {
-    const { id, isLive, thumbnail, avatar, name, docType, specialization, title, viewers, time, upComing } = item;
+    const { id, isLive, thumbnail, avatar, name, docType, specialization, title, viewers, time } = item;
     return (
-        <div className="w-full group cursor-pointer">
-            <div className="relative aspect-video rounded-[12px] overflow-hidden">
-                {
-                    isLive ? <Image src={thumbnail || "/images/classRoom/thumbnail.jpg"} alt="Video Thumbnail" width={376} height={227} className="w-full h-full object-cover" /> : <div className='h-full flex items-center justify-center text-(--grey1) text-[20px] font-medium '>Scheduled for <br/> {upComing}</div>}
-
+        <Link href={`/admin/virtual-classroom/${id}`} className="w-full group cursor-pointer">
+            <div className="relative aspect-video rounded-[12px] overflow-hidden border border-white/5">
+                <Image src={thumbnail || "/images/classRoom/thumbnail.jpg"} alt="Video Thumbnail" width={376} height={227} className="w-full h-full object-cover" />
 
                 {isLive && <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-(--red3) backdrop-blur-md px-2 py-1 rounded-[4px]">
                     <div className="size-2 bg-(--red2) rounded-full animate-pulse border border-white" />
@@ -246,12 +244,12 @@ export const VideoCard = ({ item }) => {
                     {title}
                 </h3>
 
-                {isLive ? <div className="flex items-center gap-2 text-(--grey1) text-[12px]">
+                <div className="flex items-center gap-2 text-(--grey1) text-[12px]">
                     <span>{viewers} viewers</span>
                     <div className="size-2 bg-white rounded-full" />
                     <span>{time}</span>
-                </div> : <p className="text-(--grey1) text-[16px] font-normal">Will be live on {upComing}</p>}
+                </div>
             </div>
-        </div>
+        </Link>
     );
 };

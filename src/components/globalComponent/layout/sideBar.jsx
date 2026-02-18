@@ -35,7 +35,7 @@ export default function SideBar() {
                     {navItems.map((item, index) => (
                         <Link
                             key={index}
-                            href="#"
+                            href="/admin/dashboard"
                             className={`flex items-center gap-3 px-4 py-2 rounded-[8px] transition-all group ${item.active
                                 ? "bg-(--blue1) text-white shadow-lg shadow-[#23A5E7]/20"
                                 : "hover:bg-white/5 text-(--grey1) hover:text-white"

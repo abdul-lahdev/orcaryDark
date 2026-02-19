@@ -217,14 +217,15 @@ export const VideoCard = ({ item }) => {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                             {/* Profile Image */}
-                            <div className="relative w-10 h-10 overflow-hidden rounded-full">
-                                <Image
-                                    src={avatar || "/images/classRoom/avator.png"}
-                                    fill
-                                    className="object-cover"
-                                    alt="avatar"
-                                />
-                            </div>
+                        <div className="relative w-10 h-10 overflow-hidden rounded-full">
+    <Image
+        src={avatar || "/images/classRoom/avator.png"}
+        fill
+        sizes="40px" // Yeh line add karein
+        className="object-cover"
+        alt="avatar"
+    />
+</div>
 
 
 

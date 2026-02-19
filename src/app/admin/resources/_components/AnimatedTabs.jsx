@@ -22,48 +22,6 @@ const tabs = [
 
 ];
 
-// const liveCards = [
-//     {
-//         id: 1,
-//         isLive: true,
-//         thumbnail: "/images/classRoom/thumbnail.jpg",
-//         avatar: "/images/classRoom/avator.png",
-//         name: "Mathew Helms",
-//         docType: 'video',
-//         category: 'Cardiology',
-//         specialization: "Neurology Specialist",
-//         title: "Intro to Neuroanatomy | Neurophysiology | Neuroscience",
-//         viewers: 453,
-//         time: "Streaming 12:10 PM",
-//     },
-//     {
-//         id: 2,
-//         isLive: false,
-//         thumbnail: "/images/classRoom/thumbnail2.jpg",
-//         avatar: "/images/classRoom/avator.png",
-//         name: "Dr. Sarah Khan",
-//         docType: 'video',
-//         category: 'Cardiology',
-//         specialization: "Cardiologist",
-//         title: "Heart Diseases & ECG Interpretation",
-//         viewers: 312,
-//         time: "Streaming 1:00 PM",
-//     },
-//     {
-//         id: 3,
-//         isLive: false,
-//         thumbnail: "/images/classRoom/thumbnail3.jpg",
-//         avatar: "/images/classRoom/avator.png",
-//         name: "Dr. Ali Khan",
-//         docType: 'document',
-//         category: 'Cardiology',
-//         specialization: "Cardiologist",
-//         title: "Heart Diseases & ECG Interpretation",
-//         viewers: 312,
-//         time: "Streaming 1:00 PM",
-//     },
-// ];
-
 
 
 
@@ -122,7 +80,7 @@ export default function AnimatedTabs() {
                                 Video
                             </h2>
                             <Link
-                                href='/'
+                                href='/admin/resources/video'
                                 className="group flex items-center gap-2 text-(--blue1) text-[15px] font-normal"
                             >
                                 <span className="group-hover:underline">See All</span>
@@ -160,7 +118,7 @@ export default function AnimatedTabs() {
                                 Document
                             </h2>
                             <Link
-                                href='/'
+                                href='/admin/resources/document'
                                 className="group flex items-center gap-2 text-(--blue1) text-[15px] font-normal"
                             >
                                 <span className="group-hover:underline">See All</span>
@@ -203,7 +161,7 @@ export const VideoCard = ({ item }) => {
     const { id, isLive, thumbnail, avatar, name, docType, specialization, title, viewers, time } = item;
     return (
         <Link href={`/admin/virtual-classroom/${id}`} className="w-full group cursor-pointer">
-            <div className="relative aspect-video rounded-[12px] overflow-hidden border border-white/5">
+            <div className="relative aspect-video rounded-[12px] overflow-hidden">
                 <Image src={thumbnail || "/images/classRoom/thumbnail.jpg"} alt="Video Thumbnail" width={376} height={227} className="w-full h-full object-cover" />
 
                 {isLive && <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-(--red3) backdrop-blur-md px-2 py-1 rounded-[4px]">

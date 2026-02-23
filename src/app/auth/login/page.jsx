@@ -64,9 +64,10 @@ export default function LoginPage() {
                             </div>
 
                             {/* Login Button */}
+                          <Link href='/admin/dashboard'>
                             <Button className='w-full h-12'>
                                 Login
-                            </Button>
+                            </Button></Link>
 
                             <div className="relative  text-center">
                                 <span className="text-[#A1A1AA] text-[16px] font-normal">or</span>

@@ -160,7 +160,7 @@ export default function AnimatedTabs() {
 export const VideoCard = ({ item }) => {
     const { id, isLive, thumbnail, avatar, name, docType, specialization, title, viewers, time } = item;
     return (
-        <Link href={`/admin/virtual-classroom/${id}`} className="w-full group cursor-pointer">
+        <Link href={`/admin/resources/${docType==='video'?'video':'document'}/${id}`} className="w-full group cursor-pointer">
             <div className="relative aspect-video rounded-[12px] overflow-hidden">
                 <Image src={thumbnail || "/images/classRoom/thumbnail.jpg"} alt="Video Thumbnail" width={376} height={227} className="w-full h-full object-cover" />
 

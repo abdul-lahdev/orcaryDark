@@ -6,19 +6,23 @@ import {
     ChevronRight
 } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { usePathname } from "next/navigation";
 
 const navItems = [
-    { icon: LayoutGrid, label: "Dashboard", active: true },
-    { icon: Home, label: "Home" },
-    { icon: Newspaper, label: "Newsfeed" },
-    { icon: Video, label: "Lives" },
-    { icon: Layers, label: "Resources" },
-    { icon: Presentation, label: "Virtual Classroom" },
-    { icon: Mail, label: "Messages" },
-    { icon: MessageSquare, label: "Forum" },
-    { icon: Settings, label: "Settings" },
+    { icon: LayoutGrid, label: "Dashboard",link:'/admin/dashboard', active: true },
+    { icon: Home, label: "Home",link:'/admin/dashboard' },
+    { icon: Newspaper, label: "Newsfeed",link:'/admin/dashboard' },
+    { icon: Video, label: "Lives",link:'/admin/dashboard' },
+    { icon: Layers, label: "Resources",link:'/admin/resources' },
+    { icon: Presentation, label: "Virtual Classroom",link:'/admin/virtual-classroom' },
+    { icon: Mail, label: "Messages",link:'/admin/dashboard' },
+    { icon: MessageSquare, label: "Forum",link:'/admin/dashboard' },
+    { icon: Settings, label: "Settings",link:'/admin/dashboard' },
+    
 ];
 export default function SideBar() {
+        const pathname = usePathname();
+    
     return (
         <div className="w-70 h-screen bg-(--dark1) border-r border-(--dark2) flex flex-col p-4 text-(--grey1) fixed left-0 top-0">
             {/* Logo Section */}
@@ -34,8 +38,9 @@ export default function SideBar() {
                 <div className="flex flex-col gap-1 py-4"> {/* pr-3 taake scrollbar content ke upar na aaye */}
                     {navItems.map((item, index) => (
                         <Link
+                        
                             key={index}
-                            href="/admin/dashboard"
+                            href={`${item.link}`}
                             className={`flex items-center gap-3 px-4 py-2 rounded-[8px] transition-all group ${item.active
                                 ? "bg-(--blue1) text-white shadow-lg shadow-[#23A5E7]/20"
                                 : "hover:bg-white/5 text-(--grey1) hover:text-white"

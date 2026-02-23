@@ -30,7 +30,18 @@ import SideBar from "./sideBar";
 
 export default function Layout({ children }) {
     const pathname = usePathname();
+  const isVirtualClassroom = pathname === "/admin/virtual-classroom";
+const isResources = pathname.startsWith("/admin/resources");
+const isVideoDetail = /^\/admin\/resources\/video\/[^/]+$/.test(pathname);
     const isVC = pathname === "/admin/virtual-classroom" || pathname.startsWith("/admin/resources");
+
+const layoutClass =
+  isVirtualClassroom || isResources
+    ? isVideoDetail
+      ? "grid h-full grid-cols-[1fr_480px] gap-4"
+      : "grid h-full grid-cols-[1fr_280px] gap-4"
+    : "h-full";
+
 
     return (
         <div className="flex min-h-screen bg-[#121216]">
@@ -42,7 +53,7 @@ export default function Layout({ children }) {
 
                 {/* content wrapper must grow */}
                 <div className={`flex-1 min-h-0 ${isVC ? "" : "px-8 py-6"}`}>
-                    <div className={isVC ? "grid h-full grid-cols-[1fr_280px] gap-4" : "h-full"}>
+                    <div className={layoutClass}>
                         {children}
                     </div>
                 </div>

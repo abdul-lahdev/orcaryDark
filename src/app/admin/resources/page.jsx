@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { ChannelsAccordion } from "./_components/ChannelsAccordion";
 
 export const metadata = {
-    title: "Virtual-Classroom",
+    title: "Resources",
 };
 
 export default function Page() {

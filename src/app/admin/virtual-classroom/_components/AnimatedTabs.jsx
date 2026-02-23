@@ -122,7 +122,7 @@ export default function AnimatedTabs() {
                                 Upcoming
                             </h2>
                             <Link
-                                href='/'
+                                href='/admin/virtual-classroom'
                                 className="group flex items-center gap-2 text-(--blue1) text-[15px] font-normal"
                             >
                                 <span className="group-hover:underline">See All</span>
@@ -160,7 +160,7 @@ export default function AnimatedTabs() {
                                 Ongoing
                             </h2>
                             <Link
-                                href='/'
+                                href='/admin/virtual-classroom'
                                 className="group flex items-center gap-2 text-(--blue1) text-[15px] font-normal"
                             >
                                 <span className="group-hover:underline">See All</span>

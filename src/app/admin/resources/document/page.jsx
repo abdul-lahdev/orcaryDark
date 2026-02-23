@@ -126,16 +126,7 @@ export const AnimatedTabs=()=> {
                             <h2 className="text-white text-[24px] font-semibold">
                                 Document
                             </h2>
-                            <Link
-                                href='/admin/resources/document'
-                                className="group flex items-center gap-2 text-(--blue1) text-[15px] font-normal"
-                            >
-                                <span className="group-hover:underline">See All</span>
-
-                                <span className="transform transition-transform duration-300 group-hover:translate-x-1.5">
-                                    <MoveRight size={18} />
-                                </span>
-                            </Link>
+                           
 
                         </div>
 
@@ -171,7 +162,7 @@ export const AnimatedTabs=()=> {
 export const VideoCard = ({ item }) => {
     const { id, isLive, thumbnail, avatar, name, docType, specialization, title, viewers, time } = item;
     return (
-        <Link href={`/admin/virtual-classroom/${id}`} className="w-full group cursor-pointer">
+        <Link href={`/admin/resources/document/${id}`} className="w-full group cursor-pointer">
             <div className="relative aspect-video rounded-[12px] overflow-hidden">
                 <Image src={thumbnail || "/images/classRoom/thumbnail.jpg"} alt="Video Thumbnail" width={376} height={227} className="w-full h-full object-cover" />
 

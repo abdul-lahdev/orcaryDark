@@ -1,11 +1,16 @@
 "use client";
+
 import React, { useState, useRef, useEffect } from "react";
-import dynamic from "next/dynamic";
-import { Play, Pause, Volume2, Settings, Maximize } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown, ChevronUp, Eye } from "lucide-react";
+import { accordionData } from "@/app/data/classRoom";
+import { Separator } from "@/components/ui/separator"
+import { Play, Pause, Volume2, Settings, Maximize, EllipsisVertical } from "lucide-react";
 import { useParams } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuPortal,
@@ -29,18 +34,57 @@ export default function Page() {
       <div className="px-8 py-6 overflow-x-hidden">
         <CustomVideoPlayer />
         <div className='bg-(--dark5) mt-5 p-4 rounded-[8px]'>
-            <div>
-                sad
+           <div className="flex items-center justify-between">
+             <div className="flex items-center gap-3">
+                <span className="size-15 rounded-full bg-[url(/images/classRoom/session7.jpg)] bg-cover block bg-center "></span>
+                <div>
+                    <h2 className="text-white text-[20px] font-semibold">
+                        Intro to Neuroanatomy | Neurophysiology | Neuroscience
+                    </h2>
+                    <div className='flex items-center gap-2'>
+                        <span className='font-normal text-[18px] text-(--grey1)'>Mike Millers</span>
+                        <span className="block size-2.5 bg-(--grey5) rounded-full"></span>
+                        <span className='font-normal text-[18px] text-(--grey1)'>453 viewers</span>
+                        <span className="block size-2.5 bg-(--grey5) rounded-full"></span>
+                        <span className='font-normal text-[18px] text-(--grey1)'>Streaming 12:10 PM</span>
+                    </div>
+                </div>
             </div>
+            <div>
+                   <DropdownMenu>
+  <DropdownMenuTrigger asChild>
+  <EllipsisVertical size={24} className="text-(--grey2) cursor-pointer" />
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuGroup>
+      <DropdownMenuLabel>first</DropdownMenuLabel>
+      <DropdownMenuItem>second</DropdownMenuItem>
+      <DropdownMenuItem>third</DropdownMenuItem>
+    </DropdownMenuGroup>
+  
+  </DropdownMenuContent>
+</DropdownMenu>
+            </div>
+           </div>
+           <div className="mt-5">
+            <h3 className="text-[16px] font-bold text-(--grey1)">
+                Description
+            </h3>
+            <p className='text-(--grey1) text-[16px] font-normal'>
+                The study of neuroanatomy, neurophysiology, and neuroscience is essential for understanding the structure and function of the brain and spinal cord, collectively known as the Central Nervous System (CNS). This multidisciplinary field explores how neurons, the building blocks of the nervous system, communicate with each other and with the body to generate thought, movement, and sensory experiences.
+            </p>
+           </div>
         </div>
       </div>
 
       <div className="bg-(--dark4) border-l border-(--dark2) px-3 py-4">
-        Right
+    <ChannelsAccordion/>
       </div>
     </>
   );
 }
+
+// Video Player
 
 export const CustomVideoPlayer = () => {
   const videoRef = useRef(null);
@@ -347,4 +391,120 @@ const [quality, setQuality] = useState("auto"); // "auto" | "1080p" | "720p" | "
       )}
     </div>
   );
+};
+
+
+// Accordion
+
+const Accordion = ({ i, expanded, setExpanded, title, children }) => {
+    const isOpen = expanded.includes(i);
+
+    const toggle = () => {
+        setExpanded((prev) =>
+            prev.includes(i) ? prev.filter((x) => x !== i) : [...prev, i]
+        );
+    };
+
+    return (
+        <div className="border-b border-white/5 last:border-0 overflow-hidden">
+            <motion.header
+                initial={false}
+                className="flex items-center justify-between p-4 pb-2 cursor-pointer hover:bg-white/5 transition-colors"
+                onClick={toggle}
+            >
+                <div className="flex items-center gap-2">
+                  
+                    <span
+                        className={`text-[18px] font-medium uppercase tracking-wider ${isOpen ? "text-(--blue1)" : "text-(--grey1)"
+                            }`}
+                    >
+                        {title}
+                    </span>
+
+                    
+                </div>
+
+                <motion.div
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-(--grey1)"
+                >
+                    <ChevronUp size={16} className="" />
+                </motion.div>
+            </motion.header>
+                    <Separator className='mt-2 mb-3' />
+
+
+            <AnimatePresence initial={false}>
+                {isOpen && (
+                    <motion.section
+                        key="content"
+                        initial="collapsed"
+                        animate="open"
+                        exit="collapsed"
+                        variants={{
+                            open: { opacity: 1, height: "auto" },
+                            collapsed: { opacity: 0, height: 0 },
+                        }}
+                        transition={{ duration: 0.35, ease: [0.04, 0.62, 0.23, 0.98] }}
+                    >
+                        <div className="px-2 pb-4 space-y-5">{children}</div>
+                    </motion.section>
+                )}
+            </AnimatePresence>
+        </div>
+    );
+};
+
+export const ChannelsAccordion = () => {
+    const [expanded, setExpanded] = useState([0, 1, 2]);
+
+    const liveSessions = accordionData.filter(
+        (item) => item.type === "liveSession" && item.isLive
+    );
+
+    const classRooms = accordionData.filter(
+        (item) => item.type === "classRoom" && item.isLive
+    );
+
+    const offline = accordionData.filter((item) => !item.isLive);
+
+    return (
+        <div className="w-full bg-transparent mt-5">
+            {/* 1) Live Sessions */}
+            <Accordion
+                i={0}
+                expanded={expanded}
+                setExpanded={setExpanded}
+                title="Live sessions"
+            >
+                {liveSessions.length ? (
+                    liveSessions.map((item) => <UserRow key={item.id} item={item} />)
+                ) : (
+                    <EmptyRow text="No live sessions" />
+                )}
+            </Accordion>
+
+        
+        </div>
+    );
+};
+
+const EmptyRow = ({ text }) => (
+    <div className="px-3 py-4 text-[12px] text-(--grey1)">{text}</div>
+);
+
+// User row component
+const UserRow = ({ item }) => {
+    const { name, desc, isLive, views, imgUrl } = item;
+
+    return (
+        <div className="flex items-center gap-3 justify-between px-3">
+           <span className="size-8 rounded-full block bg-[red]"></span>
+           <div>
+            <h1 className="text-white font-medium text-[14px]">Kathryn Murphy</h1>
+            <p className='text-[14px] font-medium text-(--grey1)'>the largest part, responsible for higher functions like thinking, memory, and voluntary movements.</p>
+           </div>
+        </div>
+    );
 };

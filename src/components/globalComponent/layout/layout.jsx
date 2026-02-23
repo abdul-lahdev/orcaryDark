@@ -35,6 +35,9 @@ const isResources = pathname.startsWith("/admin/resources");
 const isVideoDetail = /^\/admin\/resources\/video\/[^/]+$/.test(pathname);
     const isVC = pathname === "/admin/virtual-classroom" || pathname.startsWith("/admin/resources");
 
+    console.log('/auth/login')
+    console.log(pathname)
+
 const layoutClass =
   isVirtualClassroom || isResources
     ? isVideoDetail
@@ -44,7 +47,9 @@ const layoutClass =
 
 
     return (
-        <div className="flex min-h-screen bg-[#121216]">
+
+        <>
+      {pathname==='/auth/login'?children:  <div className="flex min-h-screen bg-[#121216]">
             <SideBar />
 
             {/* main area */}
@@ -58,6 +63,8 @@ const layoutClass =
                     </div>
                 </div>
             </div>
-        </div>
+        </div>}
+        </>
+
     );
 }

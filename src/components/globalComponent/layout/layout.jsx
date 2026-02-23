@@ -33,6 +33,7 @@ export default function Layout({ children }) {
   const isVirtualClassroom = pathname === "/admin/virtual-classroom";
 const isResources = pathname.startsWith("/admin/resources");
 const isVideoDetail = /^\/admin\/resources\/video\/[^/]+$/.test(pathname);
+const isDocDetail = /^\/admin\/resources\/document\/[^/]+$/.test(pathname);
     const isVC = pathname === "/admin/virtual-classroom" || pathname.startsWith("/admin/resources");
 
     console.log('/auth/login')
@@ -40,7 +41,7 @@ const isVideoDetail = /^\/admin\/resources\/video\/[^/]+$/.test(pathname);
 
 const layoutClass =
   isVirtualClassroom || isResources
-    ? isVideoDetail
+    ? isVideoDetail || isDocDetail
       ? "grid h-full grid-cols-[1fr_480px] gap-4"
       : "grid h-full grid-cols-[1fr_280px] gap-4"
     : "h-full";

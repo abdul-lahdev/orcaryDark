@@ -44,7 +44,7 @@ export const liveCards = [
   {
     id: 4,
     isLive: true,
-    thumbnail: "/images/classRoom/thumbnail4.jpg",
+    thumbnail: "/images/classRoom/thumbnail.jpg",
     avatar: "/images/classRoom/avator.png",
     name: "Dr. Maria Lopez",
     docType: "video",
@@ -58,7 +58,7 @@ export const liveCards = [
   {
     id: 5,
     isLive: false,
-    thumbnail: "/images/classRoom/thumbnail5.jpg",
+    thumbnail: "/images/classRoom/thumbnail3.jpg",
     avatar: "/images/classRoom/avator.png",
     name: "Dr. Ahmed Raza",
     docType: "document",
@@ -72,7 +72,7 @@ export const liveCards = [
   {
     id: 6,
     isLive: false,
-    thumbnail: "/images/classRoom/thumbnail6.jpg",
+    thumbnail: "/images/classRoom/thumbnail.jpg",
     avatar: "/images/classRoom/avator.png",
     name: "Dr. Emily Chen",
     docType: "video",
@@ -86,7 +86,7 @@ export const liveCards = [
   {
     id: 7,
     isLive: true,
-    thumbnail: "/images/classRoom/thumbnail7.jpg",
+    thumbnail: "/images/classRoom/thumbnail.jpg",
     avatar: "/images/classRoom/avator.png",
     name: "Dr. Hassan Malik",
     docType: "video",
@@ -100,7 +100,7 @@ export const liveCards = [
   {
     id: 8,
     isLive: false,
-    thumbnail: "/images/classRoom/thumbnail8.jpg",
+    thumbnail: "/images/classRoom/thumbnail3.jpg",
     avatar: "/images/classRoom/avator.png",
     name: "Dr. Sophia Williams",
     docType: "document",
@@ -114,7 +114,7 @@ export const liveCards = [
   {
     id: 9,
     isLive: false,
-    thumbnail: "/images/classRoom/thumbnail9.jpg",
+    thumbnail: "/images/classRoom/thumbnail.jpg",
     avatar: "/images/classRoom/avator.png",
     name: "Dr. Bilal Qureshi",
     docType: "video",
@@ -128,7 +128,7 @@ export const liveCards = [
   {
     id: 10,
     isLive: true,
-    thumbnail: "/images/classRoom/thumbnail10.jpg",
+    thumbnail: "/images/classRoom/thumbnail.jpg",
     avatar: "/images/classRoom/avator.png",
     name: "Dr. Ayesha Siddiqui",
     docType: "video",
@@ -142,7 +142,7 @@ export const liveCards = [
   {
     id: 11,
     isLive: false,
-    thumbnail: "/images/classRoom/thumbnail11.jpg",
+    thumbnail: "/images/classRoom/thumbnail3.jpg",
     avatar: "/images/classRoom/avator.png",
     name: "Dr. Omar Farooq",
     docType: "document",
@@ -156,7 +156,7 @@ export const liveCards = [
   {
     id: 12,
     isLive: false,
-    thumbnail: "/images/classRoom/thumbnail12.jpg",
+    thumbnail: "/images/classRoom/thumbnail.jpg",
     avatar: "/images/classRoom/avator.png",
     name: "Dr. John Carter",
     docType: "video",
@@ -170,7 +170,7 @@ export const liveCards = [
   {
     id: 13,
     isLive: true,
-    thumbnail: "/images/classRoom/thumbnail13.jpg",
+    thumbnail: "/images/classRoom/thumbnail.jpg",
     avatar: "/images/classRoom/avator.png",
     name: "Dr. Fatima Noor",
     docType: "video",
@@ -184,7 +184,7 @@ export const liveCards = [
   {
     id: 14,
     isLive: false,
-    thumbnail: "/images/classRoom/thumbnail14.jpg",
+    thumbnail: "/images/classRoom/thumbnail3.jpg",
     avatar: "/images/classRoom/avator.png",
     name: "Dr. Daniel Kim",
     docType: "document",
@@ -198,7 +198,7 @@ export const liveCards = [
   {
     id: 15,
     isLive: true,
-    thumbnail: "/images/classRoom/thumbnail15.jpg",
+    thumbnail: "/images/classRoom/thumbnail.jpg",
     avatar: "/images/classRoom/avator.png",
     name: "Dr. Zainab Ahmed",
     docType: "video",

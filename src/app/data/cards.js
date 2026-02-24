@@ -29,7 +29,7 @@ export const liveCards = [
   },
   {
     id: 3,
-    isLive: false,
+    isLive: true,
     thumbnail: "/images/classRoom/thumbnail3.jpg",
     avatar: "/images/classRoom/avator.png",
     name: "Dr. Ali Khan",

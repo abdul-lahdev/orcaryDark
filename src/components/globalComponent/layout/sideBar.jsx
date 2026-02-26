@@ -9,16 +9,15 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { usePathname } from "next/navigation";
 
 const navItems = [
-    { icon: LayoutGrid, label: "Dashboard",link:'/admin/dashboard', active: true },
-    { icon: Home, label: "Home",link:'/admin/dashboard' },
-    { icon: Newspaper, label: "Newsfeed",link:'/admin/dashboard' },
-    { icon: Video, label: "Lives",link:'/admin/dashboard' },
-    { icon: Layers, label: "Resources",link:'/admin/resources' },
-    { icon: Presentation, label: "Virtual Classroom",link:'/admin/virtual-classroom' },
-    { icon: Mail, label: "Messages",link:'/admin/dashboard' },
-    { icon: MessageSquare, label: "Forum",link:'/admin/dashboard' },
-    { icon: Settings, label: "Settings",link:'/admin/dashboard' },
-    
+    { icon: LayoutGrid, label: "Dashboard", link: '/admin/dashboard' },
+    { icon: Home, label: "Home", link: '/admin/home' }, // Example paths badal diye hain takay farq pata chale
+    { icon: Newspaper, label: "Newsfeed", link: '/admin/newsfeed' },
+    { icon: Video, label: "Lives", link: '/admin/lives' },
+    { icon: Layers, label: "Resources", link: '/admin/resources' },
+    { icon: Presentation, label: "Virtual Classroom", link: '/admin/virtual-classroom' },
+    { icon: Mail, label: "Messages", link: '/admin/message' },
+    { icon: MessageSquare, label: "Forum", link: '/admin/forum' },
+    { icon: Settings, label: "Settings", link: '/admin/settings' },
 ];
 export default function SideBar() {
         const pathname = usePathname();
@@ -35,8 +34,8 @@ export default function SideBar() {
 
             {/* Navigation Links */}
             <ScrollArea className="min-h-0 px-3 ">
-                <div className="flex flex-col gap-1 py-4"> {/* pr-3 taake scrollbar content ke upar na aaye */}
-                    {navItems.map((item, index) => (
+                <div className="flex flex-col gap-1 py-4"> 
+                    {/* {navItems.map((item, index) => (
                         <Link
                         
                             key={index}
@@ -49,7 +48,29 @@ export default function SideBar() {
                             <item.icon size={18} className={item.active ? "text-white" : "group-hover:text-white"} />
                             <span className="text-[12px] font-normal">{item.label}</span>
                         </Link>
-                    ))}
+                    ))} */}
+                    {navItems.map((item, index) => {
+                        // Logic: Agar current URL item ke link se match karta hai
+                        const isActive = pathname === item.link;
+
+                        return (
+                            <Link
+                                key={index}
+                                href={item.link}
+                                className={`flex items-center gap-3 px-4 py-2 rounded-[8px] transition-all group ${
+                                    isActive
+                                        ? "bg-(--blue1) text-white shadow-lg shadow-[#23A5E7]/20"
+                                        : "hover:bg-white/5 text-(--grey1) hover:text-white"
+                                }`}
+                            >
+                                <item.icon 
+                                    size={18} 
+                                    className={isActive ? "text-white" : "group-hover:text-white"} 
+                                />
+                                <span className="text-[12px] font-normal">{item.label}</span>
+                            </Link>
+                        );
+                    })}
                 </div>
             </ScrollArea>
 

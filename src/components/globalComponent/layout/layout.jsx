@@ -30,41 +30,45 @@ import SideBar from "./sideBar";
 
 export default function Layout({ children }) {
     const pathname = usePathname();
-  const isVirtualClassroom = pathname === "/admin/virtual-classroom";
-const isResources = pathname.startsWith("/admin/resources");
-const isVideoDetail = /^\/admin\/resources\/video\/[^/]+$/.test(pathname);
-const isDocDetail = /^\/admin\/resources\/document\/[^/]+$/.test(pathname);
-    const isVC = pathname === "/admin/virtual-classroom" || pathname.startsWith("/admin/resources");
+    const isVirtualClassroom =
+        pathname.startsWith("/admin/virtual-classroom") ||
+        pathname === "/admin/home";
+    //   const isVirtualClassroom = pathname === "/admin/virtual-classroom" || pathname==='admin/home';
+    // const isVirtualClassroom = pathname === "/admin/virtual-classroom" || pathname === "/admin/home";
+    const isResources = pathname.startsWith("/admin/resources");
+    const isVideoDetail = /^\/admin\/resources\/video\/[^/]+$/.test(pathname);
+    const isDocDetail = /^\/admin\/resources\/document\/[^/]+$/.test(pathname);
+    const isVC = pathname === "/admin/virtual-classroom" || pathname.startsWith("/admin/resources") || pathname === "/admin/home";
 
     console.log('/auth/login')
     console.log(pathname)
 
-const layoutClass =
-  isVirtualClassroom || isResources
-    ? isVideoDetail || isDocDetail
-      ? "grid h-full grid-cols-[1fr_480px] gap-4"
-      : "grid h-full grid-cols-[1fr_280px] gap-4"
-    : "h-full";
+    const layoutClass =
+        isVirtualClassroom || isResources
+            ? isVideoDetail || isDocDetail
+                ? "grid h-full grid-cols-[1fr_480px] gap-4"
+                : "grid h-full grid-cols-[1fr_280px] gap-4"
+            : "h-full";
 
 
     return (
 
         <>
-      {pathname==='/auth/login'?children:  <div className="flex min-h-screen bg-[#121216]">
-            <SideBar />
+            {pathname === '/auth/login' ? children : <div className="flex min-h-screen bg-[#121216]">
+                <SideBar />
 
-            {/* main area */}
-            <div className="ml-70 flex min-w-0 flex-1 flex-col">
-                <Header />
+                {/* main area */}
+                <div className="ml-70 flex min-w-0 flex-1 flex-col">
+                    <Header />
 
-                {/* content wrapper must grow */}
-                <div className={`flex-1 min-h-0 ${isVC ? "" : "px-8 py-6"}`}>
-                    <div className={layoutClass}>
-                        {children}
+                    {/* content wrapper must grow */}
+                    <div className={`flex-1 min-h-0 ${isVC ? "" : "px-8 py-6"}`}>
+                        <div className={layoutClass}>
+                            {children}
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>}
+            </div>}
         </>
 
     );

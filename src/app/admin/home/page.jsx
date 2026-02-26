@@ -1,11 +1,12 @@
-import AnimatedTabs from "./_components/AnimatedTabs";
 import { ArrowRight } from "lucide-react";
 import { ChannelsAccordion } from "./_components/ChannelsAccordion";
 import TopBanner from "./_components/TopBanner";
+import LiveCards from "./_components/LiveCards";
+import MedicalCategory from "./_components/MedicalCategory";
 
 
 export const metadata = {
-    title: "Virtual-Classroom",
+    title: "Home",
 };
 
 export default function Page() {
@@ -17,7 +18,10 @@ export default function Page() {
 
                 <TopBanner />
                 <div className="mt-6">
-                    <AnimatedTabs />
+                    <LiveCards />
+                </div>
+                <div className="mt-6">
+                    <MedicalCategory/>
                 </div>
             </div>
 

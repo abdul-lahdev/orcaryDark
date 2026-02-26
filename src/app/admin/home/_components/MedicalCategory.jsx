@@ -1,4 +1,4 @@
-import { MoveRight } from "lucide-react";
+import { Heart, MoveRight } from "lucide-react";
 import Link from "next/link";
 
 export default function MedicalCategory() {
@@ -6,14 +6,14 @@ export default function MedicalCategory() {
         {
             id: 1,
             catName: 'Cardiologie',
-            gradient:'linear-gradient(110.56deg,_rgba(239,68,68,0.125)_0%,_rgba(239,68,68,0.063)_100%)',
+            gradient:'linear-gradient(110.56deg, rgba(239, 68, 68, 0.19) 0%, rgba(239, 68, 68, 0.125) 100%)',
             icon: '',
             total: 12
         },
         {
             id: 2,
             catName: 'Neurologie',
-            gradient:'linear-gradient(110.56deg,_rgba(139,92,246,0.125)_0%,_rgba(139,92,246,0.063)_100%)',
+            gradient:'linear-gradient(110.56deg, rgba(139, 92, 246, 0.125) 0%, rgba(139, 92, 246, 0.063) 100%)',
             icon: '',
             total: 8,
         },
@@ -66,8 +66,10 @@ export default function MedicalCategory() {
             <div className="grid gri-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {
                     categories.map((item) => (
-                        <div key={item.id} className={` min-h-41 p-3 rounded-[12px] bg-[${item.gradient}]`}>
-                            <div className="size-12 rounded-[12px] bg-[#EF444430] flex items-center justify-center">ic</div>
+                        <div key={item.id} style={{background:item.gradient}} className={` min-h-41 p-3 rounded-[12px] `}>
+                            <div className="size-12 rounded-[12px] bg-[#EF444430] flex items-center justify-center">
+                                <Heart size={32} className="text-[#EF4343]" />
+                            </div>
                             {item.catName}</div>
 
                     ))

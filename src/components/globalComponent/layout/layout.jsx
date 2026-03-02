@@ -32,13 +32,13 @@ export default function Layout({ children }) {
     const pathname = usePathname();
     const isVirtualClassroom =
         pathname.startsWith("/admin/virtual-classroom") ||
-        pathname === "/admin/home";
+        pathname === "/admin/home" || pathname==='/admin/newsfeed';
     //   const isVirtualClassroom = pathname === "/admin/virtual-classroom" || pathname==='admin/home';
     // const isVirtualClassroom = pathname === "/admin/virtual-classroom" || pathname === "/admin/home";
     const isResources = pathname.startsWith("/admin/resources");
     const isVideoDetail = /^\/admin\/resources\/video\/[^/]+$/.test(pathname);
     const isDocDetail = /^\/admin\/resources\/document\/[^/]+$/.test(pathname);
-    const isVC = pathname === "/admin/virtual-classroom" || pathname.startsWith("/admin/resources") || pathname === "/admin/home";
+    const isVC = pathname === "/admin/virtual-classroom" || pathname.startsWith("/admin/resources") || pathname === "/admin/home" || pathname==='/admin/newsfeed';
 
     console.log('/auth/login')
     console.log(pathname)

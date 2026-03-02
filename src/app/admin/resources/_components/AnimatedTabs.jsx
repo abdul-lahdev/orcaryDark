@@ -47,7 +47,7 @@ export default function AnimatedTabs() {
     const [isOpen, setIsOpen] = useState(false);
     const [visibility, setVisibility] = useState("public");
 
-    const [thumbnail,setThumbnail]=useState('No file selected')
+    const [thumbnail, setThumbnail] = useState('No file selected')
 
     return (
 
@@ -69,154 +69,153 @@ export default function AnimatedTabs() {
 
 
 
-                  <Dialog open={isOpen} onOpenChange={setIsOpen}>
-  <DialogContent
-    className="
+                    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+                        <DialogContent
+                            className="
       bg-(--dark1) border border-(--dark3) text-white
       max-w-137.5 p-0 rounded-[16px]
       max-h-[80vh] outline-none
       flex flex-col overflow-hidden
     "
-  >
-    {/* HEADER (fixed) */}
-    <DialogHeader className="px-5 py-4 border-b border-white/5 bg-(--dark1)">
-      <DialogTitle className="text-[20px] font-semibold text-(--grey1)">
-        Upload Resource
-      </DialogTitle>
-    </DialogHeader>
+                        >
+                            {/* HEADER (fixed) */}
+                            <DialogHeader className="px-5 py-4 border-b border-white/5 bg-(--dark1)">
+                                <DialogTitle className="text-[20px] font-semibold text-(--grey1)">
+                                    Upload Resource
+                                </DialogTitle>
+                            </DialogHeader>
 
-    {/* BODY (scrollable) */}
-    <div className="flex-1 overflow-y-auto no-scrollbar px-5 py-4">
-      <div className="space-y-4">
-        {/* Title */}
-        <div className="space-y-2">
-          <label className="text-(--grey1) text-[14px] font-medium">Title</label>
-          <Input placeholder="Enter title" className="block w-full h-10 mt-2" />
-        </div>
+                            {/* BODY (scrollable) */}
+                            <div className="flex-1 overflow-y-auto no-scrollbar px-5 py-4">
+                                <div className="space-y-4">
+                                    {/* Title */}
+                                    <div className="space-y-2">
+                                        <label className="text-(--grey1) text-[14px] font-medium">Title</label>
+                                        <Input placeholder="Enter title" className="block w-full h-10 mt-2" />
+                                    </div>
 
-        {/* Category */}
-        <div className="space-y-3">
-          <label className="text-(--grey1) text-[14px] font-medium">Category Tag</label>
-          <div className="mt-2">
-            <Select>
-              <SelectTrigger className="bg-(--dark4) border border-(--dark3) h-[40px] rounded-[8px] w-full text-(--grey3)">
-                <SelectValue placeholder="Select category" />
-              </SelectTrigger>
-              <SelectContent className="bg-[#2B2B31] border-white/10 text-white">
-                <SelectItem value="cardiology">Cardiology</SelectItem>
-                <SelectItem value="neurology">Neurology</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
+                                    {/* Category */}
+                                    <div className="space-y-3">
+                                        <label className="text-(--grey1) text-[14px] font-medium">Category Tag</label>
+                                        <div className="mt-2">
+                                            <Select>
+                                                <SelectTrigger className="bg-(--dark4) border border-(--dark3) h-[40px] rounded-[8px] w-full text-(--grey3)">
+                                                    <SelectValue placeholder="Select category" />
+                                                </SelectTrigger>
+                                                <SelectContent className="bg-[#2B2B31] border-white/10 text-white">
+                                                    <SelectItem value="cardiology">Cardiology</SelectItem>
+                                                    <SelectItem value="neurology">Neurology</SelectItem>
+                                                </SelectContent>
+                                            </Select>
+                                        </div>
+                                    </div>
 
-        {/* Description */}
-        <div className="space-y-2">
-          <label className="text-(--grey1) text-[14px] font-medium">Description</label>
-          <Textarea
-            placeholder="Enter description"
-            className="bg-(--dark4) border border-(--dark4) min-h-30 rounded-[8px] focus-visible:ring-1 focus-visible:ring-(--blue1) resize-none text-white mt-2"
-          />
-        </div>
+                                    {/* Description */}
+                                    <div className="space-y-2">
+                                        <label className="text-(--grey1) text-[14px] font-medium">Description</label>
+                                        <Textarea
+                                            placeholder="Enter description"
+                                            className="bg-(--dark4) border border-(--dark4) min-h-30 rounded-[8px] focus-visible:ring-1 focus-visible:ring-(--blue1) resize-none text-white mt-2"
+                                        />
+                                    </div>
 
-        {/* Thumbnail */}
-        <div className="space-y-2">
-          <label className="text-(--grey1) text-[14px] font-medium">Thumbnail</label>
-          <div className="relative">
-            <input
-              type="file"
-              id="thumbnail-upload"
-              className="hidden"
-              onChange={(e) => setThumbnail(e.target.files?.[0]?.name || "No file selected")}
-            />
+                                    {/* Thumbnail */}
+                                    <div className="space-y-2">
+                                        <label className="text-(--grey1) text-[14px] font-medium">Thumbnail</label>
+                                        <div className="relative">
+                                            <input
+                                                type="file"
+                                                id="thumbnail-upload"
+                                                className="hidden"
+                                                onChange={(e) => setThumbnail(e.target.files?.[0]?.name || "No file selected")}
+                                            />
 
-            <label
-              htmlFor="thumbnail-upload"
-              className="flex items-center w-full h-12 bg-[#2B2B31] rounded-xl overflow-hidden cursor-pointer border border-white/5 hover:border-white/10 transition"
-            >
-              <div className="flex items-center gap-2 px-4 h-full bg-[#3A3A40] text-white/90 text-[13px] border-r border-white/5 hover:bg-[#45454C] transition-colors">
-                <Upload size={16} className="text-(--grey1)" />
-                <span>Upload thumbnail</span>
-              </div>
+                                            <label
+                                                htmlFor="thumbnail-upload"
+                                                className="flex items-center w-full h-12 bg-[#2B2B31] rounded-xl overflow-hidden cursor-pointer border border-white/5 hover:border-white/10 transition"
+                                            >
+                                                <div className="flex items-center gap-2 px-4 h-full bg-[#3A3A40] text-white/90 text-[13px] border-r border-white/5 hover:bg-[#45454C] transition-colors">
+                                                    <Upload size={16} className="text-(--grey1)" />
+                                                    <span>Upload thumbnail</span>
+                                                </div>
 
-              <div className="px-4 text-(--grey3) text-[13px] truncate">
-                {thumbnail}
-              </div>
-            </label>
-          </div>
-        </div>
+                                                <div className="px-4 text-(--grey3) text-[13px] truncate">
+                                                    {thumbnail}
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
 
-        {/* Paid Resource */}
-        <div className="flex items-center justify-between py-2">
-          <div className="space-y-0.5">
-            <label className="text-(--grey1) text-[14px] font-medium">Paid Resource</label>
-            <p className="text-[12px] text-(--grey8)">
-              You can active this if you want the viewers to pay to access
-            </p>
-          </div>
-          <Switch className="data-[state=checked]:bg-(--blue1)" />
-        </div>
+                                    {/* Paid Resource */}
+                                    <div className="flex items-center justify-between py-2">
+                                        <div className="space-y-0.5">
+                                            <label className="text-(--grey1) text-[14px] font-medium">Paid Resource</label>
+                                            <p className="text-[12px] text-(--grey8)">
+                                                You can active this if you want the viewers to pay to access
+                                            </p>
+                                        </div>
+                                        <Switch className="data-[state=checked]:bg-(--blue1)" />
+                                    </div>
 
-        {/* Price */}
-        <div className="space-y-2">
-          <label className="text-(--grey1) text-[14px] font-medium">Price</label>
-          <div className="relative">
-            <span className="absolute left-4 top-1/2 -translate-y-1/3 text-(--grey3)">$</span>
-            <Input
-              placeholder="0.00"
-              className="bg-[#2B2B31] border-none h-10 mt-2 pl-8 focus-visible:ring-1 focus-visible:ring-(--blue1) w-full"
-            />
-          </div>
-        </div>
+                                    {/* Price */}
+                                    <div className="space-y-2">
+                                        <label className="text-(--grey1) text-[14px] font-medium">Price</label>
+                                        <div className="relative">
+                                            <span className="absolute left-4 top-1/2 -translate-y-1/3 text-(--grey3)">$</span>
+                                            <Input
+                                                placeholder="0.00"
+                                                className="bg-[#2B2B31] border-none h-10 mt-2 pl-8 focus-visible:ring-1 focus-visible:ring-(--blue1) w-full"
+                                            />
+                                        </div>
+                                    </div>
 
-        {/* Visibility */}
-        <div className="space-y-3">
-          <label className="text-(--grey1) text-[20px] font-semibold">
-            Who can see the live stream?
-          </label>
-          <div className="grid grid-cols-3 gap-4 mt-2">
-            {[
-              { id: "public", label: "Public", icon: <User size={18} /> },
-              { id: "followers", label: "Followers", icon: <Users size={18} /> },
-              { id: "private", label: "Private", icon: <Lock size={18} /> },
-            ].map((option) => (
-              <button
-                key={option.id}
-                onClick={() => setVisibility(option.id)}
-                className={`flex items-center justify-center gap-2 py-4 rounded-[6px] border transition-all cursor-pointer ${
-                  visibility === option.id
-                    ? "border-(--blue1) bg-(--blue3) text-(--blue1)"
-                    : "border-white/5 bg-[#2B2B31] text-(--grey1) hover:bg-[#3A3A40]"
-                }`}
-                type="button"
-              >
-                {option.icon}
-                <span className="text-[12px] font-medium">{option.label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
+                                    {/* Visibility */}
+                                    <div className="space-y-3">
+                                        <label className="text-(--grey1) text-[20px] font-semibold">
+                                            Who can see the live stream?
+                                        </label>
+                                        <div className="grid grid-cols-3 gap-4 mt-2">
+                                            {[
+                                                { id: "public", label: "Public", icon: <User size={18} /> },
+                                                { id: "followers", label: "Followers", icon: <Users size={18} /> },
+                                                { id: "private", label: "Private", icon: <Lock size={18} /> },
+                                            ].map((option) => (
+                                                <button
+                                                    key={option.id}
+                                                    onClick={() => setVisibility(option.id)}
+                                                    className={`flex items-center justify-center gap-2 py-4 rounded-[6px] border transition-all cursor-pointer ${visibility === option.id
+                                                            ? "border-(--blue1) bg-(--blue3) text-(--blue1)"
+                                                            : "border-white/5 bg-[#2B2B31] text-(--grey1) hover:bg-[#3A3A40]"
+                                                        }`}
+                                                    type="button"
+                                                >
+                                                    {option.icon}
+                                                    <span className="text-[12px] font-medium">{option.label}</span>
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-    {/* FOOTER (sticky) */}
-    <div className="sticky bottom-0 left-0 right-0 px-5 py-4 bg-(--dark1) border-t border-white/5">
-      <div className="grid grid-cols-2 gap-3">
-        <Button
-          onClick={() => setIsOpen(false)}
-          variant="secondary"
-          className="w-full h-14.75"
-          type="button"
-        >
-          Discard
-        </Button>
-        <Button className="w-full h-14.75" type="button">
-          Upload
-        </Button>
-      </div>
-    </div>
-  </DialogContent>
-</Dialog>
+                            {/* FOOTER (sticky) */}
+                            <div className="sticky bottom-0 left-0 right-0 px-5 py-4 bg-(--dark1) border-t border-white/5">
+                                <div className="grid grid-cols-2 gap-3">
+                                    <Button
+                                        onClick={() => setIsOpen(false)}
+                                        variant="secondary"
+                                        className="w-full h-14.75"
+                                        type="button"
+                                    >
+                                        Discard
+                                    </Button>
+                                    <Button className="w-full h-14.75" type="button">
+                                        Upload
+                                    </Button>
+                                </div>
+                            </div>
+                        </DialogContent>
+                    </Dialog>
 
                 </div>
             </div>

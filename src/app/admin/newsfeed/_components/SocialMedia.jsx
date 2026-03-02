@@ -271,7 +271,7 @@ export const VideoCard = ({ item }) => {
         if (count === 1) {
             return (
                 <div className="relative w-full h-172.5 overflow-hidden rounded-sm">
-                    <Image src={images[0]} alt="post" fill className="object-cover" />
+                    <Image loading="eager" src={images[0]} alt="post" fill className="object-cover" />
                 </div>
             );
         }
@@ -281,7 +281,7 @@ export const VideoCard = ({ item }) => {
                 <div className="grid grid-cols-2 gap-2 h-172.5">
                     {images.map((img, idx) => (
                         <div key={idx} className="relative overflow-hidden h-full rounded-sm">
-                            <Image src={img} alt="post" fill className="object-cover" />
+                            <Image loading="eager" src={img} alt="post" fill className="object-cover" />
                         </div>
                     ))}
                 </div>
@@ -292,14 +292,14 @@ export const VideoCard = ({ item }) => {
             return (
                 <div className="grid grid-cols-2 gap-2 h-172.5">
                     <div className="relative overflow-hidden h-full rounded-sm">
-                        <Image src={images[0]} alt="post" fill className="object-cover" />
+                        <Image loading="eager" src={images[0]} alt="post" fill className="object-cover" />
                     </div>
                     <div className="grid grid-rows-2 gap-2 h-full">
                         <div className="relative overflow-hidden h-full rounded-sm">
-                            <Image src={images[1]} alt="post" fill className="object-cover" />
+                            <Image loading="eager" src={images[1]} alt="post" fill className="object-cover" />
                         </div>
                         <div className="relative overflow-hidden h-full rounded-sm">
-                            <Image src={images[2]} alt="post" fill className="object-cover" />
+                            <Image loading="eager" src={images[2]} alt="post" fill className="object-cover" />
                         </div>
                     </div>
                 </div>
@@ -311,11 +311,11 @@ export const VideoCard = ({ item }) => {
                 <div className="grid grid-cols-2 gap-2 h-172.5">
                     {images.slice(0, 3).map((img, idx) => (
                         <div key={idx} className="relative overflow-hidden h-full rounded-sm">
-                            <Image src={img} alt="post" fill className="object-cover" />
+                            <Image loading="eager" src={img} alt="post" fill className="object-cover" />
                         </div>
                     ))}
                     <div className="relative overflow-hidden h-full rounded-sm group/seeMore cursor-pointer">
-                        <Image src={images[3]} alt="post" fill className="object-cover" />
+                        <Image loading="eager" src={images[3]} alt="post" fill className="object-cover" />
                         <div className="absolute inset-0 bg-black/60 flex items-center justify-center backdrop-blur-[2px] group-hover/seeMore:bg-black/40 transition-all">
                             <span className="text-white font-bold text-xl tracking-wide">
                                 {count > 4 ? `+${count - 3} More` : "See More"}

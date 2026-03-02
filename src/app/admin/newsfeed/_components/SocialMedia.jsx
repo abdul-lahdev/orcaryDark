@@ -13,7 +13,6 @@ const tabs = [
     { id: "Hot", label: "Hot" },
     { id: "Oldest", label: "Oldest" },
 ];
-
 const posts = [
     {
         id: 1,
@@ -21,17 +20,48 @@ const posts = [
         userAvatar: "https://github.com/shadcn.png",
         time: "12 mins ago",
         images: [
-            'https://images.unsplash.com/photo-1522071823916-2f08034a7065?q=80',
-            'https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80',
-            'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80',
-            'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80'
+            '/images/classRoom/thumbnail2.jpg',
+            '/images/classRoom/thumbnail2.jpg',
+            '/images/classRoom/thumbnail2.jpg',
+            '/images/classRoom/thumbnail2.jpg'
         ],
-        title: "Celebrating the fierce spirit of women's football! ⚽💪🏆 GameChangers",
-        description: "Witnessed an exhilarating women's football match today as these talented athletes displayed unmatched skill and determination on the field.",
-        hashtags: ["#WomenInFootball", "#SoccerSisters", "#GirlPower"],
+        title: "Celebrating the fierce spirit of women's football!",
+        description: `"Celebrating the fierce spirit of women's football! ⚽💪🏆 GameChangers". Witnessed an exhilarating women's football match today as these talented athletes displayed unmatched skill and determination on the field. Goals, tackles, and unforgettable moments made this game a true spectacle. #WomenInFootball #SoccerSisters #GirlPower`,
+        hashtags: ["#WomenInFootball", "#SoccerSisters"],
         likes: 3,
-        messages: 3,
-        shares: 3
+        messages: 5,
+        shares: 2
+    },
+    {
+        id: 2,
+        userName: "Sarah Jenkins",
+        userAvatar: "https://github.com/shadcn.png",
+        time: "1 hour ago",
+        images: [
+            '/images/classRoom/thumbnail2.jpg',
+            '/images/classRoom/thumbnail2.jpg',
+        ],
+        title: "Team Meeting",
+        description: "Great collaboration today with the design team.",
+        hashtags: [],
+        likes: 12,
+        messages: 2,
+        shares: 1
+    },
+    {
+        id: 3,
+        userName: "Sarah imran",
+        userAvatar: "https://github.com/shadcn.png",
+        time: "1 hour ago",
+        images: [
+            '/images/classRoom/thumbnail2.jpg',
+        ],
+        title: "Team Meeting",
+        description: "Great collaboration today with the design team.",
+        hashtags: ["#Design", "#TeamWork"],
+        likes: 12,
+        messages: 2,
+        shares: 1
     }
 ];
 
@@ -111,7 +141,7 @@ export default function SocialMedia() {
                                     posts.map((item) => (
                                         <div
                                             key={item.id}
-                                            className="bg-(--dark5) hover:bg-(--dark3) rounded-[12px] p-3 cursor-pointer mt-3"
+                                            className="bg-(--dark5) hover:bg-(--dark3) rounded-[12px] p-3 cursor-pointer mt-5"
                                         >
                                             <VideoCard item={item} />
                                         </div>
@@ -128,66 +158,189 @@ export default function SocialMedia() {
     );
 }
 
+// export const VideoCard = ({ item }) => {
+//     const { id, isLive, thumbnail, avatar, name, docType, specialization, title, viewers, time } = item;
+
+//     return (
+//         <div className="w-full group cursor-pointer">
+//             <div className="w-full bg-[#1E1E1E] text-white rounded-xl overflow-hidden shadow-lg border border-white/5">
+
+
+//                 <div className="grid grid-cols-2 gap-2 h-208.5 relative ">
+//                     <div className="relative overflow-hidden h-full rounded-sm">
+//                         <Image
+//                             src="/images/classRoom/thumbnail2.jpg"
+//                             alt="meeting"
+//                             fill
+//                             className="object-cover"
+//                         />
+//                     </div>
+//                     <div className="relative overflow-hidden h-full rounded-sm">
+//                         <Image
+//                             src="/images/classRoom/thumbnail2.jpg"
+//                             alt="team"
+//                             fill
+//                             className="object-cover"
+//                         />
+//                     </div>
+//                     <div className="relative overflow-hidden h-full rounded-sm">
+//                         <Image
+//                             src="/images/classRoom/thumbnail2.jpg"
+//                             alt="office"
+//                             fill
+//                             className="object-cover"
+//                         />
+//                     </div>
+//                     <div className="relative overflow-hidden h-full rounded-sm group/seeMore cursor-pointer">
+//                         <Image
+//                             src="/images/classRoom/thumbnail2.jpg"
+//                             alt="discussion"
+//                             fill
+//                             className="object-cover"
+//                         />
+//                         <div onClick={() => console.log('hello')} className="absolute inset-0 bg-black/60 flex items-center justify-center backdrop-blur-[2px] group-hover/seeMore:bg-black/40 transition-all">
+//                             <span className="text-white font-bold text-xl tracking-wide">See More</span>
+//                         </div>
+//                     </div>
+//                     <div className="p-4 flex items-center justify-between absolute bottom-0 bg-linear-to-t from-black to-transparent w-full">
+//                         <div className="flex items-center gap-3">
+//                             <Avatar className="h-10 w-10 border border-white/10">
+//                                 <AvatarImage src={avatar || "https://github.com/shadcn.png"} />
+//                                 <AvatarFallback>{name?.[0] || "MH"}</AvatarFallback>
+//                             </Avatar>
+//                             <div>
+//                                 <h4 className="text-[14px] font-semibold leading-tight">{name || "Mathew Hems"}</h4>
+//                                 <span className="text-[12px] text-gray-400">{time || "12 mins ago"}</span>
+//                             </div>
+//                         </div>
+//                         <Button variant="ghost" size="icon" className="text-gray-400 hover:bg-white/5 h-8 w-8">
+//                             <MoreVertical size={18} />
+//                         </Button>
+//                     </div>
+//                 </div>
+//                 <div className="p-4 space-y-3">
+//                     <p className="text-[14px] leading-relaxed italic text-gray-200">
+//                         {title || "Celebrating the fierce spirit of women's football! ⚽️💪🏆 GameChangers"}
+//                     </p>
+//                     <p className="text-[13px] leading-relaxed text-gray-400">
+//                         Witnessed an exhilarating women's football match today as these talented athletes displayed unmatched skill and determination on the field.
+//                     </p>
+//                     <div className="flex gap-2">
+//                         <span className="text-blue-400 text-[12px] hover:underline cursor-pointer">#WomenInFootball</span>
+//                         <span className="text-blue-400 text-[12px] hover:underline cursor-pointer">#SoccerSisters</span>
+//                         <span className="text-blue-400 text-[12px] hover:underline cursor-pointer">#GirlPower</span>
+//                     </div>
+//                 </div>
+//                 <div className="px-4 py-2 flex justify-between border-t border-white/5 text-gray-400 text-[12px]">
+//                     <div className="flex items-center gap-4">
+//                         <span className="flex items-center gap-1.5 hover:text-white cursor-pointer transition-colors">
+//                             <ThumbsUp size={14} className="text-blue-400" /> 3
+//                         </span>
+//                         <span className="flex items-center gap-1.5 hover:text-white cursor-pointer transition-colors">
+//                             <MessageSquare size={14} /> 3
+//                         </span>
+//                     </div>
+//                     <span className="flex items-center gap-1.5 hover:text-white cursor-pointer transition-colors">
+//                         <Share2 size={14} /> 3
+//                     </span>
+//                 </div>
+//                 <div className="grid grid-cols-3 border-t border-white/5">
+//                     <Button variant="ghost" className="rounded-none h-12 gap-2 text-gray-400 hover:text-blue-400 hover:bg-white/5">
+//                         <ThumbsUp size={18} /> <span className="text-[13px]">Like</span>
+//                     </Button>
+//                     <Button variant="ghost" className="rounded-none h-12 gap-2 text-gray-400 hover:text-white hover:bg-white/5">
+//                         <MessageSquare size={18} /> <span className="text-[13px]">Comment</span>
+//                     </Button>
+//                     <Button variant="ghost" className="rounded-none h-12 gap-2 text-gray-400 hover:text-white hover:bg-white/5">
+//                         <Share2 size={18} /> <span className="text-[13px]">Share</span>
+//                     </Button>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// };
+
+
 export const VideoCard = ({ item }) => {
-    const { id, isLive, thumbnail, avatar, name, docType, specialization, title, viewers, time } = item;
+    // Destructuring from item (Matches your object keys)
+    const { images, userName, userAvatar, time, title, description, hashtags, likes, messages, shares } = item;
 
-    return (
-        <Link href={`/admin/resources/${docType === 'video' ? 'video' : 'document'}/${id}`} className="w-full group cursor-pointer">
-            <div className="w-full bg-[#1E1E1E] text-white rounded-xl overflow-hidden shadow-lg border border-white/5">
+    const renderImages = () => {
+        const count = images?.length || 0;
 
-                {/* 1. Header Section */}
+        if (count === 1) {
+            return (
+                <div className="relative w-full h-172.5 overflow-hidden rounded-sm">
+                    <Image src={images[0]} alt="post" fill className="object-cover" />
+                </div>
+            );
+        }
 
+        if (count === 2) {
+            return (
+                <div className="grid grid-cols-2 gap-2 h-172.5">
+                    {images.map((img, idx) => (
+                        <div key={idx} className="relative overflow-hidden h-full rounded-sm">
+                            <Image src={img} alt="post" fill className="object-cover" />
+                        </div>
+                    ))}
+                </div>
+            );
+        }
 
-                {/* 2. Image Grid Section - Gap-2 Added */}
-                <div className="grid grid-cols-2 gap-2 h-[400px] relative px-2 ">
-                    {/* Top Left */}
+        if (count === 3) {
+            return (
+                <div className="grid grid-cols-2 gap-2 h-172.5">
                     <div className="relative overflow-hidden h-full rounded-sm">
-                        <Image
-                            src="/images/classRoom/thumbnail3.jpg"
-                            alt="meeting"
-                            fill
-                            className="object-cover"
-                        />
+                        <Image src={images[0]} alt="post" fill className="object-cover" />
                     </div>
-                    {/* Top Right */}
-                    <div className="relative overflow-hidden h-full rounded-sm">
-                        <Image
-                            src="/images/classRoom/thumbnail3.jpg"
-                            alt="team"
-                            fill
-                            className="object-cover"
-                        />
-                    </div>
-                    {/* Bottom Left */}
-                    <div className="relative overflow-hidden h-full rounded-sm">
-                        <Image
-                            src="/images/classRoom/thumbnail3.jpg"
-                            alt="office"
-                            fill
-                            className="object-cover"
-                        />
-                    </div>
-                    {/* Bottom Right (See More Overlay) */}
-                    <div className="relative overflow-hidden h-full rounded-sm group/seeMore cursor-pointer">
-                        <Image
-                            src="/images/classRoom/thumbnail3.jpg"
-                            alt="discussion"
-                            fill
-                            className="object-cover"
-                        />
-                        <div className="absolute inset-0 bg-black/60 flex items-center justify-center backdrop-blur-[2px] group-hover/seeMore:bg-black/40 transition-all">
-                            <span className="text-white font-bold text-xl tracking-wide">See More</span>
+                    <div className="grid grid-rows-2 gap-2 h-full">
+                        <div className="relative overflow-hidden h-full rounded-sm">
+                            <Image src={images[1]} alt="post" fill className="object-cover" />
+                        </div>
+                        <div className="relative overflow-hidden h-full rounded-sm">
+                            <Image src={images[2]} alt="post" fill className="object-cover" />
                         </div>
                     </div>
-                    <div className="p-4 flex items-center justify-between absolute bottom-0 bg-amber-100 w-full">
+                </div>
+            );
+        }
+
+        if (count >= 4) {
+            return (
+                <div className="grid grid-cols-2 gap-2 h-172.5">
+                    {images.slice(0, 3).map((img, idx) => (
+                        <div key={idx} className="relative overflow-hidden h-full rounded-sm">
+                            <Image src={img} alt="post" fill className="object-cover" />
+                        </div>
+                    ))}
+                    <div className="relative overflow-hidden h-full rounded-sm group/seeMore cursor-pointer">
+                        <Image src={images[3]} alt="post" fill className="object-cover" />
+                        <div className="absolute inset-0 bg-black/60 flex items-center justify-center backdrop-blur-[2px] group-hover/seeMore:bg-black/40 transition-all">
+                            <span className="text-white font-bold text-xl tracking-wide">
+                                {count > 4 ? `+${count - 3} More` : "See More"}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+    };
+
+    return (
+        <div className="w-full group ">
+            <div className="w-full bg-[#1E1E1E] text-white rounded-xl overflow-hidden ">
+                <div className="relative">
+                    {renderImages()}
+                    <div className="p-4 flex items-center justify-between absolute bottom-0 bg-linear-to-t from-black to-transparent w-full">
                         <div className="flex items-center gap-3">
                             <Avatar className="h-10 w-10 border border-white/10">
-                                <AvatarImage src={avatar || "https://github.com/shadcn.png"} />
-                                <AvatarFallback>{name?.[0] || "MH"}</AvatarFallback>
+                                <AvatarImage src={userAvatar} />
+                                <AvatarFallback>{userName?.[0] || "U"}</AvatarFallback>
                             </Avatar>
                             <div>
-                                <h4 className="text-[14px] font-semibold leading-tight">{name || "Mathew Hems"}</h4>
-                                <span className="text-[12px] text-gray-400">{time || "12 mins ago"}</span>
+                                <h4 className="text-[14px] font-semibold leading-tight">{userName}</h4>
+                                <span className="text-[12px] text-gray-400">{time}</span>
                             </div>
                         </div>
                         <Button variant="ghost" size="icon" className="text-gray-400 hover:bg-white/5 h-8 w-8">
@@ -195,39 +348,29 @@ export const VideoCard = ({ item }) => {
                         </Button>
                     </div>
                 </div>
-
-                {/* 3. Text Content Section */}
                 <div className="p-4 space-y-3">
-                    <p className="text-[14px] leading-relaxed italic text-gray-200">
-                        {title || "Celebrating the fierce spirit of women's football! ⚽️💪🏆 GameChangers"}
-                    </p>
-                    <p className="text-[13px] leading-relaxed text-gray-400">
-                        Witnessed an exhilarating women's football match today as these talented athletes displayed unmatched skill and determination on the field.
-                    </p>
-                    <div className="flex gap-2">
-                        <span className="text-blue-400 text-[12px] hover:underline cursor-pointer">#WomenInFootball</span>
-                        <span className="text-blue-400 text-[12px] hover:underline cursor-pointer">#SoccerSisters</span>
-                        <span className="text-blue-400 text-[12px] hover:underline cursor-pointer">#GirlPower</span>
-                    </div>
+                    {/* {title && <p className="text-[14px] leading-relaxed italic text-[gray-200]">{title}</p>} */}
+                    <p className="text-[16px] font-normal text-(--grey1)">{description}</p>
+                    {hashtags && <div className="flex gap-2">
+                        {hashtags?.map((tag, i) => (
+                            <span key={i} className="text-blue-400 text-[12px] hover:underline cursor-pointer">{tag}</span>
+                        ))}
+                    </div>}
                 </div>
-
-                {/* 4. Stats Section */}
-                <div className="px-4 py-2 flex justify-between border-t border-white/5 text-gray-400 text-[12px]">
+                <div className="px-4 py-2 flex justify-between text-(--grey1) text-[12px]">
                     <div className="flex items-center gap-4">
                         <span className="flex items-center gap-1.5 hover:text-white cursor-pointer transition-colors">
-                            <ThumbsUp size={14} className="text-blue-400" /> 3
+                            <ThumbsUp size={14} className="text-blue-400" /> {likes}
                         </span>
                         <span className="flex items-center gap-1.5 hover:text-white cursor-pointer transition-colors">
-                            <MessageSquare size={14} /> 3
+                            <MessageSquare size={14} /> {messages}
                         </span>
                     </div>
                     <span className="flex items-center gap-1.5 hover:text-white cursor-pointer transition-colors">
-                        <Share2 size={14} /> 3
+                        <Share2 size={14} /> {shares}
                     </span>
                 </div>
-
-                {/* 5. Actions Footer */}
-                <div className="grid grid-cols-3 border-t border-white/5">
+                <div className="grid grid-cols-3 ">
                     <Button variant="ghost" className="rounded-none h-12 gap-2 text-gray-400 hover:text-blue-400 hover:bg-white/5">
                         <ThumbsUp size={18} /> <span className="text-[13px]">Like</span>
                     </Button>
@@ -239,6 +382,6 @@ export const VideoCard = ({ item }) => {
                     </Button>
                 </div>
             </div>
-        </Link>
+        </div>
     );
 };

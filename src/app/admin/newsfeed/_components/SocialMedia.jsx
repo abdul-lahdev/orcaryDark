@@ -2,7 +2,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Link from "next/link";
-import { CircleCheckBig, Clock, Flame, MessageSquare, MoreVertical, MoveRight, Share2, Share2Icon, ThumbsUp } from "lucide-react";
+import { CircleCheckBig, Clock, Ellipsis, Flame, MessageCircle, MessageSquare, MoreVertical, MoveRight, Paperclip, SendHorizontal, Share2, Share2Icon, ThumbsUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
@@ -141,7 +141,7 @@ export default function SocialMedia() {
                                     posts.map((item) => (
                                         <div
                                             key={item.id}
-                                            className="bg-(--dark5) hover:bg-(--dark3) rounded-[12px] p-3 cursor-pointer mt-5"
+                                            className="bg-(--dark5)  rounded-[12px] p-3  mt-5"
                                         >
                                             <VideoCard item={item} />
                                         </div>
@@ -158,112 +158,11 @@ export default function SocialMedia() {
     );
 }
 
-// export const VideoCard = ({ item }) => {
-//     const { id, isLive, thumbnail, avatar, name, docType, specialization, title, viewers, time } = item;
-
-//     return (
-//         <div className="w-full group cursor-pointer">
-//             <div className="w-full bg-[#1E1E1E] text-white rounded-xl overflow-hidden shadow-lg border border-white/5">
-
-
-//                 <div className="grid grid-cols-2 gap-2 h-208.5 relative ">
-//                     <div className="relative overflow-hidden h-full rounded-sm">
-//                         <Image
-//                             src="/images/classRoom/thumbnail2.jpg"
-//                             alt="meeting"
-//                             fill
-//                             className="object-cover"
-//                         />
-//                     </div>
-//                     <div className="relative overflow-hidden h-full rounded-sm">
-//                         <Image
-//                             src="/images/classRoom/thumbnail2.jpg"
-//                             alt="team"
-//                             fill
-//                             className="object-cover"
-//                         />
-//                     </div>
-//                     <div className="relative overflow-hidden h-full rounded-sm">
-//                         <Image
-//                             src="/images/classRoom/thumbnail2.jpg"
-//                             alt="office"
-//                             fill
-//                             className="object-cover"
-//                         />
-//                     </div>
-//                     <div className="relative overflow-hidden h-full rounded-sm group/seeMore cursor-pointer">
-//                         <Image
-//                             src="/images/classRoom/thumbnail2.jpg"
-//                             alt="discussion"
-//                             fill
-//                             className="object-cover"
-//                         />
-//                         <div onClick={() => console.log('hello')} className="absolute inset-0 bg-black/60 flex items-center justify-center backdrop-blur-[2px] group-hover/seeMore:bg-black/40 transition-all">
-//                             <span className="text-white font-bold text-xl tracking-wide">See More</span>
-//                         </div>
-//                     </div>
-//                     <div className="p-4 flex items-center justify-between absolute bottom-0 bg-linear-to-t from-black to-transparent w-full">
-//                         <div className="flex items-center gap-3">
-//                             <Avatar className="h-10 w-10 border border-white/10">
-//                                 <AvatarImage src={avatar || "https://github.com/shadcn.png"} />
-//                                 <AvatarFallback>{name?.[0] || "MH"}</AvatarFallback>
-//                             </Avatar>
-//                             <div>
-//                                 <h4 className="text-[14px] font-semibold leading-tight">{name || "Mathew Hems"}</h4>
-//                                 <span className="text-[12px] text-gray-400">{time || "12 mins ago"}</span>
-//                             </div>
-//                         </div>
-//                         <Button variant="ghost" size="icon" className="text-gray-400 hover:bg-white/5 h-8 w-8">
-//                             <MoreVertical size={18} />
-//                         </Button>
-//                     </div>
-//                 </div>
-//                 <div className="p-4 space-y-3">
-//                     <p className="text-[14px] leading-relaxed italic text-gray-200">
-//                         {title || "Celebrating the fierce spirit of women's football! ⚽️💪🏆 GameChangers"}
-//                     </p>
-//                     <p className="text-[13px] leading-relaxed text-gray-400">
-//                         Witnessed an exhilarating women's football match today as these talented athletes displayed unmatched skill and determination on the field.
-//                     </p>
-//                     <div className="flex gap-2">
-//                         <span className="text-blue-400 text-[12px] hover:underline cursor-pointer">#WomenInFootball</span>
-//                         <span className="text-blue-400 text-[12px] hover:underline cursor-pointer">#SoccerSisters</span>
-//                         <span className="text-blue-400 text-[12px] hover:underline cursor-pointer">#GirlPower</span>
-//                     </div>
-//                 </div>
-//                 <div className="px-4 py-2 flex justify-between border-t border-white/5 text-gray-400 text-[12px]">
-//                     <div className="flex items-center gap-4">
-//                         <span className="flex items-center gap-1.5 hover:text-white cursor-pointer transition-colors">
-//                             <ThumbsUp size={14} className="text-blue-400" /> 3
-//                         </span>
-//                         <span className="flex items-center gap-1.5 hover:text-white cursor-pointer transition-colors">
-//                             <MessageSquare size={14} /> 3
-//                         </span>
-//                     </div>
-//                     <span className="flex items-center gap-1.5 hover:text-white cursor-pointer transition-colors">
-//                         <Share2 size={14} /> 3
-//                     </span>
-//                 </div>
-//                 <div className="grid grid-cols-3 border-t border-white/5">
-//                     <Button variant="ghost" className="rounded-none h-12 gap-2 text-gray-400 hover:text-blue-400 hover:bg-white/5">
-//                         <ThumbsUp size={18} /> <span className="text-[13px]">Like</span>
-//                     </Button>
-//                     <Button variant="ghost" className="rounded-none h-12 gap-2 text-gray-400 hover:text-white hover:bg-white/5">
-//                         <MessageSquare size={18} /> <span className="text-[13px]">Comment</span>
-//                     </Button>
-//                     <Button variant="ghost" className="rounded-none h-12 gap-2 text-gray-400 hover:text-white hover:bg-white/5">
-//                         <Share2 size={18} /> <span className="text-[13px]">Share</span>
-//                     </Button>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-
-
 export const VideoCard = ({ item }) => {
     // Destructuring from item (Matches your object keys)
     const { images, userName, userAvatar, time, title, description, hashtags, likes, messages, shares } = item;
+
+    const [showComment, setShowComment] = useState(false)
 
     const renderImages = () => {
         const count = images?.length || 0;
@@ -329,7 +228,7 @@ export const VideoCard = ({ item }) => {
 
     return (
         <div className="w-full group ">
-            <div className="w-full bg-[#1E1E1E] text-white rounded-xl overflow-hidden ">
+            <div className="w-full text-white rounded-xl overflow-hidden ">
                 <div className="relative">
                     {renderImages()}
                     <div className="p-4 flex items-center justify-between absolute bottom-0 bg-linear-to-t from-black to-transparent w-full">
@@ -348,39 +247,71 @@ export const VideoCard = ({ item }) => {
                         </Button>
                     </div>
                 </div>
-                <div className="p-4 space-y-3">
-                    {/* {title && <p className="text-[14px] leading-relaxed italic text-[gray-200]">{title}</p>} */}
-                    <p className="text-[16px] font-normal text-(--grey1)">{description}</p>
-                    {hashtags && <div className="flex gap-2">
-                        {hashtags?.map((tag, i) => (
-                            <span key={i} className="text-blue-400 text-[12px] hover:underline cursor-pointer">{tag}</span>
-                        ))}
-                    </div>}
-                </div>
-                <div className="px-4 py-2 flex justify-between text-(--grey1) text-[12px]">
-                    <div className="flex items-center gap-4">
+                <div className="p-5">
+                    <div className="space-y-3 mb-5">
+                        {/* {title && <p className="text-[14px] leading-relaxed italic text-[gray-200]">{title}</p>} */}
+                        <p className="text-[16px] font-normal text-(--grey1)">{description}</p>
+                        {hashtags && <div className="flex gap-2">
+                            {hashtags?.map((tag, i) => (
+                                <span key={i} className="text-blue-400 text-[12px] hover:underline cursor-pointer">{tag}</span>
+                            ))}
+                        </div>}
+                    </div>
+                    <div className="px-4 py-5 flex justify-between text-(--grey1) text-[12px] border-y border-(--dark2)">
+                        <div className="flex items-center gap-4">
+                            <span className="flex items-center gap-1.5 hover:text-white cursor-pointer transition-colors">
+                                <ThumbsUp size={14} className="text-blue-400" /> {likes}
+                            </span>
+                            <span className="flex items-center gap-1.5 hover:text-white cursor-pointer transition-colors">
+                                <MessageCircle size={14} /> {messages}
+                            </span>
+                        </div>
                         <span className="flex items-center gap-1.5 hover:text-white cursor-pointer transition-colors">
-                            <ThumbsUp size={14} className="text-blue-400" /> {likes}
-                        </span>
-                        <span className="flex items-center gap-1.5 hover:text-white cursor-pointer transition-colors">
-                            <MessageSquare size={14} /> {messages}
+                            <Share2 size={14} /> {shares}
                         </span>
                     </div>
-                    <span className="flex items-center gap-1.5 hover:text-white cursor-pointer transition-colors">
-                        <Share2 size={14} /> {shares}
-                    </span>
+                    <div className="grid grid-cols-3 pt-5 ">
+                        <Button variant="ghost" className="rounded-none h-14 gap-2 text-(--grey1) hover:text-blue-400 hover:bg-white/5">
+                            <ThumbsUp size={24} className='text-(--grey1)' /> <span className="text-[13px] text-(--grey1)">Like</span>
+                        </Button>
+                        <Button onClick={()=>setShowComment(!showComment)} variant="ghost" className="rounded-none h-14 gap-2 text-(--grey1) hover:text-white border-x border-(--dark2) hover:bg-white/5">
+                            <MessageCircle size={24} className='text-(--grey1)' /> <span className="text-[13px] text-(--grey1)">Comment</span>
+                        </Button>
+                        <Button variant="ghost" className="rounded-none h-14 gap-2 text-(--grey1) hover:text-white hover:bg-white/5">
+                            <Share2 size={24} className='text-(--grey1)' /> <span className="text-[13px] text-(--grey1)">Share</span>
+                        </Button>
+                    </div>
+                   {showComment && <div className="bg-(--dark1) p-4 rounded-[4px]">
+                        <div className='bg-(--dark2) px-3 py-2 rounded-[8px] flex items-center justify-between'>
+                            <div className="grid grid-cols-[40px_1fr] w-full items-center gap-3">
+                                <Avatar className="h-10 w-10 border border-white/10">
+                                    <AvatarImage src={userAvatar} />
+                                    <AvatarFallback>{userName?.[0] || "U"}</AvatarFallback>
+                                </Avatar>
+                                <textarea name="" id="" placeholder="What's on you mind" className="h-8 border-none px-3 resize-none text-[16px] font-normal w-full text-(--grey2) "></textarea>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <Paperclip size={24} className="cursor-pointer text-(--grey1)" />
+                                <Button><SendHorizontal /> Send</Button>
+                            </div>
+                        </div>
+                        <div className="flex items-center mt-6">
+                            <div className="grid grid-cols-[32px_1fr] w-full items-center gap-3">
+                                <Avatar className="size-8 border border-white/10">
+                                    <AvatarImage src={userAvatar} />
+                                    <AvatarFallback>{userName?.[0] || "U"}</AvatarFallback>
+                                </Avatar>
+                                <textarea name="" id="" placeholder="What does the fox say?" className="h-8 border-none px-3 resize-none text-[16px] font-normal w-full text-(--grey2) "></textarea>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <span className='text-[12px] font-normal text-(--grey11) whitespace-nowrap'>12hr ago</span>
+                                <Ellipsis size={16} className='text-(--grey10)' />
+                            </div>
+                        </div>
+                    </div>}
                 </div>
-                <div className="grid grid-cols-3 ">
-                    <Button variant="ghost" className="rounded-none h-12 gap-2 text-gray-400 hover:text-blue-400 hover:bg-white/5">
-                        <ThumbsUp size={18} /> <span className="text-[13px]">Like</span>
-                    </Button>
-                    <Button variant="ghost" className="rounded-none h-12 gap-2 text-gray-400 hover:text-white hover:bg-white/5">
-                        <MessageSquare size={18} /> <span className="text-[13px]">Comment</span>
-                    </Button>
-                    <Button variant="ghost" className="rounded-none h-12 gap-2 text-gray-400 hover:text-white hover:bg-white/5">
-                        <Share2 size={18} /> <span className="text-[13px]">Share</span>
-                    </Button>
-                </div>
+
+
             </div>
         </div>
     );

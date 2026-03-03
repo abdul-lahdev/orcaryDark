@@ -17,6 +17,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import Link from "next/link";
 
 export default function Header() {
 
@@ -51,7 +52,9 @@ export default function Header() {
                         </DropdownMenuContent>
                     </DropdownMenu>
                     <Moon size={18} className="text-(--grey1) dark:hover:text-white" />
+                    <Link href='/admin/calendar'>
                     <Calendar size={18} className="text-(--grey1) dark:hover:text-white" />
+                    </Link>
 
                     <DropdownMenu>
                         <DropdownMenuTrigger className='cursor-pointer relative' asChild>

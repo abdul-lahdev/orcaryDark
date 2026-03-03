@@ -16,7 +16,7 @@ export default function LiveCards() {
                     </span>
                 </div>
                 <Link
-                    href='/admin/virtual-classroom'
+                    href='/admin/lives'
                     className="group flex items-center gap-2 text-(--blue1) text-[15px] font-normal"
                 >
                     <span className="group-hover:underline">See All</span>

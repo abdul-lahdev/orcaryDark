@@ -62,6 +62,19 @@ const posts = [
         likes: 12,
         messages: 2,
         shares: 1
+    },
+        {
+        id: 4,
+        userName: "Sarah imran",
+        userAvatar: "https://github.com/shadcn.png",
+        time: "1 hour ago",
+        images: [],
+        title: "Team Meeting",
+        description: "Witnessed an exhilarating women's football match today as these talented athletes displayed unmatched skill and determination on the field. Goals, tackles, and unforgettable moments made this game a true spectacl",
+        hashtags: ["#Design", "#TeamWork"],
+        likes: 12,
+        messages: 2,
+        shares: 1
     }
 ];
 
@@ -167,6 +180,8 @@ export const VideoCard = ({ item }) => {
     const renderImages = () => {
         const count = images?.length || 0;
 
+      
+
         if (count === 1) {
             return (
                 <div className="relative w-full h-172.5 overflow-hidden rounded-sm">
@@ -231,7 +246,7 @@ export const VideoCard = ({ item }) => {
             <div className="w-full text-white rounded-xl overflow-hidden ">
                 <div className="relative">
                     {renderImages()}
-                    <div className="p-4 flex items-center justify-between absolute bottom-0 bg-linear-to-t from-black to-transparent w-full">
+                  {images.length===0?<span>Hello</span>: <div className="p-4 flex items-center justify-between absolute bottom-0 bg-linear-to-t from-black to-transparent w-full">
                         <div className="flex items-center gap-3">
                             <Avatar className="h-10 w-10 border border-white/10">
                                 <AvatarImage src={userAvatar} />
@@ -243,9 +258,9 @@ export const VideoCard = ({ item }) => {
                             </div>
                         </div>
                         <Button variant="ghost" size="icon" className="text-gray-400 hover:bg-white/5 h-8 w-8">
-                            <MoreVertical size={18} />
+                            <MoreVertical size={25} />
                         </Button>
-                    </div>
+                    </div>}
                 </div>
                 <div className="p-5">
                     <div className="space-y-3 mb-5">

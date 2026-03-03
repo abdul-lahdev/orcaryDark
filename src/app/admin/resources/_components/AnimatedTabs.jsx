@@ -345,10 +345,10 @@ export const VideoCard = ({ item }) => {
             <div className="relative aspect-video rounded-[12px] overflow-hidden">
                 <Image src={thumbnail || "/images/classRoom/thumbnail.jpg"} alt="Video Thumbnail" width={376} height={227} className="w-full h-full object-cover" />
 
-                {isLive && <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-(--red3) backdrop-blur-md px-2 py-1 rounded-[4px]">
+                {/* {isLive && <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-(--red3) backdrop-blur-md px-2 py-1 rounded-[4px]">
                     <div className="size-2 bg-(--red2) rounded-full animate-pulse border border-white" />
                     <span className="text-white text-[12px] font-semibold uppercase">Live</span>
-                </div>}
+                </div>} */}
 
                 <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end px-4 pb-2">
                     <div className="flex items-center justify-between">

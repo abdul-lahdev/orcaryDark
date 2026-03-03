@@ -246,7 +246,21 @@ export const VideoCard = ({ item }) => {
             <div className="w-full text-white rounded-xl overflow-hidden ">
                 <div className="relative">
                     {renderImages()}
-                  {images.length===0?<span>Hello</span>: <div className="p-4 flex items-center justify-between absolute bottom-0 bg-linear-to-t from-black to-transparent w-full">
+                  {images.length===0?<div className="p-4 pb-0 flex items-center justify-between w-full">
+                        <div className="flex items-center gap-3">
+                            <Avatar className="h-10 w-10 border border-white/10">
+                                <AvatarImage src={userAvatar} />
+                                <AvatarFallback>{userName?.[0] || "U"}</AvatarFallback>
+                            </Avatar>
+                            <div>
+                                <h4 className="text-[14px] font-semibold leading-tight">{userName}</h4>
+                                <span className="text-[12px] text-gray-400">{time}</span>
+                            </div>
+                        </div>
+                        <Button variant="ghost" size="icon" className="text-gray-400 hover:bg-white/5 h-8 w-8">
+                            <MoreVertical size={25} />
+                        </Button>
+                    </div>: <div className="p-4 flex items-center justify-between absolute bottom-0 bg-linear-to-t from-black to-transparent w-full">
                         <div className="flex items-center gap-3">
                             <Avatar className="h-10 w-10 border border-white/10">
                                 <AvatarImage src={userAvatar} />
@@ -262,7 +276,7 @@ export const VideoCard = ({ item }) => {
                         </Button>
                     </div>}
                 </div>
-                <div className="p-5">
+                <div className="p-5 pb-0">
                     <div className="space-y-3 mb-5">
                         {/* {title && <p className="text-[14px] leading-relaxed italic text-[gray-200]">{title}</p>} */}
                         <p className="text-[16px] font-normal text-(--grey1)">{description}</p>

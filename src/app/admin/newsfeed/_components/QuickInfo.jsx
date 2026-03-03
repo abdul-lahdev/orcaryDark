@@ -38,7 +38,7 @@ export default function QuickInfo() {
                         <div key={item.id} className='flex items-center justify-between w-full mt-5'>
                             <div className='grid grid-cols-[40px_1fr] items-center w-full gap-3'>
                                 <Avatar className="size-10">
-                                    <AvatarImage src={`${item.avatar}`} />
+                                    <AvatarImage className='object-cover' src={`${item.avatar}`} />
                                     <AvatarFallback> {item.name?.[0] || "U"} </AvatarFallback>
                                     {/* <AvatarFallback>{userName?.[0] || "U"}</AvatarFallback> */}
                                 </Avatar>
@@ -85,7 +85,7 @@ export const QuickCards = ({ item }) => {
 
             <div className="px-2 py-5 space-y-2 grid grid-cols-[40px_1fr] gap-3">
                 <Avatar className="size-10">
-                    <AvatarImage src={`${avatar}`} />
+                    <AvatarImage className='object-cover' src={`${avatar}`} />
                     <AvatarFallback> {name?.[0] || "U"} </AvatarFallback>
                     {/* <AvatarFallback>{userName?.[0] || "U"}</AvatarFallback> */}
                 </Avatar>

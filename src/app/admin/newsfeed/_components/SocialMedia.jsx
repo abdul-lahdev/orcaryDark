@@ -1,13 +1,25 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import Link from "next/link";
 import { CircleCheckBig, Clock, Ellipsis, Flame, MessageCircle, MessageSquare, MoreHorizontal, MoreVertical, MoveRight, Paperclip, SendHorizontal, Share2, Share2Icon, ThumbsUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/components/ui/carousel"
 import { Input } from "@/components/ui/input";
 
 
@@ -20,7 +32,7 @@ const posts = [
     {
         id: 1,
         userName: "Mathew Hems",
-        userAvatar: "https://github.com/shadcn.png",
+        userAvatar: "/images/newsFeed/avator.png",
         time: "12 mins ago",
         images: [
             '/images/classRoom/thumbnail2.jpg',
@@ -145,15 +157,20 @@ export default function SocialMedia() {
 }
 
 export const VideoCard = ({ item }) => {
-    // Destructuring from item (Matches your object keys)
-    const { images, userName, userAvatar, time, title, description, hashtags, likes, messages, shares } = item;
+    const { id, images, userName, userAvatar, time, title, description, hashtags, likes, messages, shares } = item;
     const [showComment, setShowComment] = useState(false)
+    const [currId, setCurrId] = useState(null)
+
+    const value = 'hello World';
     const renderImages = () => {
         const count = images?.length || 0;
         if (count === 1) {
             return (
                 <div className="relative w-full h-172.5 overflow-hidden rounded-sm">
-                    <Image loading="eager" src={images[0]} alt="post" fill className="object-cover" />
+                    <Image onClick={() => {
+                        setCurrId(id)
+                        setIsOpen(true)
+                    }} loading="eager" src={images[0]} alt="post" fill className="object-cover" />
                 </div>
             );
         }
@@ -162,7 +179,10 @@ export const VideoCard = ({ item }) => {
                 <div className="grid grid-cols-2 gap-2 h-172.5">
                     {images.map((img, idx) => (
                         <div key={idx} className="relative overflow-hidden h-full rounded-sm">
-                            <Image loading="eager" src={img} alt="post" fill className="object-cover" />
+                            <Image onClick={() => {
+                                setCurrId(id)
+                                setIsOpen(true)
+                            }} loading="eager" src={img} alt="post" fill className="object-cover" />
                         </div>
                     ))}
                 </div>
@@ -172,14 +192,23 @@ export const VideoCard = ({ item }) => {
             return (
                 <div className="grid grid-cols-2 gap-2 h-172.5">
                     <div className="relative overflow-hidden h-full rounded-sm">
-                        <Image loading="eager" src={images[0]} alt="post" fill className="object-cover" />
+                        <Image onClick={() => {
+                            setCurrId(id)
+                            setIsOpen(true)
+                        }} loading="eager" src={images[0]} alt="post" fill className="object-cover" />
                     </div>
                     <div className="grid grid-rows-2 gap-2 h-full">
                         <div className="relative overflow-hidden h-full rounded-sm">
-                            <Image loading="eager" src={images[1]} alt="post" fill className="object-cover" />
+                            <Image onClick={() => {
+                                setCurrId(id)
+                                setIsOpen(true)
+                            }} loading="eager" src={images[1]} alt="post" fill className="object-cover" />
                         </div>
                         <div className="relative overflow-hidden h-full rounded-sm">
-                            <Image loading="eager" src={images[2]} alt="post" fill className="object-cover" />
+                            <Image onClick={() => {
+                                setCurrId(id)
+                                setIsOpen(true)
+                            }} loading="eager" src={images[2]} alt="post" fill className="object-cover" />
                         </div>
                     </div>
                 </div>
@@ -190,12 +219,21 @@ export const VideoCard = ({ item }) => {
                 <div className="grid grid-cols-2 gap-2 h-172.5">
                     {images.slice(0, 3).map((img, idx) => (
                         <div key={idx} className="relative overflow-hidden h-full rounded-sm">
-                            <Image loading="eager" src={img} alt="post" fill className="object-cover" />
+                            <Image onClick={() => {
+                                setCurrId(id)
+                                setIsOpen(true)
+                            }} loading="eager" src={img} alt="post" fill className="object-cover" />
                         </div>
                     ))}
                     <div className="relative overflow-hidden h-full rounded-sm group/seeMore cursor-pointer">
-                        <Image loading="eager" src={images[3]} alt="post" fill className="object-cover" />
-                        <div className="absolute inset-0 bg-black/60 flex items-center justify-center backdrop-blur-[2px] group-hover/seeMore:bg-black/40 transition-all">
+                        <Image onClick={() => {
+                            setCurrId(id)
+                            setIsOpen(true)
+                        }} loading="eager" src={images[3]} alt="post" fill className="object-cover" />
+                        <div onClick={() => {
+                            setCurrId(id)
+                            setIsOpen(true)
+                        }} className="absolute inset-0 bg-black/60 flex items-center justify-center backdrop-blur-[2px] group-hover/seeMore:bg-black/40 transition-all">
                             <span className="text-white font-bold text-xl tracking-wide">
                                 {count > 4 ? `+${count - 3} More` : "See More"}
                             </span>
@@ -206,6 +244,7 @@ export const VideoCard = ({ item }) => {
         }
     };
 
+    const [isOpen, setIsOpen] = useState(false)
 
     return (
         <div className="w-full group ">
@@ -306,6 +345,153 @@ export const VideoCard = ({ item }) => {
                     </div>}
                 </div>
             </div>
+
+
+            <Dialog open={isOpen} onOpenChange={setIsOpen}>
+                <DialogContent className='w-[85%] [&>button]:hidden p-2 bg-(--dark3) rounded-[24px] h-[85vh]'>
+                    <DialogHeader>
+                        <DialogTitle className='sr-only'>Are you absolutely sure?</DialogTitle>
+                        <DialogDescription className='sr-only'>
+                            This action cannot be undone. This will permanently delete your account
+                            and remove your data from our servers.
+                        </DialogDescription>
+                        {
+                            posts.filter((item) => item.id === currId).map((item) => (
+                                <div key={item.id} className='grid grid-cols-[2fr_1fr] h-full gap-3 '>
+                                    <div className="rounded-[12px] overflow-hidden">
+                                        {item.images.length === 1 ? <Image
+                                            src="/images/newsFeed/viewPost.jpg"
+                                            width={500}
+                                            height={500}
+                                            alt="Picture of the author"
+                                            className='w-full'
+                                        /> :
+                                            <Carousel className="w-full max-w-[12rem] sm:max-w-xs">
+                                                <CarouselContent>
+                                                    {/* {item.images.map((img, index) => (
+                                                        <CarouselItem key={index}>
+                                                            <Image
+                                                                src={`${{img || 'asd'}}`}
+                                                                width={500}
+                                                                height={500}
+                                                                alt="Picture of the author"
+                                                                className='w-full'
+                                                            />
+                                                            
+                                                        </CarouselItem>
+                                                    ))} */}
+                                                    {item.images.map((img, index) => (
+                                                        <CarouselItem key={index}>
+                                                            <Image
+                                                                // Sahi tarika: Direct variable ya simple fallback
+                                                                src={img || '/placeholder.jpg'}
+                                                                width={500}
+                                                                height={500}
+                                                                alt={`Post image ${index + 1}`}
+                                                                className='w-full object-contain' // Contain use karein taake image kate nahi
+                                                            />
+                                                        </CarouselItem>
+                                                    ))}
+                                                </CarouselContent>
+                                                <CarouselPrevious />
+                                                <CarouselNext />
+                                            </Carousel>
+                                        }
+                                    </div>
+                                    <div className=''>
+                                        <div className="w-full text-white rounded-xl overflow-hidden ">
+                                            <div className="relative">
+                                                <div className="p-4 pb-0 flex items-center justify-between w-full">
+                                                    <div className="grid grid-cols-[40px_1fr] items-center gap-3">
+                                                        <Avatar className="h-10 w-10">
+                                                            <AvatarImage className='object-cover' src={item.userAvatar} />
+                                                            <AvatarFallback>{userName?.[0] || "U"}</AvatarFallback>
+                                                        </Avatar>
+                                                        <div>
+                                                            <h4 className="text-[14px] font-semibold leading-tight">{item.userName}</h4>
+                                                            <span className="text-[12px] text-gray-400">{item.time}</span>
+                                                        </div>
+                                                    </div>
+                                                    <Button variant="ghost" size="icon" className="text-gray-400 hover:bg-white/5 h-8 w-8">
+                                                        <MoreVertical size={25} />
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                            <div className="px-2 pt-3 pb-0">
+                                                <div className="space-y-3 mb-5">
+                                                    {/* {title && <p className="text-[14px] leading-relaxed italic text-[gray-200]">{title}</p>} */}
+                                                    <p className="text-[16px] font-normal text-(--grey1)">
+                                                        {item.description}
+                                                    </p>
+                                                    {item.hashtags && <div className="flex gap-2">
+                                                        {item.hashtags?.map((tag, i) => (
+                                                            <span key={i} className="text-blue-400 text-[12px] hover:underline cursor-pointer">{item.tag}</span>
+                                                        ))}
+                                                    </div>}
+                                                </div>
+                                                <div className="px-4 py-5 flex justify-between text-(--grey1) text-[12px] border-y border-(--dark2)">
+                                                    <div className="flex items-center gap-4">
+                                                        <span className="flex items-center gap-1.5 hover:text-white cursor-pointer transition-colors">
+                                                            <ThumbsUp size={14} className="text-blue-400" /> {item.likes}
+                                                        </span>
+                                                        <span className="flex items-center gap-1.5 hover:text-white cursor-pointer transition-colors">
+                                                            <MessageCircle size={14} /> {item.messages}
+                                                        </span>
+                                                    </div>
+                                                    <span className="flex items-center gap-1.5 hover:text-white cursor-pointer transition-colors">
+                                                        <Share2 size={14} /> {item.shares}
+                                                    </span>
+                                                </div>
+                                                <div className="grid grid-cols-3 pt-5 ">
+                                                    <Button variant="ghost" className="rounded-none h-14 gap-2 text-(--grey1) hover:text-blue-400 hover:bg-white/5">
+                                                        <ThumbsUp size={24} className='text-(--grey1)' /> <span className="text-[13px] text-(--grey1)">Like</span>
+                                                    </Button>
+                                                    <Button variant="ghost" className="rounded-none h-14 gap-2 text-(--grey1) hover:text-white border-x border-(--dark2) hover:bg-white/5">
+                                                        <MessageCircle size={24} className='text-(--grey1)' /> <span className="text-[13px] text-(--grey1)">Comment</span>
+                                                    </Button>
+                                                    <Button variant="ghost" className="rounded-none h-14 gap-2 text-(--grey1) hover:text-white hover:bg-white/5">
+                                                        <Share2 size={24} className='text-(--grey1)' /> <span className="text-[13px] text-(--grey1)">Share</span>
+                                                    </Button>
+                                                </div>
+                                                <div className="bg-(--dark1) p-4 rounded-[4px]">
+                                                    <div className='bg-(--dark2) px-3 py-2 rounded-[8px] flex items-center justify-between'>
+                                                        <div className="grid grid-cols-[40px_1fr] w-full items-center gap-3">
+                                                            <Avatar className="h-10 w-10 border border-white/10">
+                                                                <AvatarImage className='object-cover' src={item.userAvatar} />
+                                                                <AvatarFallback>{userName?.[0] || "U"}</AvatarFallback>
+                                                            </Avatar>
+                                                            <textarea name="" id="" placeholder="What's on you mind" className="h-8 border-none px-3 resize-none text-[16px] font-normal w-full text-(--grey2) "></textarea>
+                                                        </div>
+                                                        <div className="flex items-center gap-3">
+                                                            <Paperclip size={24} className="cursor-pointer text-(--grey1)" />
+                                                            <Button><SendHorizontal /> Send</Button>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex items-center mt-6">
+                                                        <div className="grid grid-cols-[32px_1fr] w-full items-center gap-3">
+                                                            <Avatar className="size-8">
+                                                                <AvatarImage src='/images/newsFeed/comment.png' />
+                                                                <AvatarFallback>{userName?.[0] || "U"}</AvatarFallback>
+                                                            </Avatar>
+                                                            <p className="border-none resize-none text-[16px] font-normal w-full text-(--grey2) ">What does the fox say?</p>
+                                                            {/* <textarea name="" id="" placeholder="What does the fox say?" className="h-8 border-none px-3 resize-none text-[16px] font-normal w-full text-(--grey2) "></textarea> */}
+                                                        </div>
+                                                        <div className="flex items-center gap-3">
+                                                            <span className='text-[12px] font-normal text-(--grey11) whitespace-nowrap'>12hr ago</span>
+                                                            <Ellipsis size={16} className='text-(--grey10)' />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </DialogHeader>
+                </DialogContent>
+            </Dialog>
+
         </div>
     );
 };

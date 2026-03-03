@@ -39,8 +39,7 @@ const EarningsChart = () => {
         },
         xaxis: {
             categories: [
-                "3 Jul", "", "", "7 Jul", "", "", "11 Jul", "", "", "15 Jul", "", "",
-                "19 Jul", "", "", "23 Jul", "", "", "27 Jul", "", "", "31 Jul"
+                "","Jan","", "Feb","", "Mar","", "Apr", "","May", "","Jun","", "Jul","", "Aug","", "Sep","", "Oct","", "Nov","", "Dec", "", "Jan", "", "Feb"
             ],
             labels: {
                 style: {

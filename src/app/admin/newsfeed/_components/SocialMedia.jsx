@@ -2,10 +2,13 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Link from "next/link";
-import { CircleCheckBig, Clock, Ellipsis, Flame, MessageCircle, MessageSquare, MoreVertical, MoveRight, Paperclip, SendHorizontal, Share2, Share2Icon, ThumbsUp } from "lucide-react";
+import { CircleCheckBig, Clock, Ellipsis, Flame, MessageCircle, MessageSquare, MoreHorizontal, MoreVertical, MoveRight, Paperclip, SendHorizontal, Share2, Share2Icon, ThumbsUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Input } from "@/components/ui/input";
 
 
 const tabs = [
@@ -63,7 +66,7 @@ const posts = [
         messages: 2,
         shares: 1
     },
-        {
+    {
         id: 4,
         userName: "Sarah imran",
         userAvatar: "https://github.com/shadcn.png",
@@ -80,20 +83,9 @@ const posts = [
 
 
 export default function SocialMedia() {
-
-
-
     let [activeTab, setActiveTab] = useState(tabs[0].id);
-
-
-
-
     return (
-
         <>
-
-
-
             <div className="space-y-4">
                 <div className="w-full overflow-hidden">
                     <div className="flex items-center justify-between">
@@ -130,25 +122,6 @@ export default function SocialMedia() {
                             exit={{ opacity: 0, y: -10 }}
                             transition={{ duration: 0.3 }}
                         >
-
-                            {/* <div className="flex justify-between items-center">
-                                <h2 className="text-white text-[24px] font-semibold">
-                                    Video
-                                </h2>
-                                <Link
-                                    href='/admin/resources/video'
-                                    className="group flex items-center gap-2 text-(--blue1) text-[15px] font-normal"
-                                >
-                                    <span className="group-hover:underline">See All</span>
-
-                                    <span className="transform transition-transform duration-300 group-hover:translate-x-1.5">
-                                        <MoveRight size={18} />
-                                    </span>
-                                </Link>
-
-                            </div> */}
-
-
                             <div >
                                 {
                                     posts.map((item) => (
@@ -174,14 +147,9 @@ export default function SocialMedia() {
 export const VideoCard = ({ item }) => {
     // Destructuring from item (Matches your object keys)
     const { images, userName, userAvatar, time, title, description, hashtags, likes, messages, shares } = item;
-
     const [showComment, setShowComment] = useState(false)
-
     const renderImages = () => {
         const count = images?.length || 0;
-
-      
-
         if (count === 1) {
             return (
                 <div className="relative w-full h-172.5 overflow-hidden rounded-sm">
@@ -189,7 +157,6 @@ export const VideoCard = ({ item }) => {
                 </div>
             );
         }
-
         if (count === 2) {
             return (
                 <div className="grid grid-cols-2 gap-2 h-172.5">
@@ -201,7 +168,6 @@ export const VideoCard = ({ item }) => {
                 </div>
             );
         }
-
         if (count === 3) {
             return (
                 <div className="grid grid-cols-2 gap-2 h-172.5">
@@ -219,7 +185,6 @@ export const VideoCard = ({ item }) => {
                 </div>
             );
         }
-
         if (count >= 4) {
             return (
                 <div className="grid grid-cols-2 gap-2 h-172.5">
@@ -241,12 +206,13 @@ export const VideoCard = ({ item }) => {
         }
     };
 
+
     return (
         <div className="w-full group ">
             <div className="w-full text-white rounded-xl overflow-hidden ">
                 <div className="relative">
                     {renderImages()}
-                  {images.length===0?<div className="p-4 pb-0 flex items-center justify-between w-full">
+                    {images.length === 0 ? <div className="p-4 pb-0 flex items-center justify-between w-full">
                         <div className="flex items-center gap-3">
                             <Avatar className="h-10 w-10 border border-white/10">
                                 <AvatarImage src={userAvatar} />
@@ -260,7 +226,7 @@ export const VideoCard = ({ item }) => {
                         <Button variant="ghost" size="icon" className="text-gray-400 hover:bg-white/5 h-8 w-8">
                             <MoreVertical size={25} />
                         </Button>
-                    </div>: <div className="p-4 flex items-center justify-between absolute bottom-0 bg-linear-to-t from-black to-transparent w-full">
+                    </div> : <div className="p-4 flex items-center justify-between absolute bottom-0 bg-linear-to-t from-black to-transparent w-full">
                         <div className="flex items-center gap-3">
                             <Avatar className="h-10 w-10 border border-white/10">
                                 <AvatarImage src={userAvatar} />
@@ -303,14 +269,14 @@ export const VideoCard = ({ item }) => {
                         <Button variant="ghost" className="rounded-none h-14 gap-2 text-(--grey1) hover:text-blue-400 hover:bg-white/5">
                             <ThumbsUp size={24} className='text-(--grey1)' /> <span className="text-[13px] text-(--grey1)">Like</span>
                         </Button>
-                        <Button onClick={()=>setShowComment(!showComment)} variant="ghost" className="rounded-none h-14 gap-2 text-(--grey1) hover:text-white border-x border-(--dark2) hover:bg-white/5">
+                        <Button onClick={() => setShowComment(!showComment)} variant="ghost" className="rounded-none h-14 gap-2 text-(--grey1) hover:text-white border-x border-(--dark2) hover:bg-white/5">
                             <MessageCircle size={24} className='text-(--grey1)' /> <span className="text-[13px] text-(--grey1)">Comment</span>
                         </Button>
                         <Button variant="ghost" className="rounded-none h-14 gap-2 text-(--grey1) hover:text-white hover:bg-white/5">
                             <Share2 size={24} className='text-(--grey1)' /> <span className="text-[13px] text-(--grey1)">Share</span>
                         </Button>
                     </div>
-                   {showComment && <div className="bg-(--dark1) p-4 rounded-[4px]">
+                    {showComment && <div className="bg-(--dark1) p-4 rounded-[4px]">
                         <div className='bg-(--dark2) px-3 py-2 rounded-[8px] flex items-center justify-between'>
                             <div className="grid grid-cols-[40px_1fr] w-full items-center gap-3">
                                 <Avatar className="h-10 w-10 border border-white/10">
@@ -339,8 +305,6 @@ export const VideoCard = ({ item }) => {
                         </div>
                     </div>}
                 </div>
-
-
             </div>
         </div>
     );

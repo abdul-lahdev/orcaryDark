@@ -1,20 +1,28 @@
 "use client";
-import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import Link from "next/link";
-import { MoveRight } from "lucide-react";
-import { MoreVertical } from 'lucide-react';
 import Image from "next/image";
-
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { MoreVertical } from 'lucide-react';
+import { MoveRight } from "lucide-react";
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Lock, Upload, User, Users } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Upload, Users, User, Lock } from "lucide-react";
 import { liveCards } from '@/app/data/cards';
-import { Button } from "@/components/ui/button";
-
+// import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 const tabs = [
     { id: "Cardiology", label: "Cardiology" },
@@ -28,55 +36,45 @@ const tabs = [
 
 ];
 
-
-
-
 export default function AnimatedTabs() {
-
-
-
     let [activeTab, setActiveTab] = useState(tabs[0].id);
 
     const filteredVideos = liveCards.filter(
-        (item) => item.docType === "video" && item.category === activeTab
+        (item) => item.isLive === false && item.category === activeTab
     );
-    const filteredDocument = liveCards.filter(
-        (item) => item.docType === "document" && item.category === activeTab
+    const onGoingData = liveCards.filter(
+        (item) => item.isLive === true && item.category === activeTab
     );
 
+    const [topTabActive, setTopTabActive] = useState('session')
+    function submitForm(e) {
+        e.preventDefault()
+    }
     const [isOpen, setIsOpen] = useState(false);
     const [visibility, setVisibility] = useState("public");
-
     const [thumbnail, setThumbnail] = useState('No file selected')
 
     return (
 
         <>
-
             <div className="min-h-82 rounded-3xl bg-[url(/images/dashboard/banner.png)] bg-(--blue2) bg-cover bg-center p-3 flex flex-col justify-center items-center">
                 <h1 className="text-[48px] font-normal text-transparent bg-clip-text bg-[linear-gradient(90deg,#FFFFFF_0%,#23A5E7_50%,#23A5E7_100%)]">
-                    Resources For In-depth Understanding
+                    Educate Yourself With The Best
                 </h1>
                 <p className="text-[20px] font-normal text-(--grey1) mt-2">
-                    Check different resources of thousands of subjects
+                    Join 1000s of students in learning medical science
                 </p>
 
                 <div className="flex items-center gap-3 mt-8">
-                    <Button className='h-12 text-[16px] font-normal' onClick={() => setIsOpen(true)}>Upload Resource</Button>
-                    <Button variant="secondary" className='h-12 text-[16px] font-normal'>Become an Investor</Button>
-                </div>
-                <div className="p-10">
-
-
-
+                    <Button className='h-12 text-[16px] font-normal' onClick={() => setIsOpen(true)}>Start Live / Classroom</Button>
                     <Dialog open={isOpen} onOpenChange={setIsOpen}>
                         <DialogContent
                             className="
-      bg-(--dark1) border border-(--dark3) text-white
-      max-w-137.5 p-0 rounded-[16px]
-      max-h-[80vh] outline-none
-      flex flex-col overflow-hidden
-    "
+                              bg-(--dark1) border border-(--dark3) text-white
+                              max-w-137.5 p-0 rounded-[16px]
+                              max-h-[80vh] outline-none
+                              flex flex-col overflow-hidden
+                            "
                         >
                             {/* HEADER (fixed) */}
                             <DialogHeader className="px-5 py-4 border-b border-white/5 bg-(--dark1)">
@@ -216,13 +214,53 @@ export default function AnimatedTabs() {
                             </div>
                         </DialogContent>
                     </Dialog>
+                    <Dialog>
+                        <DialogTrigger asChild>
 
+                            <Button variant="secondary" className='h-12 text-[16px] font-normal '>Become an Investor</Button>
+                        </DialogTrigger>
+
+                        <DialogContent className='bg-(--dark1) border-2 border-(--dark3) max-w-[40%]'>
+                            <form onSubmit={submitForm} >
+                                <DialogHeader>
+                                    <DialogTitle className='text-[20px] font-semibold text-(--grey1)'>Become an Inverstor</DialogTitle>
+                                    <DialogDescription className="sr-only" >
+                                        ads
+                                    </DialogDescription>
+                                    <div className="mt-3">
+                                        <label htmlFor="" className="block text-[14px] font-medium text-(--grey1)">Name</label>
+                                        <Input type="text" className='h-10 w-full mt-2 bg-(--dark4) border border-(--dark3)' placeholder='Mohsin Khan' />
+                                    </div>
+                                    <div className="mt-3">
+                                        <label htmlFor="" className="block text-[14px] font-medium text-(--grey1)">Your Business Name</label>
+                                        <Input type="text" className='h-10 w-full mt-2' placeholder='Ching ping' />
+                                    </div>
+                                    <div className="mt-3">
+                                        <label htmlFor="" className="block text-[14px] font-medium text-(--grey1)">Message</label>
+                                        <Textarea className='h-39.75 rounded-[8px] mt-2 resize-none' />
+                                    </div>
+                                </DialogHeader>
+                                <DialogFooter className="flex mt-10">
+                                    <DialogClose asChild >
+                                        <Button variant="outline" className='w-[50%] h-14.75'  >Cancel</Button>
+                                    </DialogClose>
+                                    <Button type='submit' className='w-[50%] h-14.75 ' >Send</Button>
+
+                                </DialogFooter>
+                            </form>
+                        </DialogContent>
+
+                    </Dialog>
                 </div>
             </div>
-
             <div className="space-y-4 mt-6">
                 <div className="w-full overflow-hidden">
-                    <div className="flex flex-row space-x-2 p-1 overflow-x-scroll no-scrollbar">
+                    <div className="grid grid-cols-2">
+                        <button onClick={() => setTopTabActive('session')} className={`border-b-4 pb-3 w-full text-start pl-3 cursor-pointer hover:text-(--blue1) ${topTabActive === 'session' ? 'border-(--blue1) text-(--blue1)' : 'border-(--dark3) text-(--grey1)'}`}>Live Sessions</button>
+                        <button onClick={() => setTopTabActive('classroom')} className={`border-b-4 pb-3 w-full text-start pl-3 cursor-pointer hover:text-(--blue1) ${topTabActive === 'classroom' ? 'border-(--blue1) text-(--blue1)' : 'border-(--dark3) text-(--grey1)'}`}>Classroom</button>
+                    </div>
+
+                    <div className="flex flex-row space-x-2 p-1 mt-5 overflow-x-scroll no-scrollbar">
                         {tabs.map((tab) => (
                             <button
                                 key={tab.id}
@@ -256,10 +294,10 @@ export default function AnimatedTabs() {
 
                             <div className="flex justify-between items-center">
                                 <h2 className="text-white text-[24px] font-semibold">
-                                    Video
+                                    {topTabActive === 'classroom' ? 'Upcoming' : 'Trending Live Streams'}
                                 </h2>
                                 <Link
-                                    href='/admin/resources/video'
+                                    href='/admin/lives'
                                     className="group flex items-center gap-2 text-(--blue1) text-[15px] font-normal"
                                 >
                                     <span className="group-hover:underline">See All</span>
@@ -271,33 +309,124 @@ export default function AnimatedTabs() {
 
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-4">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-5">
 
-                                {
-                                    filteredVideos.length > 0 ? (
-                                        filteredVideos.map((item) => (
-                                            <div
-                                                key={item.id}
-                                                className="shadow-[0px_0px_25px_0px_#c2d4de0a] hover:bg-(--dark3) rounded-[12px] bg-transparent p-3 transition-all duration-300 hover:-translate-y-1.5 cursor-pointer"
-                                            >
-                                                <VideoCard item={item} />
-                                            </div>
-                                        ))
-                                    ) : (
-                                        <div className="text-center text-zinc-400 py-10">
-                                            No videos available in this category
+                                {topTabActive === 'classroom' && filteredVideos.length > 0 ? (
+                                    filteredVideos.slice(0, 3).map((item) => (
+                                        <div
+                                            key={item.id}
+                                            className="shadow-[0px_0px_25px_0px_#c2d4de0a] hover:bg-(--dark3) rounded-[12px] bg-transparent p-3 transition-all duration-300 hover:-translate-y-1.5 cursor-pointer"
+                                        >
+                                            <VideoCard item={item} />
                                         </div>
-                                    )
+                                    ))
+                                ) : topTabActive === 'session' && onGoingData.length > 0 ? (
+                                    onGoingData.slice(0, 3).map((item) => (
+                                        <div
+                                            key={item.id}
+                                            className="shadow-[0px_0px_25px_0px_#c2d4de0a] hover:bg-(--dark3) rounded-[12px] bg-transparent p-3 transition-all duration-300 hover:-translate-y-1.5 cursor-pointer"
+                                        >
+                                            <VideoCard item={item} />
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="text-center text-zinc-400 py-10">
+                                        No videos available in this category
+                                    </div>
+                                )
                                 }
+
 
                             </div>
 
                             <div className="flex justify-between items-center mt-10">
                                 <h2 className="text-white text-[24px] font-semibold">
-                                    Document
+                                    {topTabActive === 'session' ? 'Upcoming' : 'Ongoing'}
                                 </h2>
                                 <Link
-                                    href='/admin/resources/document'
+                                    href='/admin/lives'
+                                    className="group flex items-center gap-2 text-(--blue1) text-[15px] font-normal"
+                                >
+                                    <span className="group-hover:underline">See All</span>
+
+                                    <span className="transform transition-transform duration-300 group-hover:translate-x-1.5">
+                                        <MoveRight size={18} />
+                                    </span>
+                                </Link>
+
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-5">
+
+                                {topTabActive === 'session' && filteredVideos.length > 0 ? (
+                                    filteredVideos.slice(0, 3).map((item) => (
+                                        <div
+                                            key={item.id}
+                                            className="shadow-[0px_0px_25px_0px_#c2d4de0a] hover:bg-(--dark3) rounded-[12px] bg-transparent p-3 transition-all duration-300 hover:-translate-y-1.5 cursor-pointer"
+                                        >
+                                            <VideoCard item={item} />
+                                        </div>
+                                    ))
+                                ) : topTabActive === 'classroom' && onGoingData.length > 0 ? (
+                                    onGoingData.slice(0, 3).map((item) => (
+                                        <div
+                                            key={item.id}
+                                            className="shadow-[0px_0px_25px_0px_#c2d4de0a] hover:bg-(--dark3) rounded-[12px] bg-transparent p-3 transition-all duration-300 hover:-translate-y-1.5 cursor-pointer"
+                                        >
+                                            <VideoCard item={item} />
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="text-center text-zinc-400 py-10">
+                                        No videos available in this category
+                                    </div>
+                                )
+                                }
+                            </div>
+
+                            <div className="flex justify-between items-center mt-10">
+                                <h2 className="text-white text-[24px] font-semibold">
+                                    {topTabActive === 'session' ? 'Live Stream in Your Network' : 'Classroom in Your Network'}
+                                </h2>
+                                <Link
+                                    href='/admin/lives'
+                                    className="group flex items-center gap-2 text-(--blue1) text-[15px] font-normal"
+                                >
+                                    <span className="group-hover:underline">See All</span>
+
+                                    <span className="transform transition-transform duration-300 group-hover:translate-x-1.5">
+                                        <MoveRight size={18} />
+                                    </span>
+                                </Link>
+
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-5">
+
+                                {
+                                    onGoingData.length > 0 ? (
+                                        onGoingData.slice(0, 3).map((item) => (
+                                            <div
+                                                key={item.id}
+                                                className="shadow-[0px_0px_25px_0px_#c2d4de0a] hover:bg-(--dark3) rounded-[12px] bg-transparent p-3 transition-all duration-300 hover:-translate-y-1.5 cursor-pointer"
+                                            >
+                                                <VideoCard item={item} />
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <div className="text-center text-zinc-400 py-10">
+                                            No {topTabActive === 'session' ? 'Live Stream' : 'Classroom'} available in this category
+                                        </div>
+                                    )
+                                }
+                            </div>
+
+                            <div className="flex justify-between items-center mt-10">
+                                <h2 className="text-white text-[24px] font-semibold">
+                                    {topTabActive === 'session' ? 'All Live Streams' : 'Your Classrooms'}
+                                </h2>
+                                <Link
+                                    href='/admin/lives'
                                     className="group flex items-center gap-2 text-(--blue1) text-[15px] font-normal"
                                 >
                                     <span className="group-hover:underline">See All</span>
@@ -312,8 +441,8 @@ export default function AnimatedTabs() {
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-4">
 
                                 {
-                                    filteredDocument.length > 0 ? (
-                                        filteredDocument.map((item) => (
+                                    onGoingData.length > 0 ? (
+                                        onGoingData.slice(0, 3).map((item) => (
                                             <div
                                                 key={item.id}
                                                 className="shadow-[0px_0px_25px_0px_#c2d4de0a] hover:bg-(--dark3) rounded-[12px] bg-transparent p-3 transition-all duration-300 hover:-translate-y-1.5 cursor-pointer"
@@ -323,7 +452,7 @@ export default function AnimatedTabs() {
                                         ))
                                     ) : (
                                         <div className="text-center text-zinc-400 py-10">
-                                            No Document available in this category
+                                            No  {topTabActive === 'session' ? 'Live Streams' : 'Classrooms'} available in this category
                                         </div>
                                     )
                                 }
@@ -339,16 +468,18 @@ export default function AnimatedTabs() {
 }
 
 export const VideoCard = ({ item }) => {
-    const { id, isLive, thumbnail, avatar, name, docType, specialization, title, viewers, time } = item;
+    const { id, isLive, thumbnail, avatar, name, docType, specialization, title, viewers, time, upComing } = item;
     return (
-        <Link href={`/admin/resources/${docType === 'video' ? 'video' : 'document'}/${id}`} className="w-full group cursor-pointer">
+        <div className="w-full group cursor-pointer">
             <div className="relative aspect-video rounded-[12px] overflow-hidden">
-                <Image src={thumbnail || "/images/classRoom/thumbnail.jpg"} alt="Video Thumbnail" width={376} height={227} className="w-full h-full object-cover" />
+                {
+                    isLive ? <Image src={thumbnail || "/images/classRoom/thumbnail.jpg"} alt="Video Thumbnail" width={376} height={227} className="w-full h-full object-cover" /> : <div className='h-full flex items-center justify-center text-(--grey1) text-[20px] font-medium '>Scheduled for <br /> {upComing}</div>}
 
-                {/* {isLive && <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-(--red3) backdrop-blur-md px-2 py-1 rounded-[4px]">
+
+                {isLive && <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-(--red3) backdrop-blur-md px-2 py-1 rounded-[4px]">
                     <div className="size-2 bg-(--red2) rounded-full animate-pulse border border-white" />
                     <span className="text-white text-[12px] font-semibold uppercase">Live</span>
-                </div>} */}
+                </div>}
 
                 <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end px-4 pb-2">
                     <div className="flex items-center justify-between">
@@ -358,6 +489,7 @@ export const VideoCard = ({ item }) => {
                                 <Image
                                     src={avatar || "/images/classRoom/avator.png"}
                                     fill
+                                    sizes="40px" // Yeh line add karein
                                     className="object-cover"
                                     alt="avatar"
                                 />
@@ -383,12 +515,12 @@ export const VideoCard = ({ item }) => {
                     {title}
                 </h3>
 
-                <div className="flex items-center gap-2 text-(--grey1) text-[12px]">
+                {isLive ? <div className="flex items-center gap-2 text-(--grey1) text-[12px]">
                     <span>{viewers} viewers</span>
                     <div className="size-2 bg-white rounded-full" />
                     <span>{time}</span>
-                </div>
+                </div> : <p className="text-(--grey1) text-[16px] font-normal">Will be live on {upComing}</p>}
             </div>
-        </Link>
+        </div>
     );
 };

@@ -8,6 +8,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowUpDown, Ellipsis, Heart, Search, Trash2 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
+import ContentTab from "./ContentTab";
+import ConnectionTab from "./ConnectionTab";
+import NotificationTab from "./NotificationTab";
+import BillingTab from "./BillingTab";
+import PrivacyTab from "./PrivacyTab";
+import ProfileTab from "./ProfileTab";
 
 const tabs = [
   { id: "Profile Settings", label: "Profile Settings" },
@@ -26,6 +32,7 @@ const initialData = [
     id: 1,
     date: "10/12/25",
     subscription: true,
+    postType: "Image",
     user: "Darlene Robertson",
     email: "alma.lawson@example.com",
     time: "12:00 PM",
@@ -36,6 +43,7 @@ const initialData = [
     id: 2,
     date: "10/01/25",
     subscription: true,
+    postType: "Image",
     user: "Darlene Robertson",
     email: "alma.lawson@example.com",
     time: "4:00 PM",
@@ -46,6 +54,7 @@ const initialData = [
     id: 3,
     date: "10/12/25",
     subscription: false,
+    postType: "Image",
     user: "Darlene Robertson",
     email: "alma.lawson@example.com",
     time: "1:00 PM",
@@ -56,6 +65,7 @@ const initialData = [
     id: 4,
     date: "10/12/25",
     subscription: true,
+    postType: "Image",
     user: "Darlene Robertson",
     email: "alma.lawson@example.com",
     time: "6:00 PM",
@@ -66,6 +76,7 @@ const initialData = [
     id: 5,
     date: "10/12/25",
     subscription: false,
+    postType: "Image",
     user: "Darlene Robertson",
     email: "alma.lawson@example.com",
     time: "3:00 PM",
@@ -76,6 +87,7 @@ const initialData = [
     id: 6,
     date: "10/12/25",
     subscription: true,
+    postType: "Video",
     user: "Darlene Robertson",
     email: "alma.lawson@example.com",
     time: "2:00 PM",
@@ -86,6 +98,7 @@ const initialData = [
     id: 7,
     date: "10/12/25",
     subscription: true,
+    postType: "Image",
     user: "Darlene Robertson",
     email: "alma.lawson@example.com",
     time: "12:00 PM",
@@ -96,6 +109,7 @@ const initialData = [
     id: 8,
     date: "10/12/25",
     subscription: true,
+    postType: "Video",
     user: "Darlene Robertson",
     email: "alma.lawson@example.com",
     time: "7:00 PM",
@@ -106,6 +120,7 @@ const initialData = [
     id: 9,
     date: "10/12/25",
     subscription: false,
+    postType: "Image",
     user: "Darlene Robertson",
     email: "alma.lawson@example.com",
     time: "5:00 PM",
@@ -116,6 +131,7 @@ const initialData = [
     id: 10,
     date: "10/12/25",
     subscription: true,
+    postType: "Video",
     user: "Darlene Robertson",
     email: "alma.lawson@example.com",
     time: "5:00 PM",
@@ -127,31 +143,9 @@ const initialData = [
 export default function AnimatedTabs() {
   let [activeTab, setActiveTab] = useState(tabs[0].id);
 
-  //   here
-  const [selectedRows, setSelectedRows] = useState([]);
-
-  const allSelected =
-    initialData.length > 0 && selectedRows.length === initialData.length;
-
-  const isSelected = (id) => selectedRows.includes(id);
-
-  const toggleRow = (id) => {
-    setSelectedRows((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
-    );
-  };
-
-  const toggleAll = (checked) => {
-    if (checked) {
-      setSelectedRows(initialData.map((item) => item.id));
-    } else {
-      setSelectedRows([]);
-    }
-  };
-
   return (
     <>
-      <div className="mt-6 grid grid-cols-[300px_1fr] gap-3 min-h-screen ">
+      <div className="mt-6 grid grid-cols-[300px_1fr] gap-10 min-h-screen ">
         <div className="h-full  overflow-hidden bg-(--dark5) rounded-[10px] p-3">
           <div className="flex flex-col space-y-2 items-start w-full p-1 overflow-x-scroll no-scrollbar">
             {tabs.map((tab) => (
@@ -187,15 +181,17 @@ export default function AnimatedTabs() {
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
             >
-              {activeTab === "Profile Settings" && <>Profile Setting</>}
+              {activeTab === "Profile Settings" && 
+              <ProfileTab/>
+              }
               {activeTab === "Security" && (
                 <>
-                  <div className="grid grid-cols-[600px_1fr] items-center gap-3">
+                  <div className="grid grid-cols-[60%_1fr] items-center gap-3">
                     <div className="flex items-center gap-3">
                       <h1 className="text-(--grey1) text-[18px] font-bold whitespace-nowrap">
                         Security Settings
                       </h1>
-                      <Separator className="shrink" />
+                      <Separator className="shrink border-2 border-(--grey5)" />
                     </div>
                     <div className="flex items-center justify-end gap-3">
                       <Button
@@ -204,10 +200,12 @@ export default function AnimatedTabs() {
                       >
                         Cancel
                       </Button>
-                      <Button>Update</Button>
+                      <Button className="dark:rounded-[6px] rounded-[6px]">
+                        Update
+                      </Button>
                     </div>
                   </div>
-                  <div className="grid grid-cols-[600px_1fr]">
+                  <div className="grid grid-cols-[60%_1fr]">
                     <div className="grid grid-cols-1 lg:grid-cols-1 xl:grid-cols-2 gap-5 mt-4">
                       <div className="w-full">
                         <label
@@ -261,393 +259,106 @@ export default function AnimatedTabs() {
                 </>
               )}
               {activeTab === "Content" && (
-                <>
-                  <div>
-                    <div className="w-full rounded-xl border-2 border-(--dark2) bg-(--dark4) p-4">
-                      <div className="flex items-center justify-between">
-                        <h1 className="text-(--grey1) text-[20px] font-bold">
-                          Catergories
-                        </h1>
-                        <div className="flex items-center gap-3">
-                          <div className="relative">
-                            <Search
-                              size={16}
-                              className="absolute left-0 text-(--grey1) top-0 translate-x-2 translate-y-3"
-                            />
-                            <Input
-                              className="h-10 pl-8.5"
-                              placeholder="Search by source"
-                            />
-                          </div>
-                          <Button className="h-10">Add</Button>
-                        </div>
-                      </div>
-                      <div className="overflow-x-auto mt-5">
-                        <table className="w-full min-w-190 border-separate border-spacing-0 text-sm text-white/80">
-                          <thead>
-                            <tr className="bg-(--dark2) rounded-[12px] overflow-hidden">
-                              <th className="w-13 border-b border-white/10 px-4 py-3 text-left">
-                                <Checkbox
-                                  checked={allSelected}
-                                  onCheckedChange={toggleAll}
-                                  className="border-white/30 data-[state=checked]:border-[#7C3AED] data-[state=checked]:bg-[#7C3AED]"
-                                />
-                              </th>
-
-                              <th className="min-w-35 border-b border-(--dark2) px-4 py-3 text-(--grey1) text-[14px] font-bold">
-                                <div className="flex items-center gap-2">
-                                  <span>Added on</span>
-                                  <ArrowUpDown className="h-3.5 w-3.5 text-white/40" />
-                                </div>
-                              </th>
-
-                              <th className="min-w-55 border-b border-(--dark2) px-4 py-3 text-(--grey1) text-[14px] font-bold">
-                                <div className="flex items-center gap-2">
-                                  <span>Name</span>
-                                  <ArrowUpDown className="h-3.5 w-3.5 text-white/40" />
-                                </div>
-                              </th>
-
-                              <th className="min-w-25  border-b border-(--dark2) px-4 py-3 text-(--grey1) text-[14px] font-bold">
-                                <div className="flex items-center gap-2">
-                                  <span>Icons</span>
-                                  <ArrowUpDown className="h-3.5 w-3.5 text-white/40" />
-                                </div>
-                              </th>
-                            </tr>
-                          </thead>
-
-                          <tbody>
-                            {initialData.map((row) => {
-                              const selected = isSelected(row.id);
-
-                              return (
-                                <tr
-                                  key={row.id}
-                                  className={`transition-colors duration-200 ${
-                                    selected
-                                      ? "bg-white/2.5"
-                                      : "bg-transparent hover:bg-white/2.5"
-                                  }`}
-                                >
-                                  <td className="border-b border-(--dark2) px-4 py-3">
-                                    <Checkbox
-                                      checked={selected}
-                                      onCheckedChange={() => toggleRow(row.id)}
-                                      className="border-white/30 data-[state=checked]:border-[#7C3AED] data-[state=checked]:bg-[#7C3AED]"
-                                    />
-                                  </td>
-
-                                  <td className="border-b border-(--dark2) px-4 py-3">
-                                    <div className="flex flex-col ">
-                                      <span className="text-[14px] font-medium text-(--grey1)">
-                                        {row.date}
-                                      </span>
-                                      <span className="mt-1 text-[12px] text-(--grey13)">
-                                        {row.time}
-                                      </span>
-                                    </div>
-                                  </td>
-
-                                  <td className="border-b border-l border-(--dark2) px-4 py-3">
-                                    <span className="text-[13px] font-medium text-(--grey13)">
-                                      {row.name}
-                                    </span>
-                                  </td>
-
-                                  <td className="border-b border-l border-(--dark2) px-4 py-3">
-                                    <div className="flex items-center justify-between gap-4">
-                                      <button
-                                        type="button"
-                                        className="group cursor-pointer inline-flex items-center gap-2 text-white/35 transition hover:text-white/70"
-                                      >
-                                        <Heart
-                                          size={18}
-                                          className="text-(--grey2) transition group-hover:scale-105"
-                                        />
-                                        {/* <span className="text-[11px]">
-                                          {row.likes}
-                                        </span> */}
-                                      </button>
-
-                                      <button
-                                        type="button"
-                                        className="inline-flex cursor-pointer items-center justify-center rounded-md p-1.5 text-red-500 transition hover:bg-red-500/10 hover:text-red-400"
-                                      >
-                                        <Trash2 size={18} />
-                                      </button>
-                                    </div>
-                                  </td>
-                                </tr>
-                              );
-                            })}
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                    <div className="w-full mt-4 rounded-xl border-2 border-(--dark2) bg-(--dark4) p-4">
-                      <div className="flex items-center justify-between">
-                        <h1 className="text-(--grey1) text-[20px] font-bold">
-                          Catergories
-                        </h1>
-                        <div className="flex items-center gap-3">
-                          <div className="relative">
-                            <Search
-                              size={16}
-                              className="absolute left-0 text-(--grey1) top-0 translate-x-2 translate-y-3"
-                            />
-                            <Input
-                              className="h-10 pl-8.5"
-                              placeholder="Search by source"
-                            />
-                          </div>
-                          <Button className="h-10">Add</Button>
-                        </div>
-                      </div>
-                      <div className="overflow-x-auto mt-5">
-                        <table className="w-full min-w-190 border-separate border-spacing-0 text-sm text-white/80">
-                          <thead>
-                            <tr className="bg-(--dark2) rounded-[12px] overflow-hidden">
-                              <th className="w-13 border-b border-white/10 px-4 py-3 text-left">
-                                <Checkbox
-                                  checked={allSelected}
-                                  onCheckedChange={toggleAll}
-                                  className="border-white/30 data-[state=checked]:border-[#7C3AED] data-[state=checked]:bg-[#7C3AED]"
-                                />
-                              </th>
-
-                              <th className="min-w-35 border-b border-(--dark2) px-4 py-3 text-(--grey1) text-[14px] font-bold">
-                                <div className="flex items-center gap-2">
-                                  <span>Added on</span>
-                                  <ArrowUpDown className="h-3.5 w-3.5 text-white/40" />
-                                </div>
-                              </th>
-
-                              <th className="min-w-55 border-b border-(--dark2) px-4 py-3 text-(--grey1) text-[14px] font-bold">
-                                <div className="flex items-center gap-2">
-                                  <span>Name</span>
-                                  <ArrowUpDown className="h-3.5 w-3.5 text-white/40" />
-                                </div>
-                              </th>
-
-                              <th className="min-w-25  border-b border-(--dark2) px-4 py-3 text-(--grey1) text-[14px] font-bold">
-                                <div className="flex items-center gap-2">
-                                  <span>Icons</span>
-                                  <ArrowUpDown className="h-3.5 w-3.5 text-white/40" />
-                                </div>
-                              </th>
-                            </tr>
-                          </thead>
-
-                          <tbody>
-                            {initialData.map((row) => {
-                              const selected = isSelected(row.id);
-
-                              return (
-                                <tr
-                                  key={row.id}
-                                  className={`transition-colors duration-200 ${
-                                    selected
-                                      ? "bg-white/2.5"
-                                      : "bg-transparent hover:bg-white/2.5"
-                                  }`}
-                                >
-                                  <td className="border-b border-(--dark2) px-4 py-3">
-                                    <Checkbox
-                                      checked={selected}
-                                      onCheckedChange={() => toggleRow(row.id)}
-                                      className="border-white/30 data-[state=checked]:border-[#7C3AED] data-[state=checked]:bg-[#7C3AED]"
-                                    />
-                                  </td>
-
-                                  <td className="border-b border-(--dark2) px-4 py-3">
-                                    <div className="flex flex-col ">
-                                      <span className="text-[14px] font-medium text-(--grey1)">
-                                        {row.date}
-                                      </span>
-                                      <span className="mt-1 text-[12px] text-(--grey13)">
-                                        {row.time}
-                                      </span>
-                                    </div>
-                                  </td>
-
-                                  <td className="border-b border-l border-(--dark2) px-4 py-3">
-                                    <span className="text-[13px] font-medium text-(--grey13)">
-                                      {row.name}
-                                    </span>
-                                  </td>
-
-                                  <td className="border-b border-l border-(--dark2) px-4 py-3">
-                                    <div className="flex items-center justify-between gap-4">
-                                      <button
-                                        type="button"
-                                        className="group cursor-pointer inline-flex items-center gap-2 text-white/35 transition hover:text-white/70"
-                                      >
-                                        <Heart
-                                          size={18}
-                                          className="text-(--grey2) transition group-hover:scale-105"
-                                        />
-                                        {/* <span className="text-[11px]">
-                                          {row.likes}
-                                        </span> */}
-                                      </button>
-
-                                      <button
-                                        type="button"
-                                        className="inline-flex cursor-pointer items-center justify-center rounded-md p-1.5 text-red-500 transition hover:bg-red-500/10 hover:text-red-400"
-                                      >
-                                        <Trash2 size={18} />
-                                      </button>
-                                    </div>
-                                  </td>
-                                </tr>
-                              );
-                            })}
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </>
+                <ContentTab initialData={initialData} />
               )}
               {activeTab === "Connections" && (
+                <ConnectionTab initialData={initialData} />
+              )}
+              {activeTab === "Integrations" && (
                 <>
-                  <div>
-                    <div className="w-full rounded-xl border-2 border-(--dark2) bg-(--dark4) p-4">
-                      <div className="flex items-center justify-between">
-                        <h1 className="text-(--grey1) text-[20px] font-bold">
-                          Catergories
+                  <div className="grid grid-cols-[60%_1fr] items-center gap-3">
+                    <div className="flex items-center gap-3">
+                      <h1 className="text-(--grey1) text-[18px] font-bold whitespace-nowrap">
+                        Withdrawal Method
+                      </h1>
+                      <Separator className="shrink border-2 border-(--grey5)" />
+                    </div>
+                    <div className="flex items-center justify-end gap-3">
+                      <Button
+                        variant="secondary"
+                        className="dark:rounded-[6px]"
+                      >
+                        Cancel
+                      </Button>
+                      <Button className="dark:rounded-[6px] rounded-[6px]">
+                        Update
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-[60%_1fr]">
+                    <div>
+                      <div className="space-y-5 mt-4">
+                        <h1 className="text-[16px] font-semibold text-(--grey1)">
+                          Stripe
                         </h1>
-                        <div className="flex items-center gap-3">
-                          <div className="relative">
-                            <Search
-                              size={16}
-                              className="absolute left-0 text-(--grey1) top-0 translate-x-2 translate-y-3"
-                            />
-                            <Input
-                              className="h-10 pl-8.5"
-                              placeholder="Search by source"
-                            />
-                          </div>
-                          <Button className="h-10">Add</Button>
+                        <div className="w-full">
+                          <label
+                            htmlFor=""
+                            className="block mb-1 text-(--grey1) text-[14px] font-medium"
+                          >
+                            Stripe Public Key
+                          </label>
+                          <Input
+                            type="password"
+                            className="w-full h-10 dark:bg-(--dark4) border border-(--dark3)"
+                            placeholder="***********"
+                          />
+                        </div>
+                        <div className="w-full">
+                          <label
+                            htmlFor=""
+                            className="block mb-1 text-(--grey1) text-[14px] font-medium"
+                          >
+                            Stripe Private Key
+                          </label>
+                          <Input
+                            type="password"
+                            className="w-full h-10 dark:bg-(--dark4) border border-(--dark3)"
+                            placeholder="***********"
+                          />
                         </div>
                       </div>
-                      <div className="overflow-x-auto mt-5">
-                        <table className="w-full min-w-190 border-separate border-spacing-0 text-sm text-white/80">
-                          <thead>
-                            <tr className="bg-(--dark2) rounded-[12px] overflow-hidden">
-                              <th className="w-13 border-b border-white/10 px-4 py-3 text-left">
-                                <Checkbox
-                                  checked={allSelected}
-                                  onCheckedChange={toggleAll}
-                                  className="border-white/30 data-[state=checked]:border-[#7C3AED] data-[state=checked]:bg-[#7C3AED]"
-                                />
-                              </th>
-
-                              <th className="min-w-35 border-b border-(--dark2) px-4 py-3 text-(--grey1) text-[14px] font-bold">
-                                <div className="flex items-center gap-2">
-                                  <span>Connected on</span>
-                                  <ArrowUpDown className="h-3.5 w-3.5 text-white/40" />
-                                </div>
-                              </th>
-
-                              <th className="min-w-55 border-b border-(--dark2) px-4 py-3 text-(--grey1) text-[14px] font-bold">
-                                <div className="flex items-center gap-2">
-                                  <span>Name</span>
-                                  <ArrowUpDown className="h-3.5 w-3.5 text-white/40" />
-                                </div>
-                              </th>
-
-                              <th className="min-w-25  border-b border-(--dark2) px-4 py-3 text-(--grey1) text-[14px] font-bold">
-                                <div className="flex items-center gap-2">
-                                  <span>Subscription</span>
-                                  <ArrowUpDown className="h-3.5 w-3.5 text-white/40" />
-                                </div>
-                              </th>
-                              <th className="border-b border-(--dark2) px-4 py-3 text-(--grey1) text-[14px] font-bold"></th>
-                            </tr>
-                          </thead>
-
-                          <tbody>
-                            {initialData.map((row) => {
-                              const selected = isSelected(row.id);
-
-                              return (
-                                <tr
-                                  key={row.id}
-                                  className={`transition-colors duration-200 ${
-                                    selected
-                                      ? "bg-white/2.5"
-                                      : "bg-transparent hover:bg-white/2.5"
-                                  }`}
-                                >
-                                  <td className="border-b border-(--dark2) px-4 py-3">
-                                    <Checkbox
-                                      checked={selected}
-                                      onCheckedChange={() => toggleRow(row.id)}
-                                      className="border-white/30 data-[state=checked]:border-[#7C3AED] data-[state=checked]:bg-[#7C3AED]"
-                                    />
-                                  </td>
-
-                                  <td className="border-b border-(--dark2) px-4 py-3">
-                                    <div className="flex flex-col ">
-                                      <span className="text-[14px] font-medium text-(--grey1)">
-                                        {row.date}
-                                      </span>
-                                      <span className="mt-1 text-[12px] text-(--grey13)">
-                                        {row.time}
-                                      </span>
-                                    </div>
-                                  </td>
-
-                                  <td className=" border-b border-l border-(--dark2) px-4 py-3">
-                                    <div className="flex items-center gap-3">
-                                      <div className="rounded-full uppercase flex items-center justify-center text-[12px] size-8 font-medium bg-(--dark2) text-(--grey15)">
-                                        {row.user[0]}{row.user[1]}
-                                      </div>
-                                      <div>
-                                        <p className="text-[14px] font-medium text-(--grey1)">
-                                          {row.user}
-                                        </p>
-                                        <p className="text-[12px] font-normal text-(--grey13)">
-                                            {row.email}
-                                        </p>
-                                      </div>
-                                    </div>
-                                  </td>
-
-                                  <td className="border-b border-l border-(--dark2) px-4 py-3">
-                                    <span className="text-[13px] font-medium text-(--grey13)">
-                                      {row.subscription
-                                        ? "Paid Account"
-                                        : "Free Account"}
-                                    </span>
-                                  </td>
-
-                                  <td className="border-b border-l border-(--dark2) px-4 py-3">
-                                    <button
-                                      type="button"
-                                      className="inline-flex cursor-pointer items-center justify-center rounded-md text-(--grey14) p-1.5 transition hover:bg-(--dark4) hover:text-grey-400"
-                                    >
-                                      {/* <Trash2 size={18} /> */}
-                                      <Ellipsis size={18} />
-                                    </button>
-                                  </td>
-                                </tr>
-                              );
-                            })}
-                          </tbody>
-                        </table>
+                      <div className="space-y-5 mt-10">
+                        <h1 className="text-[16px] font-semibold text-(--grey1)">
+                          Sica Pay
+                        </h1>
+                        <div className="w-full">
+                          <label
+                            htmlFor=""
+                            className="block mb-1 text-(--grey1) text-[14px] font-medium"
+                          >
+                            Sica Pay Public Key
+                          </label>
+                          <Input
+                            type="password"
+                            className="w-full h-10 dark:bg-(--dark4) border border-(--dark3)"
+                            placeholder="***********"
+                          />
+                        </div>
+                        <div className="w-full">
+                          <label
+                            htmlFor=""
+                            className="block mb-1 text-(--grey1) text-[14px] font-medium"
+                          >
+                            Sica Pay Private Key
+                          </label>
+                          <Input
+                            type="password"
+                            className="w-full h-10 dark:bg-(--dark4) border border-(--dark3)"
+                            placeholder="***********"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
                 </>
               )}
-              {activeTab === "Integrations" && <>Integrations Setting</>}
-              {activeTab === "Billing" && <>Integrations Setting</>}
-              {activeTab === "Notifications" && <>Integrations Setting</>}
+              {activeTab === "Billing" && <BillingTab/>}
+              {activeTab === "Notifications" && <NotificationTab/>}
               {activeTab === "Earnings" && <>Integrations Setting</>}
-              {activeTab === "Privacy" && <>Integrations Setting</>}
+              {activeTab === "Privacy" && 
+              <PrivacyTab/>
+              }
               {activeTab === "Ads" && <>Integrations Setting</>}
             </motion.div>
           </AnimatePresence>

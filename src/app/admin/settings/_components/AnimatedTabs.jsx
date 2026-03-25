@@ -14,6 +14,7 @@ import NotificationTab from "./NotificationTab";
 import BillingTab from "./BillingTab";
 import PrivacyTab from "./PrivacyTab";
 import ProfileTab from "./ProfileTab";
+import AdsTab from "./AdsTab";
 
 const tabs = [
   { id: "Profile Settings", label: "Profile Settings" },
@@ -359,7 +360,7 @@ export default function AnimatedTabs() {
               {activeTab === "Privacy" && 
               <PrivacyTab/>
               }
-              {activeTab === "Ads" && <>Integrations Setting</>}
+              {activeTab === "Ads" && <AdsTab initialData={initialData}/>}
             </motion.div>
           </AnimatePresence>
         </div>

@@ -129,11 +129,11 @@
   --dark2: #303036;
   --dark3: #2b2b31;
   --dark4: #2b2b314d;
-  --dark5: #2B2B31CC;
-  --dark6: #B3B8C2;
+  --dark5: #2b2b31cc;
+  --dark6: #b3b8c2;
   --dark7: #101828;
   --dark8: #303035;
-  --dark9: #000000CC;
+  --dark9: #000000cc;
   --dark10: #78787833;
   /* --dark5: #2b2b31; */
 
@@ -142,30 +142,30 @@
 
   --blue1: #23a5e7;
   --blue2: #23a5e71a;
-  --blue3: #BDD8FF40;
+  --blue3: #bdd8ff40;
   --grey1: #a1a1aa;
   --grey2: #8897ae;
-  --grey3: #64748B;
-  --grey4: #1C1C21F2;
-  --grey5: #D7DFE9;
-  --grey6: #AFBACA;
-  --grey7: #FCFBF8;
-  --grey8: #88909F;
-  --grey9: #5E718D;
-  --grey10: #9CA3AF;
-  --grey11: #6B7280;
+  --grey3: #64748b;
+  --grey4: #1c1c21f2;
+  --grey5: #d7dfe9;
+  --grey6: #afbaca;
+  --grey7: #fcfbf8;
+  --grey8: #88909f;
+  --grey9: #5e718d;
+  --grey10: #9ca3af;
+  --grey11: #6b7280;
   --grey12: #344054;
-  --grey13: #45556C;
+  --grey13: #45556c;
   --grey14: #455468;
-  --grey15: #90A1B9;
-  --grey16: #D0D5DD;
-  --grey17: #D9D9D9;
+  --grey15: #90a1b9;
+  --grey16: #d0d5dd;
+  --grey17: #d9d9d9;
   --grey18: #656466;
   --red1: #ef4343;
   --red2: #e92215;
   --red3: #cf000026;
-  --red4: #FF3838;
-  --red5: #DC2626;
+  --red4: #ff3838;
+  --red5: #dc2626;
 }
 
 @font-face {
@@ -200,7 +200,6 @@ span {
   }
 }
 
-
-.fc-scrollgrid{
+.fc-scrollgrid {
   border-radius: 0 !important;
 }

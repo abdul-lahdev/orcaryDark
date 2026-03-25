@@ -15,6 +15,7 @@ import BillingTab from "./BillingTab";
 import PrivacyTab from "./PrivacyTab";
 import ProfileTab from "./ProfileTab";
 import AdsTab from "./AdsTab";
+import EarningTab from "./EarningTab";
 
 const tabs = [
   { id: "Profile Settings", label: "Profile Settings" },
@@ -182,9 +183,7 @@ export default function AnimatedTabs() {
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
             >
-              {activeTab === "Profile Settings" && 
-              <ProfileTab/>
-              }
+              {activeTab === "Profile Settings" && <ProfileTab />}
               {activeTab === "Security" && (
                 <>
                   <div className="grid grid-cols-[60%_1fr] items-center gap-3">
@@ -354,13 +353,11 @@ export default function AnimatedTabs() {
                   </div>
                 </>
               )}
-              {activeTab === "Billing" && <BillingTab/>}
-              {activeTab === "Notifications" && <NotificationTab/>}
-              {activeTab === "Earnings" && <>Integrations Setting</>}
-              {activeTab === "Privacy" && 
-              <PrivacyTab/>
-              }
-              {activeTab === "Ads" && <AdsTab initialData={initialData}/>}
+              {activeTab === "Billing" && <BillingTab />}
+              {activeTab === "Notifications" && <NotificationTab />}
+              {activeTab === "Earnings" && <EarningTab />}
+              {activeTab === "Privacy" && <PrivacyTab />}
+              {activeTab === "Ads" && <AdsTab initialData={initialData} />}
             </motion.div>
           </AnimatePresence>
         </div>

@@ -2,7 +2,20 @@ import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import { ArrowUpDown, ChevronDown, Filter, Search, Trash2 } from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  ArrowUpDown,
+  Check,
+  ChevronDown,
+  Filter,
+  Plus,
+  Search,
+  Trash2,
+} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -11,6 +24,27 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+} from "@/components/ui/command";
 
 const initialAdsData = [
   {
@@ -125,6 +159,21 @@ const initialAdsData = [
   },
 ];
 
+const categoryOptions = [
+  { label: "Radiology", value: "Radiology" },
+  { label: "Dermatology", value: "Dermatology" },
+  { label: "Pediatrics", value: "Pediatrics" },
+  { label: "Oncology", value: "Oncology" },
+  { label: "Neurology", value: "Neurology" },
+];
+
+const placementOptions = [
+  { label: "Live, Classroom", value: "liveClassroom" },
+  { label: "Resource, Feed", value: "resourceFeed" },
+  { label: "Forum, live", value: "forumLive" },
+  { label: "Classroom, Resource", value: "classroomResource" },
+  { label: "Feed, forum", value: "feedForum" },
+];
 export default function AdsTab() {
   const [tableData, setTableData] = useState(initialAdsData);
   const [selectedRows, setSelectedRows] = useState([]);
@@ -222,15 +271,194 @@ export default function AdsTab() {
     }));
   };
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedValue, setSelectedValue] = useState("heart");
+  const [selectedTags, setSelectedTags] = useState(["heart"]);
+  const [placementValue, setPlacementValue] = useState("heart");
+  const [openTags, setOpenTags] = useState(false);
+
+  const toggleTag = (value) => {
+    setSelectedTags((prev) =>
+      prev.includes(value)
+        ? prev.filter((item) => item !== value)
+        : [...prev, value]
+    );
+  };
+
+  const selectedTagLabels = categoryOptions
+    .filter((item) => selectedTags.includes(item.value))
+    .map((item) => item.label);
+
   return (
     <>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogContent
+          className="
+                                          bg-(--dark1) border border-(--dark3) text-white
+                                          max-w-137.5 p-0 rounded-[16px]
+                                          max-h-[80vh] outline-none
+                                          flex flex-col overflow-hidden
+                                        "
+        >
+          {/* HEADER (fixed) */}
+          <DialogHeader className="px-5 py-4 border-b border-white/5 bg-(--dark1)">
+            <DialogTitle className="text-[20px] font-semibold text-(--grey1)">
+              Upload Ad
+            </DialogTitle>
+          </DialogHeader>
+
+          <div className="px-4 space-y-5">
+            <div>
+              <label
+                htmlFor="title"
+                className="text-(--grey1) text-[14px] font-medium"
+              >
+                Title
+              </label>
+              <Input
+                id="title"
+                className="block h-11 w-full mt-1 dark:rounded-[8px]"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="brand-name"
+                className="text-(--grey1) text-[14px] font-medium"
+              >
+                Brand Name
+              </label>
+              <Input
+                id="brand-name"
+                className="block h-11 w-full mt-1 dark:rounded-[8px]"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor=""
+                className="text-(--grey1) text-[14px] font-medium"
+              >
+                Category Tag
+              </label>
+
+              <Popover open={openTags} onOpenChange={setOpenTags}>
+                <PopoverTrigger asChild>
+                  <button
+                    type="button"
+                    className="w-full bg-[#1c1c21] border border-[#27272a] text-[#a1a1aa] hover:bg-[#27272a] cursor-pointer dark:rounded-[8px] h-11 mt-1 px-3 flex items-center justify-between"
+                  >
+                    <div className="flex items-center gap-2 overflow-hidden">
+                      {selectedTagLabels.length > 0 ? (
+                        <div className="flex items-center gap-2 flex-wrap overflow-hidden">
+                          {selectedTagLabels.map((label) => (
+                            <span
+                              key={label}
+                              className="inline-flex items-center rounded-md border border-[#27272a] bg-[#27272a] px-2 py-0.5 text-[12px] text-white"
+                            >
+                              {label}
+                            </span>
+                          ))}
+                        </div>
+                      ) : (
+                        <span className="text-[#a1a1aa]">
+                          Select category tags
+                        </span>
+                      )}
+                    </div>
+
+                    <ChevronDown className="h-4 w-4 shrink-0 text-[#a1a1aa]" />
+                  </button>
+                </PopoverTrigger>
+
+                <PopoverContent
+                  align="start"
+                  className="w-[var(--radix-popover-trigger-width)] p-0 z-[999] bg-[#1c1c21] border-[#27272a] text-white"
+                >
+                  <Command className="bg-[#1c1c21]">
+                    <CommandEmpty className="py-3 text-sm text-[#a1a1aa]">
+                      No tag found.
+                    </CommandEmpty>
+
+                    <CommandGroup>
+                      {categoryOptions.map((option) => {
+                        const isSelected = selectedTags.includes(option.value);
+
+                        return (
+                          <CommandItem
+                            key={option.value}
+                            onSelect={() => toggleTag(option.value)}
+                            className="cursor-pointer focus:bg-[#27272a] text-white flex items-center justify-between"
+                          >
+                            <div className="flex items-center gap-3">
+                              <Checkbox
+                                checked={isSelected}
+                                className="border-[#3f3f46] data-[state=checked]:bg-white data-[state=checked]:text-black"
+                              />
+                              <span>{option.label}</span>
+                            </div>
+
+                            {isSelected && <Check className="h-4 w-4" />}
+                          </CommandItem>
+                        );
+                      })}
+                    </CommandGroup>
+                  </Command>
+                </PopoverContent>
+              </Popover>
+            </div>
+
+            <div>
+              <label
+                htmlFor=""
+                className="text-(--grey1) text-[14px] font-medium"
+              >
+                Placement
+              </label>
+
+              <Select value={placementValue} onValueChange={setPlacementValue}>
+                <SelectTrigger className="w-full bg-[#1c1c21] border-[#27272a] text-[#a1a1aa] hover:bg-[#27272a] cursor-pointer dark:rounded-[8px] dark:h-11 mt-1">
+                  <div className="flex items-center gap-3">
+                    <SelectValue placeholder="Select placement" />
+                  </div>
+                </SelectTrigger>
+
+                <SelectContent
+                  position="popper"
+                  className="z-[999] bg-[#1c1c21] border-[#27272a] text-white"
+                >
+                  {placementOptions.map((option) => (
+                    <SelectItem
+                      key={option.value}
+                      value={option.value}
+                      className="cursor-pointer focus:bg-[#27272a]"
+                    >
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <DialogFooter className="flex p-3">
+            <DialogClose asChild>
+              <Button variant="outline" className="w-[50%] h-11">
+                Cancel
+              </Button>
+            </DialogClose>
+            <Button type="submit" className="w-[50%] h-11 ">
+              Create
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
       <div>
         <div className="mt-4 w-full rounded-xl border-2 border-(--dark2) bg-(--dark4) p-4">
           <div className="flex items-center justify-between">
             <h1 className="text-(--grey1) text-[20px] font-bold">Ads</h1>
 
             <div className="flex items-center gap-3">
-              <DropdownMenu>
+              {/* <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button className="h-10 flex items-center gap-2 rounded-[4px] border-none px-4 py-2 text-(--grey1) dark:rounded-[4px] dark:bg-(--dark2) dark:hover:bg-(--dark3)">
                     <Filter className="h-4 w-4" />
@@ -272,7 +500,7 @@ export default function AdsTab() {
                     </DropdownMenuCheckboxItem>
                   ))}
                 </DropdownMenuContent>
-              </DropdownMenu>
+              </DropdownMenu> */}
 
               <div className="relative">
                 <Search
@@ -286,6 +514,13 @@ export default function AdsTab() {
                   placeholder="Search by source"
                 />
               </div>
+              <Button
+                onClick={() => setIsOpen(true)}
+                className="h-10 flex items-center dark:px-5 px-5 dark:rounded-[4px] rounded-[4px]"
+              >
+                {" "}
+                <Plus size={16} className="text-white" /> Add
+              </Button>
             </div>
           </div>
 

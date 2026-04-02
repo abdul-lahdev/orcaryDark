@@ -27,7 +27,7 @@ export default function Header() {
     return (
         <>
             <div className='bg-(--dark1) border-b border-white/5 p-4 flex justify-between items-center'>
-                <Input className='h-9.75 rounded-[4px] w-[40%]' placeholder='Something' />
+                <Input className='h-9.75 rounded-[4px] w-[40%]' placeholder='Rechercher des cours, professeurs...' />
                 <div className="flex items-center gap-5">
                     <div className="flex items-center gap-2">
                         <Wallet size={18} className="text-(--grey1) dark:hover:text-white" />

@@ -49,6 +49,7 @@
 
 //     );
 // }
+
 "use client";
 
 import { usePathname } from "next/navigation";
@@ -65,7 +66,7 @@ export default function Layout({ children }) {
     const isVirtualClassroom =
         pathname.startsWith("/admin/virtual-classroom") ||
         pathname === "/admin/home" ||
-        pathname === "/admin/newsfeed";
+        pathname === "/admin/newsfeed" || pathname === "/admin/forum";
 
     const isResources = pathname.startsWith("/admin/resources");
 
@@ -88,7 +89,7 @@ export default function Layout({ children }) {
         pathname.startsWith("/admin/resources") ||
         pathname.startsWith("/admin/lives") ||
         pathname === "/admin/home" ||
-        pathname === "/admin/newsfeed";
+        pathname === "/admin/newsfeed" || pathname === "/admin/forum";
 
     return (
         <>

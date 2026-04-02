@@ -1,0 +1,469 @@
+"use client";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import Link from "next/link";
+import { MoveRight, Play, Search } from "lucide-react";
+import { MoreVertical } from "lucide-react";
+import Image from "next/image";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Upload, Users, User, Lock } from "lucide-react";
+import { liveCards } from "@/app/data/cards";
+import { Button } from "@/components/ui/button";
+import SocialMedia from "./SocialMedia";
+import QuickInfo from "./QuickInfo";
+import UploadMediaDialog from "./UploadMediaDialog";
+
+const tabs = [
+  { id: "Cardiology", label: "Cardiology" },
+  { id: "Dermatology", label: "Dermatology" },
+  { id: "Endocrinology", label: "Endocrinology" },
+  { id: "Gastroenterology", label: "Gastro" },
+  { id: "Hematology", label: "Hematology" },
+  { id: "Operations", label: "Operations" },
+  { id: "Immunology", label: "immunology" },
+  { id: "Ophthalmology", label: "ophthalmology" },
+];
+
+export default function AnimatedTabs() {
+  let [activeTab, setActiveTab] = useState(tabs[0].id);
+
+  const filteredVideos = liveCards.filter(
+    (item) => item.docType === "video" && item.category === activeTab,
+  );
+  const filteredDocument = liveCards.filter(
+    (item) => item.docType === "document" && item.category === activeTab,
+  );
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [visibility, setVisibility] = useState("public");
+
+  const [thumbnail, setThumbnail] = useState("No file selected");
+
+  return (
+    <>
+      <div className="min-h-82 rounded-3xl bg-[url(/images/dashboard/banner.png)] bg-(--blue2) bg-cover bg-center p-3 flex flex-col justify-center items-center">
+        <h1 className="text-[48px] font-normal text-transparent bg-clip-text bg-[linear-gradient(90deg,#FFFFFF_0%,#23A5E7_50%,#23A5E7_100%)]">
+          Train with the Best
+        </h1>
+        <p className="text-[20px] font-normal text-(--grey1) mt-2">
+          Join Thousands of Healthcare Professionals In Live
+        </p>
+
+        <div className="flex items-center gap-3 mt-8">
+          <Button
+            className="h-12 text-[16px] font-normal"
+            onClick={() => setIsOpen(true)}
+          >
+            Explore Lives
+          </Button>
+          <Button variant="secondary" className="h-12 text-[16px] font-normal">
+            Become and Investor
+          </Button>
+        </div>
+        <div className="p-10">
+          <Dialog open={isOpen} onOpenChange={setIsOpen}>
+            <DialogContent
+              className="
+      bg-(--dark1) border border-(--dark3) text-white
+      max-w-137.5 p-0 rounded-[16px]
+      max-h-[80vh] outline-none
+      flex flex-col overflow-hidden
+    "
+            >
+              {/* HEADER (fixed) */}
+              <DialogHeader className="px-5 py-4 border-b border-white/5 bg-(--dark1)">
+                <DialogTitle className="text-[20px] font-semibold text-(--grey1)">
+                  Upload Resource
+                </DialogTitle>
+              </DialogHeader>
+
+              {/* BODY (scrollable) */}
+              <div className="flex-1 overflow-y-auto no-scrollbar px-5 py-4">
+                <div className="space-y-4">
+                  {/* Title */}
+                  <div className="space-y-2">
+                    <label className="text-(--grey1) text-[14px] font-medium">
+                      Title
+                    </label>
+                    <Input
+                      placeholder="Enter title"
+                      className="block w-full h-10 mt-2"
+                    />
+                  </div>
+
+                  {/* Category */}
+                  <div className="space-y-3">
+                    <label className="text-(--grey1) text-[14px] font-medium">
+                      Category Tag
+                    </label>
+                    <div className="mt-2">
+                      <Select>
+                        <SelectTrigger className="bg-(--dark4) border border-(--dark3) h-[40px] rounded-[8px] w-full text-(--grey3)">
+                          <SelectValue placeholder="Select category" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-[#2B2B31] border-white/10 text-white">
+                          <SelectItem value="cardiology">Cardiology</SelectItem>
+                          <SelectItem value="neurology">Neurology</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  {/* Description */}
+                  <div className="space-y-2">
+                    <label className="text-(--grey1) text-[14px] font-medium">
+                      Description
+                    </label>
+                    <Textarea
+                      placeholder="Enter description"
+                      className="bg-(--dark4) border border-(--dark4) min-h-30 rounded-[8px] focus-visible:ring-1 focus-visible:ring-(--blue1) resize-none text-white mt-2"
+                    />
+                  </div>
+
+                  {/* Thumbnail */}
+                  <div className="space-y-2">
+                    <label className="text-(--grey1) text-[14px] font-medium">
+                      Thumbnail
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="file"
+                        id="thumbnail-upload"
+                        className="hidden"
+                        onChange={(e) =>
+                          setThumbnail(
+                            e.target.files?.[0]?.name || "No file selected",
+                          )
+                        }
+                      />
+
+                      <label
+                        htmlFor="thumbnail-upload"
+                        className="flex items-center w-full h-12 bg-[#2B2B31] rounded-xl overflow-hidden cursor-pointer border border-white/5 hover:border-white/10 transition"
+                      >
+                        <div className="flex items-center gap-2 px-4 h-full bg-[#3A3A40] text-white/90 text-[13px] border-r border-white/5 hover:bg-[#45454C] transition-colors">
+                          <Upload size={16} className="text-(--grey1)" />
+                          <span>Upload thumbnail</span>
+                        </div>
+
+                        <div className="px-4 text-(--grey3) text-[13px] truncate">
+                          {thumbnail}
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Paid Resource */}
+                  <div className="flex items-center justify-between py-2">
+                    <div className="space-y-0.5">
+                      <label className="text-(--grey1) text-[14px] font-medium">
+                        Paid Resource
+                      </label>
+                      <p className="text-[12px] text-(--grey8)">
+                        You can active this if you want the viewers to pay to
+                        access
+                      </p>
+                    </div>
+                    <Switch className="data-[state=checked]:bg-(--blue1)" />
+                  </div>
+
+                  {/* Price */}
+                  <div className="space-y-2">
+                    <label className="text-(--grey1) text-[14px] font-medium">
+                      Price
+                    </label>
+                    <div className="relative">
+                      <span className="absolute left-4 top-1/2 -translate-y-1/3 text-(--grey3)">
+                        $
+                      </span>
+                      <Input
+                        placeholder="0.00"
+                        className="bg-[#2B2B31] border-none h-10 mt-2 pl-8 focus-visible:ring-1 focus-visible:ring-(--blue1) w-full"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Visibility */}
+                  <div className="space-y-3">
+                    <label className="text-(--grey1) text-[20px] font-semibold">
+                      Who can see the live stream?
+                    </label>
+                    <div className="grid grid-cols-3 gap-4 mt-2">
+                      {[
+                        {
+                          id: "public",
+                          label: "Public",
+                          icon: <User size={18} />,
+                        },
+                        {
+                          id: "followers",
+                          label: "Followers",
+                          icon: <Users size={18} />,
+                        },
+                        {
+                          id: "private",
+                          label: "Private",
+                          icon: <Lock size={18} />,
+                        },
+                      ].map((option) => (
+                        <button
+                          key={option.id}
+                          onClick={() => setVisibility(option.id)}
+                          className={`flex items-center justify-center gap-2 py-4 rounded-[6px] border transition-all cursor-pointer ${
+                            visibility === option.id
+                              ? "border-(--blue1) bg-(--blue3) text-(--blue1)"
+                              : "border-white/5 bg-[#2B2B31] text-(--grey1) hover:bg-[#3A3A40]"
+                          }`}
+                          type="button"
+                        >
+                          {option.icon}
+                          <span className="text-[12px] font-medium">
+                            {option.label}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* FOOTER (sticky) */}
+              <div className="sticky bottom-0 left-0 right-0 px-5 py-4 bg-(--dark1) border-t border-white/5">
+                <div className="grid grid-cols-2 gap-3">
+                  <Button
+                    onClick={() => setIsOpen(false)}
+                    variant="secondary"
+                    className="w-full h-14.75"
+                    type="button"
+                  >
+                    Discard
+                  </Button>
+                  <Button className="w-full h-14.75" type="button">
+                    Upload
+                  </Button>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
+        </div>
+      </div>
+
+      <div className="space-y-4 mt-6">
+        <div className="flex items-center justify-between">
+          <h1 className="text-white font-normal text-[30px]">Forums</h1>
+          <div>
+            <div className="relative w-99.5">
+              <Search
+                size={16}
+                className="absolute left-0 text-(--grey1) top-0 translate-x-2 translate-y-3"
+              />
+              <Input
+                className="h-10 w-full pl-8.5 dark:rounded-[4px] rounded-[4px]"
+                placeholder="Search by source"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="w-full overflow-hidden">
+          <div className="flex flex-row space-x-2 p-1 overflow-x-scroll no-scrollbar">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`${
+                  activeTab === tab.id
+                    ? "text-white"
+                    : "text-(--grey1) hover:text-white/60"
+                } relative rounded-[12px] cursor-pointer px-4 py-2 text-sm font-medium transition focus-visible:outline-2 outline-sky-400`}
+                style={{ WebkitTapHighlightColor: "transparent" }}
+              >
+                {activeTab === tab.id && (
+                  <motion.span
+                    layoutId="bubble"
+                    className="absolute rounded-[12px]  inset-0 z-10 bg-(--blue1)" // Blue background jo move karega
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+                <span className="relative z-20">{tab.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="min-h-75 mt-3">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="bg-(--dark5) rounded-[8px] p-4 relative">
+                <div className="grid grid-cols-[41px_1fr] items-center gap-3">
+                  <div className="size-10 rounded-full bg-[url(/images/classRoom/avator.png)] bg-cover bg-center"></div>
+                  <Textarea
+                    placeholder="Write your post here..."
+                    className="dark:bg-[#303036] border-none resize-none h-16 pr-80  "
+                  />
+                </div>
+                <div className="mt-5 pr-10 pl-5 gap-3 flex items-center justify-end group absolute right-0 top-0 translate-y-2.5 translate-x-2.5 border-l border-(--grey1)">
+                  {/* <Dialog>
+                    <DialogTrigger>
+                      <span className="text-(--grey1) group-hover:text-white flex items-center gap-3 transition-colors cursor-pointer">
+                        <Upload
+                          size={24}
+                          className="text-(--grey1) group-hover:text-white transition-colors"
+                        />
+                        Upload Media
+                      </span>
+                    </DialogTrigger>
+                    <DialogContent
+                      className="
+      bg-(--dark1) border border-(--dark3) text-white
+      max-w-[60%] p-0 rounded-[16px]
+      max-h-[80vh] outline-none
+      flex flex-col overflow-hidden
+    "
+                    >
+                      <DialogHeader className="px-5 py-4 border-b border-white/5 bg-(--dark1)">
+                        <DialogTitle className="text-[20px] font-semibold text-(--grey1)">
+                          Upload Resource
+                        </DialogTitle>
+                        <DialogDescription className="sr-only">
+                          This action cannot be undone. This will permanently
+                          delete your account and remove your data from our
+                          servers.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="p-5">
+                        <div className='flex items-center gap-3'>
+                          <div className="size-10 rounded-full bg-[url(/images/classRoom/avator.png)] bg-cover bg-center"></div>
+                          <div>
+                            <h1 className="text-(--grey1) text-[16px] font-bold">
+                              Tom Hardy
+                            </h1>
+                            <p className="text-(--grey14) text-[14px] font-normal">
+                              You
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </DialogContent>
+                  </Dialog> */}
+                  <UploadMediaDialog/>
+
+                  <Button className="h-10 px-5 dark:px-5">
+                    <Play /> Post
+                  </Button>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-[1fr_362px] gap-4 mt-5">
+                <div>
+                  <SocialMedia />
+                </div>
+                <div>
+                  <QuickInfo />
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export const VideoCard = ({ item }) => {
+  const {
+    id,
+    isLive,
+    thumbnail,
+    avatar,
+    name,
+    docType,
+    specialization,
+    title,
+    viewers,
+    time,
+  } = item;
+  return (
+    <Link
+      href={`/admin/resources/${docType === "video" ? "video" : "document"}/${id}`}
+      className="w-full group cursor-pointer"
+    >
+      <div className="relative aspect-video rounded-[12px] overflow-hidden">
+        <Image
+          src={thumbnail || "/images/classRoom/thumbnail.jpg"}
+          alt="Video Thumbnail"
+          width={376}
+          height={227}
+          className="w-full h-full object-cover"
+        />
+
+        {/* {isLive && <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-(--red3) backdrop-blur-md px-2 py-1 rounded-[4px]">
+                    <div className="size-2 bg-(--red2) rounded-full animate-pulse border border-white" />
+                    <span className="text-white text-[12px] font-semibold uppercase">Live</span>
+                </div>} */}
+
+        <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end px-4 pb-2">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              {/* Profile Image */}
+              <div className="relative w-10 h-10 overflow-hidden rounded-full">
+                <Image
+                  src={avatar || "/images/classRoom/avator.png"}
+                  fill
+                  className="object-cover"
+                  alt="avatar"
+                />
+              </div>
+
+              <div>
+                <h4 className="text-white text-[16px] font-semibold">{name}</h4>
+                <p className="text-(--light2) text-[12px] font-normal">
+                  {specialization}
+                </p>
+              </div>
+            </div>
+
+            <button className="text-white/80 hover:text-white transition-colors">
+              <MoreVertical size={18} />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="px-2 py-5 space-y-2">
+        <h3 className="text-(--grey1) text-[20px] font-semibold leading-snug line-clamp-2 transition-colors">
+          {title}
+        </h3>
+
+        <div className="flex items-center gap-2 text-(--grey1) text-[12px]">
+          <span>{viewers} viewers</span>
+          <div className="size-2 bg-white rounded-full" />
+          <span>{time}</span>
+        </div>
+      </div>
+    </Link>
+  );
+};

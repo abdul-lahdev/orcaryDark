@@ -44,6 +44,8 @@ export default function Page() {
 
     return (
         <>
+        <div className="px-8 py-6">
+
             <div>
                 <h1 className="text-white font-semibold text-[24px]">
                     Dashboard Overview
@@ -82,6 +84,7 @@ export default function Page() {
                 </div>
             </div>
 
+        </div>
         </>
     )
 }

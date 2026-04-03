@@ -4,8 +4,15 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ChevronUp, Eye, MoreVertical } from "lucide-react";
 import { accordionData } from "@/app/data/classRoom";
-import { Separator } from "@/components/ui/separator"
-import { Play, Pause, Volume2, Settings, Maximize, EllipsisVertical } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import {
+  Play,
+  Pause,
+  Volume2,
+  Settings,
+  Maximize,
+  EllipsisVertical,
+} from "lucide-react";
 import { useParams } from "next/navigation";
 import {
   DropdownMenu,
@@ -25,8 +32,7 @@ import { Switch } from "@/components/ui/switch";
 import { ChevronRight, Check } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { liveCards } from '@/app/data/cards';
-
+import { liveCards } from "@/app/data/cards";
 
 export default function Page() {
   const params = useParams();
@@ -35,125 +41,171 @@ export default function Page() {
   //  const { id, isLive, thumbnail, avatar, name, docType, specialization, title, viewers, time } = liveCards;
   return (
     <>
-      <div className="px-8 py-6 overflow-x-hidden">
-        <CustomVideoPlayer />
-        <div className='bg-(--dark5) mt-5 p-4 rounded-[8px]'>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <span className="size-15 rounded-full bg-[url(/images/classRoom/session7.jpg)] bg-cover block bg-center "></span>
-              <div>
-                <h2 className="text-white text-[20px] font-semibold">
-                  Intro to Neuroanatomy | Neurophysiology | Neuroscience
-                </h2>
-                <div className='flex items-center gap-2'>
-                  <span className='font-normal text-[18px] text-(--grey1)'>Mike Millers</span>
-                  <span className="block size-2.5 bg-(--grey5) rounded-full"></span>
-                  <span className='font-normal text-[18px] text-(--grey1)'>453 viewers</span>
-                  <span className="block size-2.5 bg-(--grey5) rounded-full"></span>
-                  <span className='font-normal text-[18px] text-(--grey1)'>Streaming 12:10 PM</span>
+      <div className="grid h-full grid-cols-[1fr_480px] gap-4">
+        <div className="px-8 py-6 overflow-x-hidden">
+          <CustomVideoPlayer />
+          <div className="bg-(--dark5) mt-5 p-4 rounded-[8px]">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <span className="size-15 rounded-full bg-[url(/images/classRoom/session7.jpg)] bg-cover block bg-center "></span>
+                <div>
+                  <h2 className="text-white text-[20px] font-semibold">
+                    Intro to Neuroanatomy | Neurophysiology | Neuroscience
+                  </h2>
+                  <div className="flex items-center gap-2">
+                    <span className="font-normal text-[18px] text-(--grey1)">
+                      Mike Millers
+                    </span>
+                    <span className="block size-2.5 bg-(--grey5) rounded-full"></span>
+                    <span className="font-normal text-[18px] text-(--grey1)">
+                      453 viewers
+                    </span>
+                    <span className="block size-2.5 bg-(--grey5) rounded-full"></span>
+                    <span className="font-normal text-[18px] text-(--grey1)">
+                      Streaming 12:10 PM
+                    </span>
+                  </div>
                 </div>
               </div>
+              <div>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <EllipsisVertical
+                      size={24}
+                      className="text-(--grey2) cursor-pointer"
+                    />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuGroup>
+                      <DropdownMenuLabel>first</DropdownMenuLabel>
+                      <DropdownMenuItem>second</DropdownMenuItem>
+                      <DropdownMenuItem>third</DropdownMenuItem>
+                    </DropdownMenuGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
             </div>
-            <div>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <EllipsisVertical size={24} className="text-(--grey2) cursor-pointer" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuGroup>
-                    <DropdownMenuLabel>first</DropdownMenuLabel>
-                    <DropdownMenuItem>second</DropdownMenuItem>
-                    <DropdownMenuItem>third</DropdownMenuItem>
-                  </DropdownMenuGroup>
-
-                </DropdownMenuContent>
-              </DropdownMenu>
+            <div className="mt-5">
+              <h3 className="text-[16px] font-bold text-(--grey1)">
+                Description
+              </h3>
+              <p className="text-(--grey1) text-[16px] font-normal">
+                The study of neuroanatomy, neurophysiology, and neuroscience is
+                essential for understanding the structure and function of the
+                brain and spinal cord, collectively known as the Central Nervous
+                System (CNS). This multidisciplinary field explores how neurons,
+                the building blocks of the nervous system, communicate with each
+                other and with the body to generate thought, movement, and
+                sensory experiences.
+              </p>
             </div>
           </div>
-          <div className="mt-5">
-            <h3 className="text-[16px] font-bold text-(--grey1)">
-              Description
-            </h3>
-            <p className='text-(--grey1) text-[16px] font-normal'>
-              The study of neuroanatomy, neurophysiology, and neuroscience is essential for understanding the structure and function of the brain and spinal cord, collectively known as the Central Nervous System (CNS). This multidisciplinary field explores how neurons, the building blocks of the nervous system, communicate with each other and with the body to generate thought, movement, and sensory experiences.
-            </p>
-          </div>
-        </div>
 
-        <div className='mt-4'>
-          <h1 className='text-white text-[24px] font-bold'>
-            More from Mike Millers
-          </h1>
-          <div className='mt-4 grid grid-cols-2 gap-4'>
-            {
-              liveCards.map((item) => item.docType === 'video' && item.isLive && (
+          <div className="mt-4">
+            <h1 className="text-white text-[24px] font-bold">
+              More from Mike Millers
+            </h1>
+            <div className="mt-4 grid grid-cols-2 gap-4">
+              {liveCards.map(
+                (item) =>
+                  item.docType === "video" &&
+                  item.isLive && (
+                    <Link
+                      key={item.id}
+                      href={`/admin/resources/video/${item.id}`}
+                      className="w-full group cursor-pointer"
+                    >
+                      <div className="relative aspect-video rounded-[12px] overflow-hidden">
+                        <Image
+                          src={
+                            item.thumbnail || "/images/classRoom/thumbnail.jpg"
+                          }
+                          alt="Video Thumbnail"
+                          width={376}
+                          height={227}
+                          className="w-full h-full object-cover"
+                        />
 
-                <Link key={item.id} href={`/admin/resources/video/${item.id}`} className="w-full group cursor-pointer">
-                  <div className="relative aspect-video rounded-[12px] overflow-hidden">
-                    <Image src={item.thumbnail || "/images/classRoom/thumbnail.jpg"} alt="Video Thumbnail" width={376} height={227} className="w-full h-full object-cover" />
-
-                    {item.isLive && <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-(--red3) backdrop-blur-md px-2 py-1 rounded-[4px]">
-                      <div className="size-2 bg-(--red2) rounded-full animate-pulse border border-white" />
-                      <span className="text-white text-[12px] font-semibold uppercase">Live</span>
-                    </div>}
-
-                    <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end px-4 pb-2">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          {/* Profile Image */}
-                          <div className="relative w-10 h-10 overflow-hidden rounded-full">
-                            <Image
-                              src={item.avatar || "/images/classRoom/avator.png"}
-                              fill
-                              className="object-cover"
-                              alt="avatar"
-                            />
+                        {item.isLive && (
+                          <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-(--red3) backdrop-blur-md px-2 py-1 rounded-[4px]">
+                            <div className="size-2 bg-(--red2) rounded-full animate-pulse border border-white" />
+                            <span className="text-white text-[12px] font-semibold uppercase">
+                              Live
+                            </span>
                           </div>
+                        )}
 
+                        <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end px-4 pb-2">
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                              {/* Profile Image */}
+                              <div className="relative w-10 h-10 overflow-hidden rounded-full">
+                                <Image
+                                  src={
+                                    item.avatar ||
+                                    "/images/classRoom/avator.png"
+                                  }
+                                  fill
+                                  className="object-cover"
+                                  alt="avatar"
+                                />
+                              </div>
 
+                              <div>
+                                <h4 className="text-white text-[16px] font-semibold">
+                                  {item.name}
+                                </h4>
+                                <p className="text-(--light2) text-[12px] font-normal">
+                                  {item.specialization}
+                                </p>
+                              </div>
+                            </div>
 
-                          <div>
-                            <h4 className="text-white text-[16px] font-semibold">{item.name}</h4>
-                            <p className="text-(--light2) text-[12px] font-normal">{item.specialization}</p>
+                            <button className="text-white/80 hover:text-white transition-colors">
+                              <MoreVertical size={18} />
+                            </button>
                           </div>
                         </div>
-
-                        <button className="text-white/80 hover:text-white transition-colors">
-                          <MoreVertical size={18} />
-                        </button>
                       </div>
-                    </div>
-                  </div>
 
-                  <div className="px-2 py-5 space-y-2">
-                    <h3 className="text-(--grey1) text-[20px] font-semibold leading-snug line-clamp-2 transition-colors">
-                      {item.title}
-                    </h3>
+                      <div className="px-2 py-5 space-y-2">
+                        <h3 className="text-(--grey1) text-[20px] font-semibold leading-snug line-clamp-2 transition-colors">
+                          {item.title}
+                        </h3>
 
-                    <div className="flex items-center gap-2 text-(--grey1) text-[12px]">
-                      <span>{item.viewers} viewers</span>
-                      <div className="size-2 bg-white rounded-full" />
-                      <span>{item.time}</span>
-                    </div>
-                  </div>
-                </Link>
-              ))
-            }
-
+                        <div className="flex items-center gap-2 text-(--grey1) text-[12px]">
+                          <span>{item.viewers} viewers</span>
+                          <div className="size-2 bg-white rounded-full" />
+                          <span>{item.time}</span>
+                        </div>
+                      </div>
+                    </Link>
+                  ),
+              )}
+            </div>
           </div>
-
         </div>
-      </div>
 
-      <div className="bg-(--dark4) border-l border-(--dark2) px-3 py-4">
-        <div className="h-109.75 overflow-y-scroll no-scrollbar">
-          <ChannelsAccordion />
-        </div>
-        <div className='mt-5'>
-          <Image src={"/images/resource/mediaAds.png"} alt="Video Thumbnail" width={376} height={227} className="w-full h-full object-cover" />
-          <div className='mt-3 flex items-center justify-between'>
-            <span className='text-[16px] font-normal text-(--blue1)'>Carelining Glucose System.</span>
-            <span className='text-[14px] font-normal text-(--grey1)'>Ad.</span>
+        <div className="bg-(--dark4) border-l border-(--dark2) px-3 py-4">
+          <div className="h-109.75 overflow-y-scroll no-scrollbar">
+            <ChannelsAccordion />
+          </div>
+          <div className="mt-5">
+            <Image
+              src={"/images/resource/mediaAds.png"}
+              alt="Video Thumbnail"
+              width={376}
+              height={227}
+              className="w-full h-full object-cover"
+            />
+            <div className="mt-3 flex items-center justify-between">
+              <span className="text-[16px] font-normal text-(--blue1)">
+                Carelining Glucose System.
+              </span>
+              <span className="text-[14px] font-normal text-(--grey1)">
+                Ad.
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -239,7 +291,6 @@ export const CustomVideoPlayer = () => {
 
   return (
     <div className="relative group w-full aspect-video bg-black rounded-[16px] overflow-hidden border border-white/5 shadow-2xl">
-
       <video
         ref={videoRef}
         src={src}
@@ -328,22 +379,34 @@ export const CustomVideoPlayer = () => {
                     <div className="flex items-center gap-3">
                       <span className="text-sm">Stable Volume</span>
                     </div>
-                    <Switch checked={stableVolume} onCheckedChange={setStableVolume} />
+                    <Switch
+                      checked={stableVolume}
+                      onCheckedChange={setStableVolume}
+                    />
                   </div>
 
                   <div className="flex items-center justify-between gap-3 rounded-xl px-2 py-2 hover:bg-white/5">
                     <span className="text-sm">Voice boost</span>
-                    <Switch checked={voiceBoost} onCheckedChange={setVoiceBoost} />
+                    <Switch
+                      checked={voiceBoost}
+                      onCheckedChange={setVoiceBoost}
+                    />
                   </div>
 
                   <div className="flex items-center justify-between gap-3 rounded-xl px-2 py-2 hover:bg-white/5">
                     <span className="text-sm">Ambient mode</span>
-                    <Switch checked={ambientMode} onCheckedChange={setAmbientMode} />
+                    <Switch
+                      checked={ambientMode}
+                      onCheckedChange={setAmbientMode}
+                    />
                   </div>
 
                   <div className="flex items-center justify-between gap-3 rounded-xl px-2 py-2 hover:bg-white/5">
                     <span className="text-sm">Annotations</span>
-                    <Switch checked={annotations} onCheckedChange={setAnnotations} />
+                    <Switch
+                      checked={annotations}
+                      onCheckedChange={setAnnotations}
+                    />
                   </div>
                 </div>
 
@@ -368,7 +431,9 @@ export const CustomVideoPlayer = () => {
                       >
                         <div className="flex w-full items-center justify-between">
                           <span>Off</span>
-                          {cc === "off" && <Check size={16} className="opacity-90" />}
+                          {cc === "off" && (
+                            <Check size={16} className="opacity-90" />
+                          )}
                         </div>
                       </DropdownMenuItem>
                       <DropdownMenuItem
@@ -377,7 +442,9 @@ export const CustomVideoPlayer = () => {
                       >
                         <div className="flex w-full items-center justify-between">
                           <span>English</span>
-                          {cc === "en" && <Check size={16} className="opacity-90" />}
+                          {cc === "en" && (
+                            <Check size={16} className="opacity-90" />
+                          )}
                         </div>
                       </DropdownMenuItem>
                     </DropdownMenuSubContent>
@@ -405,7 +472,9 @@ export const CustomVideoPlayer = () => {
                         >
                           <div className="flex w-full items-center justify-between">
                             <span>{s === 1 ? "Normal" : `${s}x`}</span>
-                            {speed === s && <Check size={16} className="opacity-90" />}
+                            {speed === s && (
+                              <Check size={16} className="opacity-90" />
+                            )}
                           </div>
                         </DropdownMenuItem>
                       ))}
@@ -434,7 +503,9 @@ export const CustomVideoPlayer = () => {
                         >
                           <div className="flex w-full items-center justify-between">
                             <span>{q === "auto" ? "Auto (720p)" : q}</span>
-                            {quality === q && <Check size={16} className="opacity-90" />}
+                            {quality === q && (
+                              <Check size={16} className="opacity-90" />
+                            )}
                           </div>
                         </DropdownMenuItem>
                       ))}
@@ -455,7 +526,6 @@ export const CustomVideoPlayer = () => {
         </div>
       </div>
 
-
       {!playing && (
         <div
           onClick={togglePlay}
@@ -470,7 +540,6 @@ export const CustomVideoPlayer = () => {
   );
 };
 
-
 // Accordion
 
 const Accordion = ({ i, expanded, setExpanded, title, children }) => {
@@ -478,7 +547,7 @@ const Accordion = ({ i, expanded, setExpanded, title, children }) => {
 
   const toggle = () => {
     setExpanded((prev) =>
-      prev.includes(i) ? prev.filter((x) => x !== i) : [...prev, i]
+      prev.includes(i) ? prev.filter((x) => x !== i) : [...prev, i],
     );
   };
 
@@ -490,15 +559,13 @@ const Accordion = ({ i, expanded, setExpanded, title, children }) => {
         onClick={toggle}
       >
         <div className="flex items-center gap-2">
-
           <span
-            className={`text-[18px] font-medium uppercase tracking-wider ${isOpen ? "text-(--blue1)" : "text-(--grey1)"
-              }`}
+            className={`text-[18px] font-medium uppercase tracking-wider ${
+              isOpen ? "text-(--blue1)" : "text-(--grey1)"
+            }`}
           >
             {title}
           </span>
-
-
         </div>
 
         <motion.div
@@ -509,8 +576,7 @@ const Accordion = ({ i, expanded, setExpanded, title, children }) => {
           <ChevronUp size={16} className="" />
         </motion.div>
       </motion.header>
-      <Separator className='mt-2 mb-3' />
-
+      <Separator className="mt-2 mb-3" />
 
       <AnimatePresence initial={false}>
         {isOpen && (
@@ -537,11 +603,11 @@ export const ChannelsAccordion = () => {
   const [expanded, setExpanded] = useState([0, 1, 2]);
 
   const liveSessions = accordionData.filter(
-    (item) => item.type === "liveSession" && item.isLive
+    (item) => item.type === "liveSession" && item.isLive,
   );
 
   const classRooms = accordionData.filter(
-    (item) => item.type === "classRoom" && item.isLive
+    (item) => item.type === "classRoom" && item.isLive,
   );
 
   const offline = accordionData.filter((item) => !item.isLive);
@@ -561,8 +627,6 @@ export const ChannelsAccordion = () => {
           <EmptyRow text="No live sessions" />
         )}
       </Accordion>
-
-
     </div>
   );
 };
@@ -580,10 +644,13 @@ const UserRow = ({ item }) => {
       <span className="size-8 rounded-full block bg-[url(/images/resource/liveChat1.png)] bg-cover bg-center"></span>
       <div>
         <h1 className="text-white font-medium text-[14px]">Kathryn Murphy</h1>
-        <p className='text-[14px]/[16px] font-medium text-(--grey1)'>the largest part, responsible for higher functions like thinking, memory, and voluntary movements.</p>
+        <p className="text-[14px]/[16px] font-medium text-(--grey1)">
+          the largest part, responsible for higher functions like thinking,
+          memory, and voluntary movements.
+        </p>
       </div>
       <span>
-        <EllipsisVertical size={24} className='text-(--grey6)' />
+        <EllipsisVertical size={24} className="text-(--grey6)" />
       </span>
     </div>
   );

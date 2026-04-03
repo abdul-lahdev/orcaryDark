@@ -5,7 +5,7 @@ export const metadata = {
 export default function Page() {
     return (
         <>
-            <div className="">
+            <div className="px-8 py-6">
                 {/* <h1 className="text-(--grey1) font-bold text-[20px]">
                     Calendar
                 </h1>

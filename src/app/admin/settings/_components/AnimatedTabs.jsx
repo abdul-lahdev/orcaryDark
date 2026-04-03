@@ -147,7 +147,7 @@ export default function AnimatedTabs() {
 
   return (
     <>
-      <div className="mt-6 grid grid-cols-[300px_1fr] gap-10 min-h-screen ">
+      <div className=" grid grid-cols-[300px_1fr] gap-10 min-h-screen ">
         <div className="h-full  overflow-hidden bg-(--dark5) rounded-[10px] p-3">
           <div className="flex flex-col space-y-2 items-start w-full p-1 overflow-x-scroll no-scrollbar">
             {tabs.map((tab) => (

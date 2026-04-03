@@ -37,8 +37,9 @@ import CustomVideoPlayer from "./CustomVideoPlayer";
 
 const tabs = [
   { id: "New", label: "New" },
+  { id: "Top", label: "Top" },
   { id: "Hot", label: "Hot" },
-  { id: "Oldest", label: "Oldest" },
+  { id: "Closed", label: "Closed" },
 ];
 
 const posts = [

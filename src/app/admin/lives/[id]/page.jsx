@@ -43,167 +43,172 @@ export default function Page() {
   //  const { id, isLive, thumbnail, avatar, name, docType, specialization, title, viewers, time } = liveCards;
   return (
     <>
-      <div className="px-8 py-6 overflow-x-hidden">
-        <CustomVideoPlayer />
-        <div className="bg-(--dark5) mt-5 p-4 rounded-[8px]">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <span className="size-15 rounded-full bg-[url(/images/classRoom/session7.jpg)] bg-cover block bg-center "></span>
-              <div>
-                <h2 className="text-white text-[20px] font-semibold">
-                  Intro to Neuroanatomy | Neurophysiology | Neuroscience
-                </h2>
-                <div className="flex items-center gap-2">
-                  <span className="font-normal text-[18px] text-(--grey1)">
-                    Mike Millers
-                  </span>
-                  <span className="block size-2.5 bg-(--grey5) rounded-full"></span>
-                  <span className="font-normal text-[18px] text-(--grey1)">
-                    453 viewers
-                  </span>
-                  <span className="block size-2.5 bg-(--grey5) rounded-full"></span>
-                  <span className="font-normal text-[18px] text-(--grey1)">
-                    Streaming 12:10 PM
-                  </span>
+      <div className="grid h-full grid-cols-[1fr_480px] gap-4">
+        <div className="px-8 py-6 overflow-x-hidden">
+          <CustomVideoPlayer />
+          <div className="bg-(--dark5) mt-5 p-4 rounded-[8px]">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <span className="size-15 rounded-full bg-[url(/images/classRoom/session7.jpg)] bg-cover block bg-center "></span>
+                <div>
+                  <h2 className="text-white text-[20px] font-semibold">
+                    Intro to Neuroanatomy | Neurophysiology | Neuroscience
+                  </h2>
+                  <div className="flex items-center gap-2">
+                    <span className="font-normal text-[18px] text-(--grey1)">
+                      Mike Millers
+                    </span>
+                    <span className="block size-2.5 bg-(--grey5) rounded-full"></span>
+                    <span className="font-normal text-[18px] text-(--grey1)">
+                      453 viewers
+                    </span>
+                    <span className="block size-2.5 bg-(--grey5) rounded-full"></span>
+                    <span className="font-normal text-[18px] text-(--grey1)">
+                      Streaming 12:10 PM
+                    </span>
+                  </div>
                 </div>
               </div>
+              <div>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <EllipsisVertical
+                      size={24}
+                      className="text-(--grey2) cursor-pointer"
+                    />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuGroup>
+                      <DropdownMenuLabel>first</DropdownMenuLabel>
+                      <DropdownMenuItem>second</DropdownMenuItem>
+                      <DropdownMenuItem>third</DropdownMenuItem>
+                    </DropdownMenuGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
             </div>
-            <div>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <EllipsisVertical
-                    size={24}
-                    className="text-(--grey2) cursor-pointer"
-                  />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuGroup>
-                    <DropdownMenuLabel>first</DropdownMenuLabel>
-                    <DropdownMenuItem>second</DropdownMenuItem>
-                    <DropdownMenuItem>third</DropdownMenuItem>
-                  </DropdownMenuGroup>
-                </DropdownMenuContent>
-              </DropdownMenu>
+            <div className="mt-5">
+              <h3 className="text-[16px] font-bold text-(--grey1)">
+                Description
+              </h3>
+              <p className="text-(--grey1) text-[16px] font-normal">
+                The study of neuroanatomy, neurophysiology, and neuroscience is
+                essential for understanding the structure and function of the
+                brain and spinal cord, collectively known as the Central Nervous
+                System (CNS). This multidisciplinary field explores how neurons,
+                the building blocks of the nervous system, communicate with each
+                other and with the body to generate thought, movement, and
+                sensory experiences.
+              </p>
             </div>
           </div>
-          <div className="mt-5">
-            <h3 className="text-[16px] font-bold text-(--grey1)">
-              Description
-            </h3>
-            <p className="text-(--grey1) text-[16px] font-normal">
-              The study of neuroanatomy, neurophysiology, and neuroscience is
-              essential for understanding the structure and function of the
-              brain and spinal cord, collectively known as the Central Nervous
-              System (CNS). This multidisciplinary field explores how neurons,
-              the building blocks of the nervous system, communicate with each
-              other and with the body to generate thought, movement, and sensory
-              experiences.
-            </p>
-          </div>
-        </div>
 
-        <div className="mt-4">
-          <h1 className="text-white text-[24px] font-bold">
-            More from Mike Millers
-          </h1>
-          <div className="mt-4 grid grid-cols-2 gap-4">
-            {liveCards.map(
-              (item) =>
-                item.docType === "video" &&
-                item.isLive && (
-                  <Link
-                    key={item.id}
-                    href={`/admin/resources/video/${item.id}`}
-                    className="w-full group cursor-pointer"
-                  >
-                    <div className="relative aspect-video rounded-[12px] overflow-hidden">
-                      <Image
-                        src={
-                          item.thumbnail || "/images/classRoom/thumbnail.jpg"
-                        }
-                        alt="Video Thumbnail"
-                        width={376}
-                        height={227}
-                        className="w-full h-full object-cover"
-                      />
+          <div className="mt-4">
+            <h1 className="text-white text-[24px] font-bold">
+              More from Mike Millers
+            </h1>
+            <div className="mt-4 grid grid-cols-2 gap-4">
+              {liveCards.map(
+                (item) =>
+                  item.docType === "video" &&
+                  item.isLive && (
+                    <Link
+                      key={item.id}
+                      href={`/admin/resources/video/${item.id}`}
+                      className="w-full group cursor-pointer"
+                    >
+                      <div className="relative aspect-video rounded-[12px] overflow-hidden">
+                        <Image
+                          src={
+                            item.thumbnail || "/images/classRoom/thumbnail.jpg"
+                          }
+                          alt="Video Thumbnail"
+                          width={376}
+                          height={227}
+                          className="w-full h-full object-cover"
+                        />
 
-                      {item.isLive && (
-                        <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-(--red3) backdrop-blur-md px-2 py-1 rounded-[4px]">
-                          <div className="size-2 bg-(--red2) rounded-full animate-pulse border border-white" />
-                          <span className="text-white text-[12px] font-semibold uppercase">
-                            Live
-                          </span>
-                        </div>
-                      )}
-
-                      <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end px-4 pb-2">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-3">
-                            {/* Profile Image */}
-                            <div className="relative w-10 h-10 overflow-hidden rounded-full">
-                              <Image
-                                src={
-                                  item.avatar || "/images/classRoom/avator.png"
-                                }
-                                fill
-                                className="object-cover"
-                                alt="avatar"
-                              />
-                            </div>
-
-                            <div>
-                              <h4 className="text-white text-[16px] font-semibold">
-                                {item.name}
-                              </h4>
-                              <p className="text-(--light2) text-[12px] font-normal">
-                                {item.specialization}
-                              </p>
-                            </div>
+                        {item.isLive && (
+                          <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-(--red3) backdrop-blur-md px-2 py-1 rounded-[4px]">
+                            <div className="size-2 bg-(--red2) rounded-full animate-pulse border border-white" />
+                            <span className="text-white text-[12px] font-semibold uppercase">
+                              Live
+                            </span>
                           </div>
+                        )}
 
-                          <button className="text-white/80 hover:text-white transition-colors">
-                            <MoreVertical size={18} />
-                          </button>
+                        <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end px-4 pb-2">
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                              {/* Profile Image */}
+                              <div className="relative w-10 h-10 overflow-hidden rounded-full">
+                                <Image
+                                  src={
+                                    item.avatar ||
+                                    "/images/classRoom/avator.png"
+                                  }
+                                  fill
+                                  className="object-cover"
+                                  alt="avatar"
+                                />
+                              </div>
+
+                              <div>
+                                <h4 className="text-white text-[16px] font-semibold">
+                                  {item.name}
+                                </h4>
+                                <p className="text-(--light2) text-[12px] font-normal">
+                                  {item.specialization}
+                                </p>
+                              </div>
+                            </div>
+
+                            <button className="text-white/80 hover:text-white transition-colors">
+                              <MoreVertical size={18} />
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="px-2 py-5 space-y-2">
-                      <h3 className="text-(--grey1) text-[20px] font-semibold leading-snug line-clamp-2 transition-colors">
-                        {item.title}
-                      </h3>
+                      <div className="px-2 py-5 space-y-2">
+                        <h3 className="text-(--grey1) text-[20px] font-semibold leading-snug line-clamp-2 transition-colors">
+                          {item.title}
+                        </h3>
 
-                      <div className="flex items-center gap-2 text-(--grey1) text-[12px]">
-                        <span>{item.viewers} viewers</span>
-                        <div className="size-2 bg-white rounded-full" />
-                        <span>{item.time}</span>
+                        <div className="flex items-center gap-2 text-(--grey1) text-[12px]">
+                          <span>{item.viewers} viewers</span>
+                          <div className="size-2 bg-white rounded-full" />
+                          <span>{item.time}</span>
+                        </div>
                       </div>
-                    </div>
-                  </Link>
-                ),
-            )}
+                    </Link>
+                  ),
+              )}
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="bg-(--dark4) border-l border-(--dark2) px-3 py-4">
-        {/* <div className="max-h-109.75 overflow-y-scroll no-scrollbar">
+        <div className="bg-(--dark4) border-l border-(--dark2) px-3 py-4">
+          {/* <div className="max-h-109.75 overflow-y-scroll no-scrollbar">
         </div> */}
-        <ChannelsAccordion />
+          <ChannelsAccordion />
 
-        <div className="mt-5">
-          <Image
-            src={"/images/resource/mediaAds.png"}
-            alt="Video Thumbnail"
-            width={376}
-            height={227}
-            className="w-full h-full object-cover"
-          />
-          <div className="mt-3 flex items-center justify-between">
-            <span className="text-[16px] font-normal text-(--blue1)">
-              Carelining Glucose System.
-            </span>
-            <span className="text-[14px] font-normal text-(--grey1)">Ad.</span>
+          <div className="mt-5">
+            <Image
+              src={"/images/resource/mediaAds.png"}
+              alt="Video Thumbnail"
+              width={376}
+              height={227}
+              className="w-full h-full object-cover"
+            />
+            <div className="mt-3 flex items-center justify-between">
+              <span className="text-[16px] font-normal text-(--blue1)">
+                Carelining Glucose System.
+              </span>
+              <span className="text-[14px] font-normal text-(--grey1)">
+                Ad.
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -626,10 +631,14 @@ export const ChannelsAccordion = () => {
             <EmptyRow text="No live sessions" />
           )}
         </div>
-        <div  className='w-full relative flex items-center'>
+        <div className="w-full relative flex items-center">
           <div className="size-9 rounded-full block bg-[url(/images/resource/liveChat1.png)] bg-cover bg-center absolute left-2"></div>
-          <Button className='absolute right-2 h-10'>Send</Button>
-          <input type="text" placeholder="What’s on your mind?" className='h-16 focus-visible:outline-none focus:border-0 pl-13 pr-21 bg-(--grey4) w-full block text-base dark:text-[#A1A1AA]' />
+          <Button className="absolute right-2 h-10">Send</Button>
+          <input
+            type="text"
+            placeholder="What’s on your mind?"
+            className="h-16 focus-visible:outline-none focus:border-0 pl-13 pr-21 bg-(--grey4) w-full block text-base dark:text-[#A1A1AA]"
+          />
         </div>
       </Accordion>
     </div>

@@ -38,21 +38,21 @@ export default function LivesTab() {
                         <button
                             key={tab.id}
                             onClick={() => setActiveSubTab(tab.id)}
-                            className="relative cursor-pointer px-5 py-2 text-[13px] font-medium rounded-full transition-colors"
+                            className="relative cursor-pointer px-5 py-4 text-[13px] font-medium rounded-[12px] transition-colors"
                             style={{ WebkitTapHighlightColor: "transparent" }}
                         >
                             {/* Animated background */}
                             {activeSubTab === tab.id && (
                                 <motion.span
                                     layoutId="lives-sub-tab"
-                                    className="absolute inset-0 rounded-full bg-(--blue1)"
+                                    className="absolute inset-0 rounded-[12px] bg-(--blue1)"
                                     transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                                 />
                             )}
                             <span
                                 className={`relative z-10 ${activeSubTab === tab.id
                                     ? "text-white"
-                                    : "text-(--grey1)"
+                                    : "text-(--grey19)"
                                     }`}
                             >
                                 {tab.label}
@@ -70,7 +70,7 @@ export default function LivesTab() {
                         exit={{ opacity: 0, y: -8 }}
                         transition={{ duration: 0.2 }}
                     >
-                        <div className="space-y-6">
+                        <div className="space-y-12">
                             {displayCards.map((card) => (
                                 <LiveCard key={card.id} card={card} />
                             ))}
@@ -134,7 +134,7 @@ function LiveCard({ card }) {
                             className="object-cover"
                         />
                         {/* LIVE badge */}
-                        <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5 bg-black/60 backdrop-blur-sm rounded-md px-2.5 py-1">
+                        <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5 bg-[#CF000026] backdrop-blur-[12px] rounded-md px-2.5 py-1">
                             <span className="h-[8px] w-[8px] rounded-full bg-red-500 animate-pulse" />
                             <span className="text-[11px] font-bold text-white uppercase tracking-wide">
                                 Live
@@ -164,10 +164,10 @@ function LiveCard({ card }) {
                             />
                         </div>
                         <div>
-                            <p className="text-[13px] font-semibold text-white leading-tight">
+                            <p className="text-[16px] font-semibold text-white ">
                                 {card.name}
                             </p>
-                            <p className="text-[11px] font-normal text-white/60">
+                            <p className="text-[12px] font-normal text-(--light2)">
                                 {card.specialization}
                             </p>
                         </div>
@@ -179,22 +179,22 @@ function LiveCard({ card }) {
             </div>
 
             {/* Info below card */}
-            <div className="mt-3 px-1">
-                <p className="text-[15px] font-medium text-(--grey1) leading-snug">
+            <div className="mt-5 px-1">
+                <p className="text-[20px] font-semibold text-(--grey1)">
                     {card.title}
                 </p>
                 {card.isLive ? (
-                    <div className="flex items-center gap-2 mt-1.5">
-                        <span className="text-[13px] font-normal text-(--grey1)">
+                    <div className="flex items-center gap-2 mt-5">
+                        <span className="text-[16px] font-normal text-(--grey1)">
                             {card.viewers} viewers
                         </span>
-                        <span className="h-[7px] w-[7px] rounded-full bg-green-500" />
-                        <span className="text-[13px] font-normal text-(--grey1)">
+                        <span className="h-[7px] w-[7px] rounded-full bg-(--grey5)" />
+                        <span className="text-[16px] font-normal text-(--grey1)">
                             {card.time}
                         </span>
                     </div>
                 ) : (
-                    <p className="text-[13px] font-normal text-(--grey1) mt-1.5">
+                    <p className="text-[13px] font-normal text-(--grey1) mt-5">
                         Will be live on {card.upComing}
                     </p>
                 )}

@@ -12,14 +12,18 @@ export default function Page() {
   
   return (
     <>
-      <div className={`grid h-full ${!notification?'grid-cols-[1fr_280px]':'grid-cols-[1fr_80px]'} gap-4`}>
+      <div
+        className="grid h-full gap-4"
+        style={{
+          gridTemplateColumns: notification ? '1fr 80px' : '1fr 280px',
+          transition: 'grid-template-columns 0.3s ease',
+        }}
+      >
         <div className="px-8 py-6 overflow-x-hidden">
           <AnimatedTabs />
         </div>
 
-        <div className="bg-(--dark4) border-l border-(--dark2) px-3 py-4">
-         
-
+        <div className="bg-(--dark4) border-l border-(--dark2) px-3 py-4 overflow-hidden">
           <ChannelsAccordion notification={notification} setNotification={setNotification} />
         </div>
       </div>

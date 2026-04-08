@@ -38,13 +38,13 @@ export default function ResourcesTab() {
                         <button
                             key={tab.id}
                             onClick={() => setActiveSubTab(tab.id)}
-                            className="relative cursor-pointer px-5 py-2 text-[13px] font-medium rounded-full transition-colors"
+                            className="relative cursor-pointer px-5 py-3 text-[13px] font-medium rounded-[8px] transition-colors"
                             style={{ WebkitTapHighlightColor: "transparent" }}
                         >
                             {activeSubTab === tab.id && (
                                 <motion.span
                                     layoutId="resources-sub-tab"
-                                    className="absolute inset-0 rounded-full bg-(--blue1)"
+                                    className="absolute inset-0 rounded-[8px] bg-(--blue1)"
                                     transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                                 />
                             )}
@@ -69,7 +69,7 @@ export default function ResourcesTab() {
                         exit={{ opacity: 0, y: -8 }}
                         transition={{ duration: 0.2 }}
                     >
-                        <div className="space-y-6">
+                        <div className="space-y-12">
                             {displayCards.map((card) => (
                                 <ResourceCard
                                     key={card.id}
@@ -135,7 +135,7 @@ function ResourceCard({ card, isVideo }) {
                 />
 
                 {/* Bottom bar — avatar + name + menu */}
-                <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-4 py-3 bg-gradient-to-t from-black/80 to-transparent">
+                <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-4 py-3 bg-linear-to-t from-black/80 to-transparent">
                     <div className="flex items-center gap-2.5">
                         <div className="h-[34px] w-[34px] rounded-full overflow-hidden shrink-0">
                             <Image
@@ -162,12 +162,12 @@ function ResourceCard({ card, isVideo }) {
             </div>
 
             {/* Info below card */}
-            <div className="mt-3 px-1">
+            <div className="mt-8 px-1">
                 <p className="text-[15px] font-medium text-(--grey1) leading-snug">
                     {card.title}
                 </p>
                 {isVideo ? (
-                    <div className="flex items-center gap-2 mt-1.5">
+                    <div className="flex items-center gap-2 mt-4">
                         <span className="text-[13px] font-normal text-(--grey1)">
                             {card.viewers} viewers
                         </span>
@@ -177,7 +177,7 @@ function ResourceCard({ card, isVideo }) {
                         </span>
                     </div>
                 ) : (
-                    <p className="text-[13px] font-normal text-(--grey1) mt-1.5">
+                    <p className="text-[13px] font-normal text-(--grey1) mt-4">
                         Uploaded by Zakir Khan
                     </p>
                 )}

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronDown,School,GlobeX, Eye, RadioTower } from "lucide-react";
+import { ArrowRight, ChevronDown, School, GlobeX, Eye, RadioTower } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { accordionData } from "@/app/data/classRoom";
@@ -35,19 +35,18 @@ const Accordion = ({
             <div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" />
           )}
           {notification && title.toLowerCase().includes("live") &&
-             <RadioTower size={17} className='text-(--grey1)' />
+            <RadioTower size={17} className='text-(--grey1)' />
           }
           {notification && title.toLowerCase().includes("class") &&
-             <School size={17} className='text-(--grey1)' />
+            <School size={17} className='text-(--grey1)' />
           }
           {notification && title.toLowerCase().includes("offline") &&
-             <GlobeX size={17} className='text-(--grey1)' />
+            <GlobeX size={17} className='text-(--grey1)' />
           }
           {!notification && (
             <span
-              className={`text-[13px] font-semibold uppercase tracking-wider ${
-                isOpen ? "text-(--blue1)" : "text-(--grey1)"
-              }`}
+              className={`text-[13px] font-semibold uppercase tracking-wider ${isOpen ? "text-(--blue1)" : "text-(--grey1)"
+                }`}
             >
               {title}
             </span>
@@ -102,11 +101,14 @@ export const ChannelsAccordion = ({ notification, setNotification }) => {
   return (
     <>
       <div className="flex items-center gap-2">
-        <ArrowRight
+        <motion.div
+          animate={{ rotate: notification ? 180 : 0 }}
+          transition={{ type: "spring", stiffness: 300, damping: 25 }}
+          className="cursor-pointer"
           onClick={() => setNotification(!notification)}
-          size={24}
-          className="text-(--grey1) cursor-pointer"
-        />
+        >
+          <ArrowRight size={24} className="text-(--grey1)" />
+        </motion.div>
         {!notification && (
           <h2 className="text-white text-[18px] font-normal">Channels</h2>
         )}
@@ -180,16 +182,14 @@ const UserRow = ({ item, notification }) => {
       <div className="flex items-center gap-2">
         <div className="relative">
           <span
-            className={`size-3 block border-2 rounded-full absolute bottom-0 right-0 z-10 ${
-              isLive
+            className={`size-3 block border-2 rounded-full absolute bottom-0 right-0 z-10 ${isLive
                 ? "border-(--dark3) bg-(--red1)"
                 : "border-(--dark3) bg-(--dark3)"
-            }`}
+              }`}
           />
           <Avatar
-            className={`size-10 border-2 ${
-              isLive ? "border-(--red1)" : "opacity-50 border-white/10"
-            }`}
+            className={`size-10 border-2 ${isLive ? "border-(--red1)" : "opacity-50 border-white/10"
+              }`}
           >
             <AvatarImage src={imgUrl} />
             <AvatarFallback>CN</AvatarFallback>

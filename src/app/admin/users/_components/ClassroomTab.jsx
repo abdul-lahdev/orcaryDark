@@ -58,7 +58,7 @@ export default function ClassroomTab() {
     return (
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6 mt-6">
             {/* ─── Left Column — Cards ─── */}
-            <div className="space-y-6">
+            <div className="space-y-12">
                 {classroomData.map((card) => (
                     <div key={card.id}>
                         {/* Thumbnail area */}
@@ -71,22 +71,22 @@ export default function ClassroomTab() {
                             />
 
                             {/* Bottom bar — avatar + name + menu */}
-                            <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-4 py-3 bg-gradient-to-t from-black/80 to-transparent">
+                            <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-4 py-3 bg-linear-to-t from-black/80 to-transparent">
                                 <div className="flex items-center gap-2.5">
-                                    <div className="h-[34px] w-[34px] rounded-full overflow-hidden shrink-0">
+                                    <div className="h-[40px] w-[40px] rounded-full overflow-hidden shrink-0">
                                         <Image
                                             src={card.avatar}
                                             alt={card.name}
-                                            width={34}
-                                            height={34}
+                                            width={40}
+                                            height={40}
                                             className="object-cover"
                                         />
                                     </div>
                                     <div>
-                                        <p className="text-[13px] font-semibold text-white leading-tight">
+                                        <p className="text-[16px] font-semibold text-white">
                                             {card.name}
                                         </p>
-                                        <p className="text-[11px] font-normal text-white/60">
+                                        <p className="text-[12px] font-normal text-(--light2)">
                                             {card.specialization}
                                         </p>
                                     </div>
@@ -98,16 +98,16 @@ export default function ClassroomTab() {
                         </div>
 
                         {/* Info below card */}
-                        <div className="mt-3 px-1">
-                            <p className="text-[15px] font-medium text-(--grey1) leading-snug">
+                        <div className="mt-8 px-1">
+                            <p className="text-[20px] font-semibold text-(--grey1)">
                                 {card.title}
                             </p>
-                            <div className="flex items-center gap-2 mt-1.5">
-                                <span className="text-[13px] font-normal text-(--grey1)">
+                            <div className="flex items-center gap-2 mt-4">
+                                <span className="text-[16px] font-normal text-(--grey1)">
                                     {card.viewers} viewers
                                 </span>
-                                <span className="h-[7px] w-[7px] rounded-full bg-green-500" />
-                                <span className="text-[13px] font-normal text-(--grey1)">
+                                <span className="size-2.5 rounded-full bg-(--grey5)" />
+                                <span className="text-[16px] font-normal text-(--grey1)">
                                     Streaming {card.streamTime}
                                 </span>
                             </div>

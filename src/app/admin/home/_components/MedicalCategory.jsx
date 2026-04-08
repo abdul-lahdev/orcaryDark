@@ -44,7 +44,7 @@ export default function MedicalCategory() {
         <>
             <div className='flex items-center justify-between '>
                 <h1 className="text-[30px] font-normal text-white">
-                    Categories
+                    Medical Categories
                 </h1>
                 <Link
                     href='/admin/virtual-classroom'

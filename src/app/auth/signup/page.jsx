@@ -49,18 +49,19 @@ export default function Page() {
                             </div>
                         </div>
 
-                        <div className="flex items-center justify-between text-xs">
+                        {/* <div className="flex items-center justify-between text-xs">
                             <label className="flex items-center gap-2 cursor-pointer text-[#A1A1AA] font-normal text-[14px] hover:text-foreground">
                                 <input type="checkbox" className="rounded border-border accent-primary" />
                                 Remember me
                             </label>
                             <Link href="#" className="text-[14px] font-normal text-[#23A5E7] hover:underline">Forgot Password?</Link>
-                        </div>
+                        </div> */}
 
                         {/* Login Button */}
+                      <Link href='/auth/login'>
                         <Button className='w-full h-12'>
-                            Login
-                        </Button>
+                            Signup
+                        </Button></Link>
 
                         <div className="relative  text-center">
                             <span className="text-[#A1A1AA] text-[16px] font-normal">or</span>
@@ -68,8 +69,8 @@ export default function Page() {
                         </div>
 
                         <p className="text-[16px] font-normal text-[#A1A1AA] text-center">
-                            Don't have an account?
-                            <Link href="/auth/signup" className="text-[16px] font-bold hover:underline text-[#23A5E7]">Sign Up</Link>
+                            Already have an account?
+                            <Link href="/auth/login" className="text-[16px] font-bold hover:underline text-[#23A5E7]"> Login</Link>
                         </p>
                     </form>
                 </div>

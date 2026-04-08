@@ -33,7 +33,11 @@ export default function Header() {
                         <Wallet size={18} className="text-(--grey1) dark:hover:text-white" />
                         <span className="text-(--grey1) text-[12px] font-normal">$124.00</span>
                     </div>
-                    <DropdownMenu onChange={(e) => console.log(e)} modal={false}> {/* modal={false} se scrollbar hide nahi hoga */}
+                    <Link href='/admin/users/12' className="cursor-pointer">
+                            <LuUsers size={18} className="text-(--grey1)  dark:hover:text-white" />
+                    </Link>
+
+                    {/* <DropdownMenu onChange={(e) => console.log(e)} modal={false}>
                         <DropdownMenuTrigger className='cursor-pointer '>
                             <LuUsers size={18} className="text-(--grey1)  dark:hover:text-white" />
                         </DropdownMenuTrigger>
@@ -50,10 +54,10 @@ export default function Header() {
 
                             </DropdownMenuGroup>
                         </DropdownMenuContent>
-                    </DropdownMenu>
+                    </DropdownMenu> */}
                     <Moon size={18} className="text-(--grey1) dark:hover:text-white" />
                     <Link href='/admin/calendar'>
-                    <Calendar size={18} className="text-(--grey1) dark:hover:text-white" />
+                        <Calendar size={18} className="text-(--grey1) dark:hover:text-white" />
                     </Link>
 
                     <DropdownMenu>
@@ -97,9 +101,24 @@ export default function Header() {
                             </DropdownMenuTrigger>
                             <DropdownMenuContent>
                                 <DropdownMenuGroup>
-                                    <DropdownMenuItem>Notification 1</DropdownMenuItem>
-                                    <DropdownMenuItem>Notification 2</DropdownMenuItem>
-                                    <DropdownMenuItem>Notification 3</DropdownMenuItem>
+                                    {/* asChild add karein aur Link par cursor-pointer lagayein */}
+                                    <DropdownMenuItem asChild>
+                                        <Link href='/admin/users/12' className="w-full cursor-pointer">
+                                            User
+                                        </Link>
+                                    </DropdownMenuItem>
+
+                                    <DropdownMenuItem asChild>
+                                        <Link href='/admin/settings' className="w-full cursor-pointer">
+                                            Setting
+                                        </Link>
+                                    </DropdownMenuItem>
+
+                                    <DropdownMenuItem asChild>
+                                        <Link href='/auth/login' className="w-full cursor-pointer">
+                                            Signout
+                                        </Link>
+                                    </DropdownMenuItem>
                                 </DropdownMenuGroup>
 
                             </DropdownMenuContent>

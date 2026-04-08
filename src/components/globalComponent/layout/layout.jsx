@@ -89,7 +89,7 @@ export default function Layout({ children }) {
 
   return (
     <>
-      {pathname === "/auth/login" ? (
+      {pathname === "/auth/login" || pathname === "/auth/signup"? (
         children
       ) : (
         <div className="flex min-h-screen bg-[#121216]">

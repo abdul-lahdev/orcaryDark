@@ -90,7 +90,7 @@ export default function Page() {
             {/* COVER */}
             <div>
               <p>Upload Cover</p>
-              <input type="file" onChange={(e) => handleChange(e, "cover")} />
+              <input type="file" className="bg-[#585858] my-2 w-full rounded-[8px] p-2 cursor-pointer" onChange={(e) => handleChange(e, "cover")} />
 
               {cover && (
                 <img src={cover.preview} className="mt-2 h-32 w-full object-cover rounded" />
@@ -100,7 +100,7 @@ export default function Page() {
             {/* PROFILE */}
             <div>
               <p>Upload Profile</p>
-              <input type="file" onChange={(e) => handleChange(e, "profile")} />
+              <input type="file" className="bg-[#585858] my-2 w-full rounded-[8px] p-2 cursor-pointer" onChange={(e) => handleChange(e, "profile")} />
 
               {profile && (
                 <img src={profile.preview} className="mt-2 h-20 w-20 rounded-full object-cover" />
@@ -147,13 +147,13 @@ export default function Page() {
         <div className="relative w-[85%] mx-auto pb-4">
           {/* Avatar */}
           <div className="absolute -top-20 left-0">
-            <div className="h-[140px] w-[140px] rounded-full border-4 border-(--dark1) overflow-hidden bg-(--dark2)">
+            <div className="h-[140px] w-[140px] rounded-full object-cover border-4 border-(--dark1) overflow-hidden bg-(--dark2)">
               <Image
                 src={profile?.preview || userData?.avatar}
                 alt={userData.name}
                 width={140}
                 height={140}
-                className="object-cover"
+                className="object-cover  h-full"
               />
             </div>
           </div>

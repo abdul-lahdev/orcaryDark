@@ -3,6 +3,9 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useMemo, useState } from "react";
 import {
+    CircleCheckBig,
+    Clock,
+    Flame,
     MessageCircle,
     MoreHorizontal,
     MoreVertical,
@@ -224,17 +227,74 @@ const addReplyToTree = (comments, targetId, replyPayload) => {
 };
 
 export default function Threads() {
+    const [activeTab, setActiveTab] = useState(tabs[0].id);
 
     return (
-        <div className="space-y-5">
-            {posts.map((item) => (
-                <div
-                    key={item.id}
-                    className="bg-(--dark5) rounded-[12px] p-3 "
-                >
-                    <VideoCard item={item} />
+        <div className="space-y-4">
+            <div className="w-full overflow-hidden">
+                <div className="flex items-center justify-between">
+                    <h1 className="text-white text-[24px] font-bold">Cardiology</h1>
+
+                    <div className="flex flex-row space-x-2 p-1 overflow-x-scroll no-scrollbar justify-end">
+                        {tabs.map((tab) => (
+                            <button
+                                key={tab.id}
+                                onClick={() => setActiveTab(tab.id)}
+                                className={`${activeTab === tab.id
+                                        ? "text-white"
+                                        : "text-(--grey1) hover:text-white/60"
+                                    } relative rounded-[12px] cursor-pointer p-4 text-sm font-medium transition focus-visible:outline-2 outline-sky-400`}
+                                style={{ WebkitTapHighlightColor: "transparent" }}
+                            >
+                                {activeTab === tab.id && (
+                                    <motion.span
+                                        layoutId="bubble"
+                                        className="absolute rounded-[12px] inset-0 z-10 bg-(--blue1)"
+                                        transition={{
+                                            type: "spring",
+                                            bounce: 0.2,
+                                            duration: 0.6,
+                                        }}
+                                    />
+                                )}
+                                <span className="relative z-20 flex items-center gap-2">
+                                    {tab.label === "New" ? (
+                                        <Clock size={15} />
+                                    ) : tab.label === "Hot" ? (
+                                        <Flame size={15} />
+                                    ) : (
+                                        <CircleCheckBig size={15} />
+                                    )}
+                                    {tab.label}
+                                </span>
+                            </button>
+                        ))}
+                    </div>
                 </div>
-            ))}
+            </div>
+
+            <div className="min-h-75 mt-3">
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={activeTab}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        <div>
+                            {posts.map((item) => (
+                                <div
+                                    key={item.id}
+                                    className="bg-(--dark5) rounded-[12px] p-3 mt-5"
+                                >
+                                    <VideoCard item={item} />
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+                </AnimatePresence>
+            </div>
         </div>
     );
 }

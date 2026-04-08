@@ -33,8 +33,8 @@ export default function Header() {
                         <Wallet size={18} className="text-(--grey1) dark:hover:text-white" />
                         <span className="text-(--grey1) text-[12px] font-normal">$124.00</span>
                     </div>
-                    <Link href='/admin/users/12' className="cursor-pointer">
-                            <LuUsers size={18} className="text-(--grey1)  dark:hover:text-white" />
+                    <Link href='/admin/users' className="cursor-pointer">
+                        <LuUsers size={18} className="text-(--grey1)  dark:hover:text-white" />
                     </Link>
 
                     {/* <DropdownMenu onChange={(e) => console.log(e)} modal={false}>
@@ -103,7 +103,7 @@ export default function Header() {
                                 <DropdownMenuGroup>
                                     {/* asChild add karein aur Link par cursor-pointer lagayein */}
                                     <DropdownMenuItem asChild>
-                                        <Link href='/admin/users/12' className="w-full cursor-pointer">
+                                        <Link href='/admin/users' className="w-full cursor-pointer">
                                             User
                                         </Link>
                                     </DropdownMenuItem>

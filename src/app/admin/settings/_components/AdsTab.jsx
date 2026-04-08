@@ -594,11 +594,10 @@ export default function AdsTab() {
                   return (
                     <tr
                       key={row.id}
-                      className={`transition-colors duration-200 ${
-                        selected
+                      className={`transition-colors duration-200 ${selected
                           ? "bg-white/2.5"
                           : "bg-transparent hover:bg-white/2.5"
-                      }`}
+                        }`}
                     >
                       <td className="border-b border-(--dark2) px-4 py-3">
                         <Checkbox

@@ -2,13 +2,13 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Eye } from "lucide-react";
+import { ArrowRight, ChevronDown, Eye, GlobeX, RadioTower, School } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { accordionData } from "@/app/data/classRoom";
 
 
-const Accordion = ({ i, expanded, setExpanded, title, children }) => {
+const Accordion = ({ i, expanded, setExpanded, title, children,notification }) => {
     const isOpen = expanded.includes(i);
 
     const toggle = () => {
@@ -21,19 +21,30 @@ const Accordion = ({ i, expanded, setExpanded, title, children }) => {
         <div className="border-b border-white/5 last:border-0 overflow-hidden">
             <motion.header
                 initial={false}
-                className="flex items-center justify-between p-4 cursor-pointer hover:bg-white/5 transition-colors"
+                className="flex items-center justify-between px-2 py-4 cursor-pointer hover:bg-white/5 transition-colors"
                 onClick={toggle}
             >
-                <div className="flex items-center gap-2">
-                    {title.toLowerCase().includes("live") && (
+                   <div className="flex items-center gap-2">
+                    {!notification && title.toLowerCase().includes("live") && (
                         <div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" />
                     )}
-                    <span
-                        className={`text-[13px] font-semibold uppercase tracking-wider ${isOpen ? "text-(--blue1)" : "text-(--grey1)"
-                            }`}
-                    >
-                        {title}
-                    </span>
+                    {notification && title.toLowerCase().includes("live") &&
+                        <RadioTower size={17} className='text-(--grey1)' />
+                    }
+                    {notification && title.toLowerCase().includes("class") &&
+                        <School size={17} className='text-(--grey1)' />
+                    }
+                    {notification && title.toLowerCase().includes("offline") &&
+                        <GlobeX size={17} className='text-(--grey1)' />
+                    }
+                    {!notification && (
+                        <span
+                            className={`text-[13px] font-semibold uppercase tracking-wider ${isOpen ? "text-(--blue1)" : "text-(--grey1)"
+                                }`}
+                        >
+                            {title}
+                        </span>
+                    )}
                 </div>
 
                 <motion.div
@@ -66,7 +77,7 @@ const Accordion = ({ i, expanded, setExpanded, title, children }) => {
     );
 };
 
-export const ChannelsAccordion = () => {
+export const ChannelsAccordion = ({ notification, setNotification }) => {
     const [expanded, setExpanded] = useState([0, 1, 2]);
 
     const liveSessions = accordionData.filter(
@@ -80,44 +91,63 @@ export const ChannelsAccordion = () => {
     const offline = accordionData.filter((item) => !item.isLive);
 
     return (
-        <div className="w-full bg-transparent mt-5">
-            {/* 1) Live Sessions */}
-            <Accordion
-                i={0}
-                expanded={expanded}
-                setExpanded={setExpanded}
-                title="Live sessions"
-            >
-                {liveSessions.length ? (
-                    liveSessions.map((item) => <UserRow key={item.id} item={item} />)
-                ) : (
-                    <EmptyRow text="No live sessions" />
+        <>
+            <div className="flex items-center gap-2">
+                <motion.div
+                    animate={{ rotate: notification ? 180 : 0 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                    className="cursor-pointer"
+                    onClick={() => setNotification(!notification)}
+                >
+                    <ArrowRight size={24} className="text-(--grey1)" />
+                </motion.div>
+                {!notification && (
+                    <h2 className="text-white text-[18px] font-normal">Channels</h2>
                 )}
-            </Accordion>
+            </div>
+            <div className="w-full bg-transparent mt-5">
+                {/* 1) Live Sessions */}
+                <Accordion
+                    i={0}
+                    expanded={expanded}
+                    setExpanded={setExpanded}
+                    notification={notification}
 
-            {/* 2) Class Room */}
-            <Accordion
-                i={1}
-                expanded={expanded}
-                setExpanded={setExpanded}
-                title="Class Room"
-            >
-                {classRooms.length ? (
-                    classRooms.map((item) => <UserRow key={item.id} item={item} />)
-                ) : (
-                    <EmptyRow text="No live classrooms" />
-                )}
-            </Accordion>
+                    title="Live sessions"
+                >
+                    {liveSessions.length ? (
+                        liveSessions.map((item) => <UserRow notification={notification} key={item.id} item={item} />)
+                    ) : (
+                        <EmptyRow text="No live sessions" />
+                    )}
+                </Accordion>
 
-            {/* 3) Offline */}
-            <Accordion i={2} expanded={expanded} setExpanded={setExpanded} title="Offline">
-                {offline.length ? (
-                    offline.map((item) => <UserRow key={item.id} item={item} />)
-                ) : (
-                    <EmptyRow text="No offline sessions" />
-                )}
-            </Accordion>
-        </div>
+                {/* 2) Class Room */}
+                <Accordion
+                    i={1}
+                    expanded={expanded}
+                    setExpanded={setExpanded}
+                    notification={notification}
+                    title="Class Room"
+                >
+                    {classRooms.length ? (
+                        classRooms.map((item) => <UserRow notification={notification} key={item.id} item={item} />)
+                    ) : (
+                        <EmptyRow text="No live classrooms" />
+                    )}
+                </Accordion>
+
+                {/* 3) Offline */}
+                <Accordion i={2} expanded={expanded} notification={notification} setExpanded={setExpanded} title="Offline">
+                    {offline.length ? (
+                        offline.map((item) => <UserRow notification={notification} key={item.id} item={item} />)
+                    ) : (
+                        <EmptyRow text="No offline sessions" />
+                    )}
+                </Accordion>
+            </div>
+        </>
+
     );
 };
 
@@ -126,11 +156,11 @@ const EmptyRow = ({ text }) => (
 );
 
 // User row component
-const UserRow = ({ item }) => {
+const UserRow = ({ item,notification }) => {
     const { name, desc, isLive, views, imgUrl } = item;
 
     return (
-        <div className="flex items-center gap-3 justify-between px-3">
+        <div className="flex items-center gap-3 justify-between ">
             <div className="flex items-center gap-2">
                 <div className="relative">
                     <span
@@ -148,15 +178,19 @@ const UserRow = ({ item }) => {
                     </Avatar>
                 </div>
 
-                <div className="flex flex-col">
-                    <h1 className={`text-sm font-normal ${isLive ? "text-white" : "text-(--grey1)"}`}>
-                        {name}
-                    </h1>
-                    <p className="text-[11px] font-normal text-(--grey1)">{desc}</p>
-                </div>
+                 {!notification ? (
+                    <div className="flex flex-col">
+                        <h1
+                            className={`text-sm font-normal ${isLive ? "text-white" : "text-(--grey1)"}`}
+                        >
+                            {name}
+                        </h1>
+                        <p className="text-[11px] font-normal text-(--grey1)">{desc}</p>
+                    </div>
+                ) : null}
             </div>
 
-            {isLive && (
+            {!notification && isLive && (
                 <div className="flex items-center gap-1">
                     <Eye size={15} className="text-white" />
                     <span className="text-[10px] text-white">{views}</span>

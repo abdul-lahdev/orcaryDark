@@ -215,7 +215,7 @@ export const ChannelsAccordion = ({ notification, setNotification }) => {
                     title="Class Room"
                 >
                     {classRooms.length ? (
-                        classRooms.map((item) => <UserRow key={item.id} item={item} />)
+                        classRooms.map((item) => <UserRow notification={notification} key={item.id} item={item} />)
                     ) : (
                         <EmptyRow text="No live classrooms" />
                     )}

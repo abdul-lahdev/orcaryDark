@@ -52,33 +52,37 @@
 import { usePathname } from "next/navigation";
 import Header from "./header";
 import SideBar from "./sideBar";
+import { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function Layout({ children }) {
   const pathname = usePathname();
 
-//   const isLivesList = pathname === "/admin/lives";
-//   const isLivesDetail = /^\/admin\/lives\/[^/]+$/.test(pathname);
+  const [activeBar, setActiveBar] = useState(false);
 
-//   const isVirtualClassroom =
-//     pathname.startsWith("/admin/virtual-classroom") ||
-//     pathname === "/admin/home" ||
-//     pathname === "/admin/newsfeed" ||
-//     pathname === "/admin/forum";
+  //   const isLivesList = pathname === "/admin/lives";
+  //   const isLivesDetail = /^\/admin\/lives\/[^/]+$/.test(pathname);
 
-//   const isResources = pathname.startsWith("/admin/resources");
+  //   const isVirtualClassroom =
+  //     pathname.startsWith("/admin/virtual-classroom") ||
+  //     pathname === "/admin/home" ||
+  //     pathname === "/admin/newsfeed" ||
+  //     pathname === "/admin/forum";
 
-//   const isVideoDetail = /^\/admin\/resources\/video\/[^/]+$/.test(pathname);
-//   const isDocDetail = /^\/admin\/resources\/document\/[^/]+$/.test(pathname);
+  //   const isResources = pathname.startsWith("/admin/resources");
 
-//   const layoutClass = isLivesDetail
-//     ? "grid h-full grid-cols-[1fr_480px] gap-4"
-//     : isLivesList
-//       ? "grid h-full grid-cols-[1fr_280px] gap-4"
-//       : isVirtualClassroom || isResources
-//         ? isVideoDetail || isDocDetail
-//           ? "grid h-full grid-cols-[1fr_480px] gap-4"
-//           : "grid h-full grid-cols-[1fr_280px] gap-4"
-//         : "h-full";
+  //   const isVideoDetail = /^\/admin\/resources\/video\/[^/]+$/.test(pathname);
+  //   const isDocDetail = /^\/admin\/resources\/document\/[^/]+$/.test(pathname);
+
+  //   const layoutClass = isLivesDetail
+  //     ? "grid h-full grid-cols-[1fr_480px] gap-4"
+  //     : isLivesList
+  //       ? "grid h-full grid-cols-[1fr_280px] gap-4"
+  //       : isVirtualClassroom || isResources
+  //         ? isVideoDetail || isDocDetail
+  //           ? "grid h-full grid-cols-[1fr_480px] gap-4"
+  //           : "grid h-full grid-cols-[1fr_280px] gap-4"
+  //         : "h-full";
 
   // const isVC =
   //     pathname.startsWith("/admin/virtual-classroom") ||
@@ -89,19 +93,24 @@ export default function Layout({ children }) {
 
   return (
     <>
-      {pathname === "/auth/login" || pathname === "/auth/signup"? (
+      {pathname === "/auth/login" || pathname === "/auth/signup" ? (
         children
       ) : (
         <div className="flex min-h-screen bg-[#121216]">
-          <SideBar />
+          <SideBar activeBar={activeBar} setActiveBar={setActiveBar} />
 
-          <div className="ml-70 flex min-w-0 flex-1 flex-col">
+          <motion.div
+            layout
+            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+            className={`${!activeBar ? "ml-70" : "ml-20"
+              } flex min-w-0 flex-1 flex-col transition-all duration-300 ease-in-out`}
+          >
             <Header />
 
-            <div className="flex-1 min-h-0">
+            <div className="min-h-0 flex-1">
               <div>{children}</div>
             </div>
-          </div>
+          </motion.div>
         </div>
       )}
     </>

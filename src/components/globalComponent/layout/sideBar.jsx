@@ -34,8 +34,8 @@ export default function SideBar({ activeBar, setActiveBar }) {
         >
             {/* Logo Section */}
             <div
-                className={`flex items-center ${activeBar ? "justify-center flex-col-reverse mb-1" : "justify-between mb-4"
-                    }  px-2 transition-all duration-300 ease-in-out`}
+                className={`flex items-center ${activeBar ? "justify-center flex-col-reverse mb-1 px-2" : "justify-between pl-3 pr-2 mb-4"
+                    }   transition-all duration-300 ease-in-out`}
             >
                 {!activeBar && (
                     <motion.div

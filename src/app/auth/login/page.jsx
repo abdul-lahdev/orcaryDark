@@ -69,7 +69,7 @@ export default function LoginPage() {
                                 Login
                             </Button></Link>
 
-                            <div className="relative  text-center">
+                            <div className="relative  text-center mt-3">
                                 <span className="text-[#A1A1AA] text-[16px] font-normal">or</span>
                                 <div className="absolute top-1/2 -z-10 w-full border-t border-border" />
                             </div>
